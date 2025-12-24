@@ -11,7 +11,7 @@ Legend (common Azure examples):
 - Observability: Azure Monitor, Log Analytics, App Insights
 
 ------------------------------------------------------------
-Layer 1 — Physical (Bits)
+## Layer 1 — Physical (Bits)
 ------------------------------------------------------------
 Cloud meaning:
 - You don’t manage hardware, cables, RF, or physical switching.
@@ -117,9 +117,9 @@ Common failure modes:
 Key checks:
 - Idempotency keys, DLQ counts, queue depth, error budget burn, dependency latency.
 
-============================================================
+------------------------------------------------------------
 Cross-Layer “PaaS Defaults” Checklist (Practical)
-============================================================
+------------------------------------------------------------
 Security posture
 - L3: Prefer private endpoints for data plane + private DNS
 - L4: TLS everywhere; restrict ports; timeouts + retries
@@ -138,9 +138,8 @@ Troubleshooting workflow (fast)
 5) L2: NSG/peering? verify allowed flows
 6) L1: region incident? check platform health/status
 
-============================================================
+
 Common “Where does this live in OSI?” Mapping (mental shortcuts)
-============================================================
 - WAF / API Gateway policies -> Layer 7
 - JWT / OAuth tokens -> Layer 5–7 (session/auth semantics)
 - TLS / certificates -> Layer 5/6 (secure session + presentation)
@@ -149,8 +148,3 @@ Common “Where does this live in OSI?” Mapping (mental shortcuts)
 - Ports / TCP keepalive / pooling -> Layer 4
 - JSON/XML/Avro schema evolution -> Layer 6
 - Messaging semantics (idempotency, DLQ) -> Layer 7 (application protocol behavior)
-
-------------------------------------------------------------
-If you tell me your target stack (e.g., Front Door + APIM + Functions + Service Bus + SQL),
-I can produce an OSI-layer “troubleshooting playbook” tailored to that architecture.
-------------------------------------------------------------
