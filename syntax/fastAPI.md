@@ -1,7 +1,4 @@
-
-===========================================================
-FastAPI Quick Reference (Intermediate) — Syntax + Patterns
-===========================================================
+# FastAPI Quick Reference (Intermediate) — Syntax + Patterns
 
 Goal:
 - Copy/paste ready snippets for day-to-day FastAPI work.
