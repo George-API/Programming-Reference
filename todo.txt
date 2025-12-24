@@ -1,0 +1,9 @@
+options to include:
+sklearn
+Streamlit
+pydantic
+PyCaret
+tensorflow
+Statsmodels
+matplotlib / seaborn
+Polars (maybe..)
