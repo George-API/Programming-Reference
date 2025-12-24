@@ -1,6 +1,4 @@
-============================================================
 PaaS Best Practices & Common Concepts — OSI Model Lens (Cloud-Focused)
-============================================================
 Goal: map what you do in PaaS designs to OSI layers for faster reasoning
 about security, connectivity, performance, and troubleshooting.
 
