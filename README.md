@@ -1,6 +1,6 @@
 # Programming Reference
 
-Quick reference for data engineering, cloud architecture, and programming syntax.
+Quick reference for data, cloud & software engineering concepts and programming syntax.
 
 ## Concepts
 
