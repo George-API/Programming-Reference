@@ -18,6 +18,7 @@ Quick reference for data engineering, cloud architecture, and programming syntax
 ### Software
 - [Software Design](concepts/software/design.md) - Enterprise design patterns and best practices
 - [DevOps](concepts/software/devops.md) - CI/CD pipelines and Azure DevOps practices
+- [SDLC](concepts/software/sdlc.md) - Software development life cycle, methodologies, best practices
 - [DSA Overview](concepts/software/dsa.md) - Data structures and algorithms concepts
 - [OSI Model](concepts/software/osi.md) - Troubleshooting lens using OSI layers (cloud emphasis)
 
