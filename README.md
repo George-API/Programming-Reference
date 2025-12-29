@@ -5,34 +5,34 @@ Quick reference for data, cloud & software engineering concepts and programming 
 ## Concepts
 
 ### Cloud
-- [Cloud Architecture](concepts/cloud/architecture.md) - Identity, networking, APIs, messaging, multi-tenant, reliability
-- [Azure Data Platform](concepts/cloud/azure_architecture.md) - Azure data platform implementation (ADF, ADLS, Synapse)
-- [Microsoft Fabric](concepts/cloud/fabric_architecture.md) - Microsoft Fabric data platform implementation (OneLake, Lakehouse, Warehouse)
+- [Cloud Architecture](concepts/cloud/architecture.md) - Identity, networking, APIs, messaging, reliability
+- [Azure Data Platform](concepts/cloud/azure_architecture.md) - ADF, ADLS, Synapse implementation
+- [Microsoft Fabric](concepts/cloud/fabric_architecture.md) - OneLake, Lakehouse, Warehouse implementation
 
 ### Data
-- [Data Engineering](concepts/data/engineering.md) - Pipeline patterns: ETL/ELT, orchestration, transformation
-- [Database Management](concepts/data/database.md) - RDBMS design, indexing, query optimization, transactions
-- [Data Governance](concepts/data/governance.md) - Operating models, metadata, catalog, policies
-- [Data Operations](concepts/data/operations.md) - Quality, integrity, lifecycle, reliability
-- [Data Security](concepts/data/security.md) - Access control, encryption, privacy, compliance
-- [Analytics Engineering](concepts/data/analytics_engineering.md) - Transformation layer, semantic layer, BI modeling
+- [Analytics Engineering](concepts/data/analytics_eng.md) - Transformation layer, semantic layer, BI modeling
 - [Data Analytics](concepts/data/analytics.md) - Statistical analysis, EDA, forecasting, experimentation
+- [Database Management](concepts/data/database.md) - RDBMS design, indexing, query optimization, transactions
+- [Data Engineering](concepts/data/engineering.md) - ETL/ELT, orchestration, transformation, data modeling
+- [Data Governance](concepts/data/governance.md) - Operating models, metadata, catalog, policies
+- [Data Operations](concepts/data/operations.md) - Quality, integrity, lifecycle, reliability, Data SRE
+- [Data Security](concepts/data/security.md) - Access control, encryption, privacy, compliance
 
 ### Software
-- [Software Design](concepts/software/design.md) - Code-level design patterns, SOLID principles, DDD tactical
-- [Software Architecture](concepts/software/architecture.md) - System-level patterns, microservices, event-driven, distributed systems
-- [DevOps](concepts/software/devops.md) - CI/CD pipelines and Azure DevOps practices
-- [SDLC](concepts/software/sdlc.md) - Software development life cycle, methodologies, best practices
-- [DSA Overview](concepts/software/dsa.md) - Data structures and algorithms concepts
-- [OSI Model](concepts/software/osi.md) - Troubleshooting lens using OSI layers (cloud emphasis)
+- [Software Architecture](concepts/software/architecture.md) - System-level patterns, microservices, event-driven
+- [Software Design](concepts/software/design.md) - Code-level patterns, SOLID, DDD, OOP/FP
+- [DevOps](concepts/software/devops.md) - CI/CD pipelines, Azure DevOps
+- [DSA Overview](concepts/software/dsa.md) - Data structures and algorithms
+- [OSI Model](concepts/software/osi.md) - Troubleshooting lens (OSI layers, cloud emphasis)
+- [SDLC](concepts/software/sdlc.md) - Development life cycle, methodologies, best practices
 
 ## Languages
 
+### C
+- [C](languages/c/c.md) - Systems programming, memory management, pointers, standard library
+
 ### Excel
 - [Excel](languages/excel/excel.md) - Functions, lookups, formulas, data analysis
-
-### C
-- [C](languages/c/c.md) - Systems programming, memory management, pointers, low-level operations
 
 ### Git
 - [Git](languages/git/git.md) - Command reference and workflows
@@ -54,8 +54,8 @@ Quick reference for data, cloud & software engineering concepts and programming 
 - [Tidyverse](languages/r/tidyverse.md) - dplyr, tidyr, stringr, lubridate essentials
 
 ### SQL
-- [Core](languages/sql/core.md) - Core syntax, operation flow/order, basic queries
-- [Patterns](languages/sql/patterns.md) - Common patterns, best practices, advanced techniques
+- [Core](languages/sql/core.md) - Core syntax, operation flow, basic queries, DDL/DML
+- [Patterns](languages/sql/patterns.md) - Common patterns, window functions, CTEs, data quality
 
 ### Typescript
 - [Typescript](languages/typescript/typescript.md) - Syntax: types, interfaces, classes, generics, modules
