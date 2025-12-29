@@ -174,20 +174,12 @@
 
 ## 5. Data Modeling Patterns
 
-### Normalized Models
+### Normalization vs Denormalization
 
-- **Third Normal Form (3NF)**: Eliminate redundancy, separate entities
-- **Use case**: Transactional systems, source systems
-- **Pros**: No redundancy, easier updates, referential integrity
-- **Cons**: More joins, slower queries for analytics
-
-### Denormalized Models
-
-- **Star Schema**: Fact tables + dimension tables
-- **Wide Tables**: Flattened, all columns in one table
-- **Use case**: Analytics, BI, reporting
-- **Pros**: Faster queries, fewer joins, simpler for analysts
-- **Cons**: Data redundancy, larger storage, harder to maintain
+- **Normalized models**: Reduce redundancy, separate entities (see [Database Management](database.md) for normalization details)
+- **Denormalized models**: Optimize for read performance, reduce joins
+- **Pipeline context**: Source systems often normalized; analytics layers often denormalized (star schemas, wide tables)
+- **Trade-off**: Normalization reduces storage but increases joins; denormalization improves query performance but increases storage
 
 ### Medallion Architecture
 
@@ -301,10 +293,9 @@
 
 ### Indexing
 
-- **Primary keys**: Unique identifiers, fast lookups
-- **Secondary indexes**: Foreign keys, frequently filtered columns
-- **Composite indexes**: Multiple columns for complex queries
-- **Best practices**: Index columns used in WHERE, JOIN, ORDER BY
+- **Lakehouse/Data Warehouse**: Index columns used in WHERE, JOIN, ORDER BY clauses
+- **Best practices**: Index foreign keys, frequently filtered columns, join columns
+- **Note**: For detailed indexing strategies (B-tree, hash, covering indexes, query optimization), see [Database Management](database.md)
 
 ### Caching
 
@@ -335,5 +326,5 @@
 
 ---
 
-> **Note**: For governance and quality practices, see [Data Management](data_management.md). For analytics/BI layer patterns, see [Analytics Engineering](analytics_engineering.md). For Microsoft-specific implementation, see [Microsoft Data Platform Implementation](ms_architecture.md).
+> **Note**: For database design and optimization, see [Database Management](database.md). For governance and quality practices, see [Data Governance](governance.md), [Data Operations](operations.md), and [Data Security](security.md). For analytics/BI layer patterns, see [Analytics Engineering](analytics_engineering.md).
 

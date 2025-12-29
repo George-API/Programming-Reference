@@ -20,7 +20,7 @@
 **Typical Azure stack:**
 
 - **Ingestion/Orchestration**: Azure Data Factory (ADF)
-- **Streaming**: Event Hubs (telemetry/streams), Event Grid (events), Service Bus (commands/queues)
+- **Streaming**: Event Hubs (telemetry/streams), Event Grid (events), Service Bus (commands/queues), Stream Analytics (real-time processing)
 - **Storage/Lake**: Azure Data Lake Storage Gen2 (ADLS Gen2), Delta/Parquet
 - **Processing**: Azure Synapse Analytics / Databricks / HDInsight
 - **Serving**: Azure SQL Database / Azure SQL Managed Instance / Synapse SQL
@@ -40,7 +40,7 @@
 
 - **Batch**: Azure Data Factory (copy + transforms) → Bronze
 - **CDC**: source CDC → landing → Bronze (or event stream)
-- **Streaming**: Event Hubs → stream processing (Stream Analytics/Synapse) → Bronze/Silver
+- **Streaming**: Event Hubs → stream processing (Stream Analytics/Synapse Spark streaming) → Bronze/Silver
 
 ### C) Lakehouse Layers (Medallion)
 
@@ -70,6 +70,8 @@
 - **Partitioning**: by date/tenant/source; optimize file sizes (128MB-1GB target)
 - **Access control**: RBAC + ACLs for fine-grained permissions
 - **Lifecycle management**: hot/cool/archive tiers, automatic tiering
+- **Immutable storage**: WORM (Write Once, Read Many) for compliance scenarios
+- **Soft delete**: recover deleted blobs within retention period
 
 ### Medallion Architecture Implementation
 
@@ -90,24 +92,28 @@
 
 - **Copy activities**: efficient data movement between sources and ADLS
 - **Data flows**: Spark-based transformations (mapping data flows)
+- **Power Query**: self-service data preparation (preview/GA status varies)
 - **Linked services**: connection management with Managed Identity
 - **Triggers**: schedule-based, event-based (Event Grid), tumbling window
 - **Integration runtime**: Azure IR, self-hosted IR for on-prem sources
+- **Pipeline parameters**: parameterize pipelines for reusability
 
 ### Synapse Analytics
 
-- **Synapse SQL (dedicated)**: provisioned SQL pools for data warehousing
-- **Synapse SQL (serverless)**: serverless SQL for ad-hoc queries on lake
-- **Synapse Spark**: Spark pools for data engineering and ML
+- **Synapse SQL (dedicated)**: provisioned SQL pools for data warehousing (pause/resume for cost optimization)
+- **Synapse SQL (serverless)**: serverless SQL for ad-hoc queries on lake (pay per query)
+- **Synapse Spark**: Spark pools for data engineering and ML (auto-scale, auto-pause)
 - **Workspace integration**: unified experience for SQL, Spark, and pipelines
+- **Lake database**: unified metadata layer across lake and warehouse
 
 ### Data Networking (Azure)
 
-- **Private endpoints**: Private endpoints for ADLS Gen2, Synapse, SQL
+- **Private endpoints**: Private endpoints for ADLS Gen2, Synapse, SQL, ADF
 - **Private Link**: secure connectivity without public internet
 - **VNet integration**: Synapse managed VNet, ADF VNet integration
 - **Data plane isolation**: separate subnets for data ingestion vs serving
 - **Egress control**: NAT Gateway for stable outbound IPs (source systems allowlists)
+- **Service endpoints**: use service endpoints for PaaS services when private endpoints not available
 
 > **Note**: For general networking patterns, see [Cloud Architecture](architecture.md). For OSI troubleshooting, see [OSI Model](../software/osi.md).
 
@@ -136,13 +142,13 @@
   - deny public endpoints on data stores, enforce private link, enforce tagging, restrict regions/SKUs
 - **Resource locks**: prevent accidental deletion of critical resources
 
-> **Note**: For data management concepts (operating model, quality, integrity), see [Data Management](../data/management.md).
+> **Note**: For data management concepts (operating model, quality, integrity), see [Data Governance](../data/governance.md), [Data Operations](../data/operations.md), and [Data Security](../data/security.md).
 
 ---
 
 ## 4. Reliability & Data Freshness
 
-> **Note**: For data SLO concepts (what they are, why they matter), see [Data Management - Reliability](../data/management.md#8-reliability-resilience-and-data-sre-advanced).
+> **Note**: For data SLO concepts (what they are, why they matter), see [Data Operations - Reliability](../data/operations.md#8-reliability--data-sre).
 
 ### Implementing Data SLOs (Azure)
 
@@ -183,7 +189,7 @@
 - **Contracts**: schema, semantics, keys, SLAs defined in Purview
 - **Documentation**: Power BI semantic model descriptions, sample queries, changelog
 
-> **Note**: For data contract concepts and operating model, see [Data Management](../data/management.md).
+> **Note**: For data contract concepts and operating model, see [Data Governance](../data/governance.md).
 
 ---
 
@@ -203,6 +209,48 @@
   - table distribution (hash, round-robin, replicated)
   - columnstore indexes for analytics workloads
   - result set caching for repeated queries
+  - materialized views for pre-aggregated data
+  - workload management: resource classes and workload groups for query prioritization
+
+### Disaster Recovery & High Availability
+
+- **ADLS Gen2**: geo-redundant storage (GRS/RA-GRS) for cross-region backup; soft delete for point-in-time recovery
+- **Synapse SQL**: automated backups (7-35 days retention); geo-restore to paired region; active geo-replication for critical workloads
+- **ADF pipelines**: store definitions in Git (Azure DevOps/GitHub); parameterize connection strings for DR failover
+- **Event Hubs**: geo-disaster recovery (paired namespaces) for streaming workloads
+- **RTO/RPO targets**: define recovery objectives per workload tier; test DR procedures regularly
+
+### CI/CD for Data Pipelines
+
+- **Source control**: ADF pipelines in Git (ARM templates); Synapse artifacts in Git
+- **Deployment**: Azure DevOps pipelines or GitHub Actions for automated deployment
+- **Environment promotion**: dev → test → prod with parameterized linked services
+- **Testing**: unit tests for data transformations; integration tests for pipeline runs; data quality tests in staging
+- **Approval gates**: manual approvals for production deployments; automated quality gates
+
+### Monitoring & Alerting
+
+- **Pipeline monitoring**: ADF run metrics in Log Analytics; custom metrics via Application Insights
+- **Data freshness alerts**: alert when pipeline completion exceeds SLA; monitor partition update timestamps
+- **Cost alerts**: budget alerts per subscription/resource group; cost anomaly detection
+- **Performance monitoring**: query performance insights (Synapse SQL); Spark job metrics (Synapse Spark)
+- **Health dashboards**: Azure Monitor workbooks for custom dashboards; Power BI for operational reporting
+
+### Error Handling & Retry Strategies
+
+- **ADF retry policies**: configure retry count and interval per activity; exponential backoff for transient failures
+- **Dead letter queues**: Event Hubs capture failed messages; Service Bus dead-letter queues for processing failures
+- **Pipeline error handling**: try-catch blocks in ADF; conditional activities for error paths
+- **Idempotent operations**: use merge/upsert patterns; watermark-based incremental loads prevent duplicates on retry
+- **Notification**: email/Slack alerts on pipeline failures; integration with ITSM tools (ServiceNow)
+
+### Data Lifecycle & Archiving
+
+- **ADLS lifecycle policies**: automatic tiering (hot → cool → archive); delete old partitions after retention period
+- **Bronze retention**: retain raw data per compliance requirements (typically 7-90 days)
+- **Silver retention**: retain cleaned data longer (typically 1-3 years)
+- **Gold retention**: retain curated data indefinitely or per business requirements
+- **Archive strategy**: move cold data to Archive tier; restore from archive when needed (hours to days)
 
 ---
 
@@ -230,10 +278,12 @@
 - Pipeline run telemetry + alerts (Log Analytics)
 - Freshness + backlog dashboards
 - Cost per pipeline + anomaly alerts
+- Application Insights for custom telemetry and dependency tracking
+- Azure Monitor workbooks for custom dashboards
 
 ### Governance
 
 - Purview catalog + lineage
-- Data contracts + versioning policy (see [Data Management](../data/management.md))
+- Data contracts + versioning policy (see [Data Governance](../data/governance.md))
 - Retention policies per zone (Bronze/Silver/Gold)
 

@@ -1,25 +1,20 @@
-# Design Patterns & Best Practices
+# Software Design Patterns
 
-**Scope**: Enterprise software design patterns, architectural principles, and best practices for building scalable, maintainable systems.
+**Scope**: Code-level design patterns, principles, and best practices for writing maintainable, testable code.
 
-**Purpose**: Design patterns and principles for enterprise software development, independent of specific cloud platforms.
+**Purpose**: Use this when designing classes, modules, and code structure. For system-level architectural patterns, see [Software Architecture](architecture.md).
 
 ## Table of Contents
 
-- [1. Architectural Principles](#1-architectural-principles)
-- [2. Domain-Driven Design (DDD)](#2-domain-driven-design-ddd)
-- [3. Microservices Patterns](#3-microservices-patterns)
-- [4. API Design Patterns](#4-api-design-patterns)
-- [5. Event-Driven Architecture](#5-event-driven-architecture)
-- [6. CQRS & Event Sourcing](#6-cqrs--event-sourcing)
-- [7. Distributed Systems Patterns](#7-distributed-systems-patterns)
-- [8. Security Patterns](#8-security-patterns)
-- [9. Observability & Monitoring](#9-observability--monitoring)
-- [10. Testing Strategies](#10-testing-strategies)
+- [1. Design Principles](#1-design-principles)
+- [2. Programming Paradigms](#2-programming-paradigms)
+- [3. Domain-Driven Design (Tactical)](#3-domain-driven-design-tactical)
+- [4. Design Patterns](#4-design-patterns)
+- [5. Testing Strategies](#5-testing-strategies)
 
 ---
 
-## 1. Architectural Principles
+## 1. Design Principles
 
 ### SOLID Principles
 
@@ -37,24 +32,66 @@
 - **YAGNI (You Aren't Gonna Need It)**: Don't build for hypothetical future needs
 - **Fail Fast**: Detect errors early, fail immediately with clear messages
 
-### Architectural Styles
+---
 
-- **Layered Architecture**: Presentation → Business → Data layers
-- **Hexagonal Architecture**: Ports and adapters, business logic at center
-- **Clean Architecture**: Dependency rule: dependencies point inward
-- **Onion Architecture**: Core domain → application → infrastructure layers
+## 2. Programming Paradigms
+
+### Object-Oriented Programming (OOP)
+
+- **Core Principles**:
+  - **Encapsulation**: Bundle data and methods together; hide internal state
+  - **Inheritance**: Reuse code through class hierarchies
+  - **Polymorphism**: Same interface, different implementations
+  - **Abstraction**: Hide complexity, expose essential features
+- **Example**: `class Order { private items; addItem(); calculateTotal(); }`
+- **When to use**: Complex domain models, stateful systems, GUI applications
+- **Languages**: Java, C#, Python, TypeScript (class-based)
+
+### Functional Programming (FP)
+
+- **Core Principles**:
+  - **Immutability**: Data doesn't change; create new data structures
+  - **Pure Functions**: No side effects; same input → same output
+  - **First-Class Functions**: Functions as values (pass, return, assign)
+  - **Higher-Order Functions**: Functions that take/return functions (map, filter, reduce)
+- **Example**: `const total = items.map(x => x.price).reduce((a, b) => a + b, 0)`
+- **When to use**: Data transformations, concurrent programming, mathematical computations
+- **Languages**: Haskell, Clojure, F#, Elixir (pure FP); JavaScript, Python, Scala (support FP)
+
+### Hybrid Approaches
+
+- **OOP + FP**: Use OOP for structure, FP for transformations
+  - **Example**: Classes for domain models, functional methods for data processing
+  - **Languages**: Scala, Kotlin, Python, TypeScript, C# (modern features)
+- **Best of Both**: Encapsulation + immutability, classes + higher-order functions
+- **When to use**: Modern applications benefit from both paradigms
+
+### Language Characteristics
+
+- **Compiled vs Interpreted**:
+  - **Compiled** (C, C++, Go, Rust): Faster execution, type checking at compile time, harder to debug
+  - **Interpreted** (Python, JavaScript, Ruby): Easier development, slower execution, dynamic typing
+  - **Hybrid** (Java, C#, TypeScript): Compile to bytecode/JS, then interpret/JIT compile
+- **Level of Abstraction**:
+  - **Low-level** (C, Rust): Direct memory management, hardware control, high performance
+  - **High-level** (Python, JavaScript): Built-in data structures, garbage collection, rapid development
+  - **Mid-level** (Java, C#, Go): Balance of control and productivity
+- **Type Systems**:
+  - **Static typing** (Java, C#, TypeScript): Type checking at compile time, fewer runtime errors
+  - **Dynamic typing** (Python, JavaScript, Ruby): Flexibility, faster prototyping
+  - **Gradual typing** (TypeScript, Python type hints): Optional static typing
+
+### Choosing a Paradigm/Language
+
+- **Domain complexity**: OOP for rich domain models, FP for data pipelines
+- **Performance requirements**: Compiled languages for performance-critical code
+- **Team expertise**: Choose languages team knows; consider learning curve
+- **Ecosystem**: Libraries, frameworks, tooling available
+- **Type safety**: Static typing for large codebases, dynamic for rapid prototyping
 
 ---
 
-## 2. Domain-Driven Design (DDD)
-
-### Strategic Design
-
-- **Bounded Context**: Explicit boundaries where domain model applies
-- **Ubiquitous Language**: Shared vocabulary between domain experts and developers
-- **Context Mapping**: Relationships between bounded contexts (shared kernel, customer/supplier, conformist, etc.)
-
-### Tactical Design
+## 3. Domain-Driven Design (Tactical)
 
 - **Entities**: Objects with identity (User, Order)
 - **Value Objects**: Immutable objects defined by attributes (Money, Address)
@@ -65,203 +102,34 @@
 - **Domain Services**: Operations that don't belong to single entity
 - **Factories**: Encapsulate complex object creation
 
-### Patterns
+> **Note**: For DDD strategic design (bounded contexts, context mapping), see [Software Architecture](architecture.md).
 
-- **Specification Pattern**: Encapsulate business rules as reusable predicates
-- **Strategy Pattern**: Encapsulate algorithms, make them interchangeable
+---
+
+## 4. Design Patterns
+
+### Creational Patterns
+
 - **Factory Pattern**: Centralize object creation logic
+- **Builder Pattern**: Construct complex objects step by step
+- **Singleton Pattern**: Single instance (use sparingly, prefer dependency injection)
+
+### Structural Patterns
+
+- **Adapter Pattern**: Convert interface of one class to another
+- **Decorator Pattern**: Add behavior to objects dynamically
+- **Facade Pattern**: Simplified interface to complex subsystem
+
+### Behavioral Patterns
+
+- **Strategy Pattern**: Encapsulate algorithms, make them interchangeable
+- **Observer Pattern**: Notify dependents of state changes
+- **Command Pattern**: Encapsulate requests as objects
+- **Specification Pattern**: Encapsulate business rules as reusable predicates
 
 ---
 
-## 3. Microservices Patterns
-
-### Service Decomposition
-
-- **Decompose by Business Capability**: Align services with business functions
-- **Decompose by Subdomain**: Based on DDD bounded contexts
-- **Database per Service**: Each service owns its database
-- **API Gateway**: Single entry point for clients, routes to services
-
-### Communication Patterns
-
-- **Synchronous**: REST, gRPC for request/response
-- **Asynchronous**: Messaging, events for decoupled communication
-- **Service Mesh**: Infrastructure layer for service-to-service communication
-- **Saga Pattern**: Manage distributed transactions across services
-
-### Data Management
-
-- **Database per Service**: Isolation, independent scaling
-- **Shared Database Anti-pattern**: Avoid sharing databases between services
-- **API Composition**: Aggregate data from multiple services
-- **CQRS**: Separate read and write models
-
-### Resilience
-
-- **Circuit Breaker**: Prevent cascading failures
-- **Bulkhead**: Isolate failures to specific service pools
-- **Timeout**: Prevent indefinite waiting
-- **Retry with Backoff**: Handle transient failures
-- **Health Checks**: Monitor service availability
-
----
-
-## 4. API Design Patterns
-
-### RESTful Design
-
-- **Resource-Based URLs**: `/users/{id}`, `/orders/{id}/items`
-- **HTTP Methods**: GET (read), POST (create), PUT (replace), PATCH (partial update), DELETE (remove)
-- **Status Codes**: 200 (OK), 201 (Created), 400 (Bad Request), 404 (Not Found), 500 (Server Error)
-- **HATEOAS**: Hypermedia as the engine of application state
-- **Pagination**: Limit, offset, or cursor-based
-- **Filtering & Sorting**: Query parameters for flexible queries
-
-### API Versioning
-
-- **URL Versioning**: `/v1/users`, `/v2/users`
-- **Header Versioning**: `Accept: application/vnd.api+json;version=2`
-- **Query Parameter**: `/users?version=2`
-- **Backward Compatibility**: Add fields, don't remove; deprecate before removing
-
-### API Patterns
-
-- **API Gateway**: Single entry point, routing, auth, rate limiting
-- **Backend for Frontend (BFF)**: Separate API per client type
-- **GraphQL**: Query language for APIs, client specifies data needs
-- **gRPC**: High-performance RPC framework, protocol buffers
-
----
-
-## 5. Event-Driven Architecture
-
-### Event Patterns
-
-- **Event Sourcing**: Store events, not current state; rebuild state from events
-- **Event Streaming**: Continuous flow of events (Kafka, Event Hubs)
-- **Pub/Sub**: Publishers emit events, subscribers consume
-- **Event Carrying State Transfer**: Events contain full state, not just deltas
-
-### Event Design
-
-- **Event Naming**: Past tense verbs (OrderPlaced, PaymentReceived)
-- **Event Schema**: Versioned, backward-compatible schemas
-- **Idempotency**: Process same event multiple times safely
-- **Event Ordering**: Handle out-of-order events (watermarks, timestamps)
-
-### Patterns
-
-- **Event-Driven Saga**: Coordinate distributed transactions via events
-- **CQRS**: Separate command (write) and query (read) models
-- **Event Replay**: Reprocess events for debugging, migration, analytics
-
----
-
-## 6. CQRS & Event Sourcing
-
-### CQRS (Command Query Responsibility Segregation)
-
-- **Separate Models**: Different models for reads and writes
-- **Command Side**: Optimized for writes, business logic, validation
-- **Query Side**: Optimized for reads, denormalized views, fast queries
-- **Event Bus**: Synchronize read models from write model events
-
-### Event Sourcing
-
-- **Event Store**: Append-only log of events
-- **State Reconstruction**: Replay events to rebuild current state
-- **Snapshots**: Periodic snapshots to avoid replaying all events
-- **Projections**: Build read models from events
-
-### Benefits
-
-- **Audit Trail**: Complete history of changes
-- **Time Travel**: Reconstruct state at any point in time
-- **Debugging**: Understand why state changed
-- **Scalability**: Separate read/write scaling
-
----
-
-## 7. Distributed Systems Patterns
-
-### Consistency Patterns
-
-- **Strong Consistency**: All nodes see same data immediately (ACID)
-- **Eventual Consistency**: Nodes converge to same state over time (BASE)
-- **CAP Theorem**: Choose 2 of 3: Consistency, Availability, Partition tolerance
-- **Consensus Algorithms**: Raft, Paxos for distributed agreement
-
-### Coordination Patterns
-
-- **Distributed Lock**: Coordinate access to shared resources
-- **Leader Election**: Select single leader from group
-- **Two-Phase Commit**: Distributed transaction protocol
-- **Saga Pattern**: Long-running transaction coordinator
-
-### Resilience Patterns
-
-- **Circuit Breaker**: Stop calling failing service, fail fast
-- **Bulkhead**: Isolate resources to prevent cascading failures
-- **Retry**: Handle transient failures with exponential backoff
-- **Timeout**: Prevent indefinite blocking
-- **Rate Limiting**: Control request rate per client/service
-
----
-
-## 8. Security Patterns
-
-### Authentication & Authorization
-
-- **OAuth 2.0**: Authorization framework, access tokens
-- **OpenID Connect (OIDC)**: Identity layer on OAuth 2.0
-- **JWT (JSON Web Tokens)**: Stateless authentication tokens
-- **RBAC (Role-Based Access Control)**: Permissions via roles
-- **ABAC (Attribute-Based Access Control)**: Permissions via attributes
-
-### Security Patterns
-
-- **Defense in Depth**: Multiple security layers
-- **Least Privilege**: Minimum permissions required
-- **Zero Trust**: Never trust, always verify
-- **Secure by Default**: Secure configuration out of the box
-- **Fail Secure**: Default to deny on failure
-
-### Data Protection
-
-- **Encryption at Rest**: Encrypt stored data
-- **Encryption in Transit**: TLS/SSL for network communication
-- **Secrets Management**: Secure storage and rotation of secrets
-- **Data Masking**: Hide sensitive data in non-production
-- **Audit Logging**: Track access and changes
-
----
-
-## 9. Observability & Monitoring
-
-### Three Pillars
-
-- **Metrics**: Numerical measurements over time (CPU, latency, error rate)
-- **Logs**: Discrete events with timestamps and context
-- **Traces**: Request flow across distributed systems
-
-### Observability Patterns
-
-- **Distributed Tracing**: Track requests across services (OpenTelemetry, Zipkin)
-- **Structured Logging**: JSON logs with consistent fields
-- **Correlation IDs**: Track requests across services
-- **Health Checks**: Liveness and readiness probes
-- **SLI/SLO/SLA**: Service level indicators, objectives, agreements
-
-### Best Practices
-
-- **Log Levels**: DEBUG, INFO, WARN, ERROR, FATAL
-- **Context Enrichment**: Add request ID, user ID, tenant ID to logs
-- **Sampling**: Sample high-volume traces/logs
-- **Alerting**: Alert on SLO violations, not raw metrics
-
----
-
-## 10. Testing Strategies
+## 5. Testing Strategies
 
 ### Testing Pyramid
 
@@ -287,5 +155,5 @@
 
 ---
 
-> **Note**: These patterns are platform-agnostic. For cloud-specific implementations, see [Architecture](cloud_architecture.md).
+> **Note**: For system-level architectural patterns, see [Software Architecture](architecture.md). For cloud-specific implementations, see [Cloud Architecture](../cloud/architecture.md).
 

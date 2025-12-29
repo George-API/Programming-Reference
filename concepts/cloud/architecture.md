@@ -31,6 +31,8 @@
 - **B2C/B2B**: External identity provider for customer-facing apps
 - **Token validation**: centralize at API gateway when possible; validate in apps for defense-in-depth
 - **Key rotation**: automated cert rotation; avoid long-lived client secrets
+- **Zero Trust**: Verify explicitly, least privilege access, assume breach; continuous validation
+- **Session management**: Short-lived tokens; refresh token rotation; secure cookie flags (HttpOnly, Secure, SameSite)
 
 ---
 
@@ -40,6 +42,7 @@
 
 - Global CDN/WAF for multi-region failover
 - Regional WAF for VNet-centric patterns
+- **DDoS protection**: Enable at edge (WAF/CDN); rate limiting per IP/tenant; geo-blocking when appropriate
 
 ### Private-only services
 
@@ -54,10 +57,12 @@
 ### Segmentation
 
 - Separate inbound, app, and data subnets; NSGs as defense-in-depth
+- **Health checks**: Liveness/readiness probes; health endpoints for load balancers; dependency health checks
 
 ### Multi-region connectivity
 
 - Virtual WAN for branch connectivity; hub-spoke for simpler estates
+- **Caching**: Application-level caching (Redis) for read-heavy workloads; CDN for static assets
 
 > **Troubleshooting**: For networking troubleshooting (DNS, routing, private endpoints), see [OSI Model](../software/osi.md).
 
@@ -69,17 +74,22 @@
 
 - **North-south**: external APIs, policies, developer portal
 - **East-west**: internal APIs, mTLS, routing, rate limiting
+- **Service mesh**: Consider for complex microservices (traffic management, observability, security policies)
 
 ### Policies (enterprise essentials)
 
 - JWT validation, quota/rate limit, IP allowlist, correlation headers
 - Request/response transformation (avoid heavy transforms at gateway)
 - **Versioning**: URL (`/v1`), header, or query param; deprecation policy
+- **Security**: OWASP top 10 protection (injection, XSS, broken auth); request size limits
 
 ### Observability
 
 - Standard correlation headers: `traceparent` + `x-correlation-id`
 - Log request IDs + consumer/app IDs + subscription IDs
+- **Distributed tracing**: OpenTelemetry for end-to-end request flows across services
+- **Structured logging**: JSON logs with consistent schema; avoid PII in logs
+- **Metrics**: Export to central platform (Prometheus-compatible); cardinality limits
 
 ---
 
@@ -95,6 +105,8 @@
 - **Duplicate detection**: time-window for producer-side help (still keep consumer idempotent)
 - **DLQ strategy**: classify faults (transient vs permanent), automate re-drive tooling
 - **Event schema**: standardize (CloudEvents where practical)
+- **Batch processing**: Batch messages for throughput; balance latency vs efficiency; handle partial batch failures
+- **Message ordering**: Guarantee ordering only when required (sessions); accept out-of-order for scalability
 
 ### Orchestration
 
@@ -119,6 +131,7 @@
 ### Tenant routing
 
 - Tenant context from JWT claim → route to correct data partition / connection string
+- **Tenant lifecycle**: Automated onboarding/offboarding; data isolation verification; tenant data deletion workflows
 
 ### Rate limiting
 
@@ -127,6 +140,7 @@
 ### Data protection
 
 - Per-tenant encryption keys (advanced) when required by compliance
+- **Data residency**: Enforce geographic data storage requirements; tenant-aware routing for compliance
 
 ---
 
@@ -142,11 +156,13 @@
 - **Bulkheads**: separate thread pools per dependency or workload class
 - **Timeouts everywhere**: HTTP, DB, queue handlers
 - **Circuit breakers** + retry budgets (avoid retry storms)
+- **Retry strategy**: Exponential backoff with jitter; cap max retries; use retry-after headers
 
 ### Backpressure
 
 - Autoscale on queue depth (Functions/Container Apps)
 - Shed load on non-critical endpoints when dependencies degrade
+- **Graceful degradation**: Return cached/stale data when dependencies fail; circuit breaker fallbacks
 
 ### Chaos-lite
 
@@ -162,6 +178,7 @@
 
 - Central keys/certs; app secrets only when unavoidable
 - Access via Managed Identity; rotate automatically
+- **Secret scanning**: Scan code repos for hardcoded secrets; pre-commit hooks; automated rotation windows
 
 ### Confidential computing (when mandated)
 
@@ -175,6 +192,7 @@
 ### Runbooks + playbooks
 
 - DLQ handling, replay procedures, incident triage, rollback
+- **On-call rotation**: Clear escalation paths; incident severity classification; post-mortem culture
 
 ### Audit trails
 
@@ -183,11 +201,17 @@
 ### Change management
 
 - Schema changes, API deprecations, topic migrations with comms + timelines
+- **Infrastructure as Code**: Version control all infrastructure; GitOps for automated deployments
+- **Disaster recovery**: Define RTO/RPO; test failover regularly; automate recovery procedures
+- **Deployment strategies**: Blue-green or canary for zero-downtime; feature flags for gradual rollouts; automated rollback triggers
 
 ### FinOps
 
 - Cost per tenant/request/pipeline run; budgets + anomaly detection
 - Reserved capacity for steady workloads; autoscale for burst
+- **Right-sizing**: Regular review of resource utilization; downsize over-provisioned resources
+- **Spot instances**: Use for fault-tolerant workloads (batch, dev/test); graceful shutdown handling
+- **Tagging strategy**: Consistent tags for cost allocation (team, environment, cost center)
 
 ---
 

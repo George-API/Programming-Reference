@@ -39,12 +39,12 @@
 - `None` - Null / no value
 
 ### Logical / comparison
-- `and` - Logical AND
+- same object)
+- `is not` - Negative identity comparison
+- `in` - Membership test`and` - Logical AND
 - `or` - Logical OR
 - `not` - Logical NOT
-- `is` - Identity comparison (same object)
-- `is not` - Negative identity comparison
-- `in` - Membership test
+- `is` - Identity comparison (
 - `not in` - Negative membership test
 
 ### Conditionals

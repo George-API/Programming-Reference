@@ -10,13 +10,17 @@ Quick reference for data, cloud & software engineering concepts and programming 
 - [Microsoft Fabric](concepts/cloud/fabric_architecture.md) - Microsoft Fabric data platform implementation (OneLake, Lakehouse, Warehouse)
 
 ### Data
-- [Data Management](concepts/data/management.md) - Operating models, security, privacy, quality, governance
 - [Data Engineering](concepts/data/engineering.md) - Pipeline patterns: ETL/ELT, orchestration, transformation
+- [Database Management](concepts/data/database.md) - RDBMS design, indexing, query optimization, transactions
+- [Data Governance](concepts/data/governance.md) - Operating models, metadata, catalog, policies
+- [Data Operations](concepts/data/operations.md) - Quality, integrity, lifecycle, reliability
+- [Data Security](concepts/data/security.md) - Access control, encryption, privacy, compliance
 - [Analytics Engineering](concepts/data/analytics_engineering.md) - Transformation layer, semantic layer, BI modeling
 - [Data Analytics](concepts/data/analytics.md) - Statistical analysis, EDA, forecasting, experimentation
 
 ### Software
-- [Software Design](concepts/software/design.md) - Enterprise design patterns and best practices
+- [Software Design](concepts/software/design.md) - Code-level design patterns, SOLID principles, DDD tactical
+- [Software Architecture](concepts/software/architecture.md) - System-level patterns, microservices, event-driven, distributed systems
 - [DevOps](concepts/software/devops.md) - CI/CD pipelines and Azure DevOps practices
 - [SDLC](concepts/software/sdlc.md) - Software development life cycle, methodologies, best practices
 - [DSA Overview](concepts/software/dsa.md) - Data structures and algorithms concepts
@@ -26,6 +30,9 @@ Quick reference for data, cloud & software engineering concepts and programming 
 
 ### Excel
 - [Excel](languages/excel/excel.md) - Functions, lookups, formulas, data analysis
+
+### C
+- [C](languages/c/c.md) - Systems programming, memory management, pointers, low-level operations
 
 ### Git
 - [Git](languages/git/git.md) - Command reference and workflows
@@ -47,7 +54,8 @@ Quick reference for data, cloud & software engineering concepts and programming 
 - [Tidyverse](languages/r/tidyverse.md) - dplyr, tidyr, stringr, lubridate essentials
 
 ### SQL
-- [SQL](languages/sql/sql.md) - Core syntax, aggregations, joins, window functions
+- [Core](languages/sql/core.md) - Core syntax, operation flow/order, basic queries
+- [Patterns](languages/sql/patterns.md) - Common patterns, best practices, advanced techniques
 
 ### Typescript
 - [Typescript](languages/typescript/typescript.md) - Syntax: types, interfaces, classes, generics, modules

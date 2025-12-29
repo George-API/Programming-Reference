@@ -19,13 +19,14 @@
 
 **Typical Fabric stack:**
 
-- **Ingestion/Orchestration**: Fabric Data Pipelines
-- **Streaming**: Event Hubs (telemetry/streams), Event Grid (events), Service Bus (commands/queues)
+- **Ingestion/Orchestration**: Data Factory (pipelines, data flows)
+- **Streaming**: Real-Time Intelligence / Real-Time Hub (Event Hubs, IoT Hub, streaming sources)
 - **Storage/Lake**: OneLake (unified storage), Delta/Parquet
-- **Processing**: Fabric Lakehouse (Spark), Fabric Notebooks
-- **Serving**: Fabric Warehouse / Fabric SQL Analytics Endpoint
-- **Semantic/BI**: Power BI (native integration)
-- **Governance**: Microsoft Purview
+- **Processing**: Data Engineering (Lakehouse, Spark, Notebooks)
+- **Serving**: Data Warehouse (SQL analytics), Databases (operational SQL)
+- **Semantic/BI**: Power BI (native integration, Direct Lake)
+- **AI/ML**: Copilot (AI assistance), Data Science (ML workloads)
+- **Governance**: Microsoft Purview (built-in)
 - **Security/Monitoring**: Entra ID, Key Vault, Defender for Cloud, Fabric monitoring
 
 ---
@@ -38,9 +39,9 @@
 
 ### B) Ingestion Layer
 
-- **Batch**: Fabric Data Pipelines (copy + transforms) → Bronze
+- **Batch**: Data Factory pipelines (copy + transforms) → Bronze
 - **CDC**: source CDC → landing → Bronze (or event stream)
-- **Streaming**: Event Hubs → stream processing → Bronze/Silver
+- **Streaming**: Real-Time Intelligence / Real-Time Hub → stream processing → Bronze/Silver
 
 ### C) Lakehouse Layers (Medallion)
 
@@ -50,7 +51,7 @@
 
 ### D) Serving
 
-- **Warehouse/SQL**: Fabric Warehouse / SQL Analytics Endpoint for BI-friendly consumption
+- **Warehouse/SQL**: Data Warehouse for BI-friendly consumption
 - **APIs**: lightweight serving via App Service/Functions if operational consumers need data products
 
 ### E) Governance/Operations
@@ -63,13 +64,22 @@
 
 ## 2. Microsoft Fabric Patterns
 
+### Real-Time Intelligence
+
+- **Real-Time Hub**: unified SaaS experience for data-in-motion
+- **Streaming sources**: Event Hubs, IoT Hub, Microsoft 365 events, external streams
+- **Stream processing**: real-time transformation and analytics
+- **Event routing**: route events to destinations (OneLake, Event Hubs, etc.)
+- **Low-latency analytics**: query streaming data with minimal delay
+
 ### OneLake (Unified Storage)
 
-- **Single logical lake**: across all workspaces; no data movement between workspaces
+- **Single logical lake**: tenant-wide unified storage; no data movement between workspaces
 - **Shortcuts**: reference external data (ADLS, S3, Google Cloud) without copying
 - **Delta format**: default for lakehouse tables; ACID transactions, time travel
 - **Partitioning**: by date/tenant/source; optimize file sizes (128MB-1GB target)
 - **Workspace isolation**: each workspace has its own OneLake location
+- **Zero-copy access**: data shared across workloads without duplication
 
 ### Medallion Architecture Implementation
 
@@ -86,39 +96,43 @@
   - Business entities; star schemas; aggregates
   - Certified datasets; documented semantics
 
-### Fabric Lakehouse
+### Data Engineering (Lakehouse)
 
 - **Spark engine**: built-in Spark runtime for transformations
 - **SQL endpoint**: automatic SQL endpoint for querying lakehouse tables
 - **Notebooks**: Python/Scala/R notebooks for data engineering
 - **Shortcuts**: connect to external storage without data duplication
+- **Copilot**: AI-assisted code generation, query optimization, documentation
 
-### Fabric Warehouse
+### Data Warehouse
 
 - **SQL analytics**: fully managed SQL data warehouse
 - **Direct lake access**: query OneLake data directly without import
 - **Automatic indexing**: query optimization built-in
 - **T-SQL compatibility**: standard SQL Server syntax
+- **Copilot**: AI-assisted SQL query generation and optimization
 
-### Fabric Data Pipelines
+### Data Factory
 
-- **Copy activities**: efficient data movement
-- **Data flows**: Spark-based transformations
+- **Pipelines**: orchestration and data movement (copy activities)
+- **Data flows**: Spark-based transformations (mapping data flows)
 - **Workspace integration**: native integration with lakehouse and warehouse
 - **Triggers**: schedule-based, event-based
+- **Copilot**: AI-assisted pipeline authoring and code generation
 
 ### Semantic Models (Power BI)
 
 - **Import mode**: data copied into Power BI (fast, limited size)
 - **DirectQuery**: live queries to Fabric Warehouse (real-time, larger datasets)
-- **Direct Lake**: query OneLake directly (best of both worlds)
+- **Direct Lake**: query OneLake Delta tables directly (no import, no DirectQuery overhead; best performance)
 - **Composite models**: mix import + DirectQuery for optimal performance
 - **Certified datasets**: governance-approved; promoted in Power BI service
+- **Copilot**: AI-assisted report creation, DAX generation, insights
 
 ### Data Networking (Fabric)
 
 - **ADLS Private Link**: Private endpoints for OneLake/ADLS Gen2 access
-- **Fabric Private Link**: Private endpoints for Fabric workspace access (preview)
+- **Fabric Private Link**: Private endpoints for Fabric workspace access (check current GA status)
 - **Data plane isolation**: separate subnets for data ingestion vs serving
 - **Egress control**: NAT Gateway for stable outbound IPs (source systems allowlists)
 
@@ -141,22 +155,24 @@
 
 ### Governance
 
-- **Purview**:
+- **Purview (built-in)**:
   - catalog + lineage for pipelines and lakehouse assets
   - classification labels for sensitive fields
   - data contracts enforcement (schema validation)
+  - centralized data discovery and access control
 - **Fabric governance**:
   - workspace-level access control, item-level permissions
   - data sensitivity labels, retention policies
   - workspace settings and policies
+  - admin portal for tenant-wide governance
 
-> **Note**: For data management concepts (operating model, quality, integrity), see [Data Management](../data/management.md).
+> **Note**: For data management concepts (operating model, quality, integrity), see [Data Governance](../data/governance.md), [Data Operations](../data/operations.md), and [Data Security](../data/security.md).
 
 ---
 
 ## 4. Reliability & Data Freshness
 
-> **Note**: For data SLO concepts (what they are, why they matter), see [Data Management - Reliability](../data/management.md#8-reliability-resilience-and-data-sre-advanced).
+> **Note**: For data SLO concepts (what they are, why they matter), see [Data Operations - Reliability](../data/operations.md#8-reliability--data-sre).
 
 ### Implementing Data SLOs (Fabric)
 
@@ -197,7 +213,7 @@
 - **Contracts**: schema, semantics, keys, SLAs defined in Purview
 - **Documentation**: Power BI semantic model descriptions, sample queries, changelog
 
-> **Note**: For data contract concepts and operating model, see [Data Management](../data/management.md).
+> **Note**: For data contract concepts and operating model, see [Data Governance](../data/governance.md).
 
 ---
 
@@ -210,10 +226,11 @@
 - **Avoid moving data unnecessarily**:
   - pushdown filters, incremental loads, CDC where possible
   - use shortcuts to reference external data
-- **Choose the right Fabric tool**:
-  - Fabric Pipelines for orchestration + movement
-  - Fabric Lakehouse (Spark) for heavy transforms
-  - Fabric Warehouse for serving + BI transforms
+- **Choose the right Fabric workload**:
+  - Data Factory for orchestration + movement
+  - Data Engineering (Lakehouse/Spark) for heavy transforms
+  - Data Warehouse for serving + BI transforms
+  - Real-Time Intelligence for streaming scenarios
 - **Direct Lake mode**:
   - Power BI Direct Lake queries OneLake directly (no import, no DirectQuery overhead)
 
@@ -243,11 +260,12 @@
 - Pipeline run telemetry + alerts (Fabric monitoring)
 - Freshness + backlog dashboards
 - Cost per pipeline + anomaly alerts
+- Capacity metrics and utilization tracking
 
 ### Governance
 
 - Purview catalog + lineage
-- Data contracts + versioning policy (see [Data Management](../data/management.md))
+- Data contracts + versioning policy (see [Data Governance](../data/governance.md))
 - Retention policies per zone (Bronze/Silver/Gold)
 - Fabric workspace governance settings
 
