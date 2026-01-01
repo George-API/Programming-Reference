@@ -62,3 +62,19 @@ Quick reference for data, cloud & software engineering concepts and programming 
 
 ### Terminal
 - [Terminal](languages/terminal/terminal.md) - Bash command reference
+
+---
+
+## Language Usage Guide
+
+**Mental model**: Use the highest-level language that does not hide risks you actually care about; drop lower only when correctness, scale, or performance demands it.
+
+- **Python** - Data analysis, automation, scripting, ML
+- **PySpark** - Large-scale data engineering, distributed processing, ETL/ELT pipelines
+- **R** - Statistical analysis, modeling, forecasting, quantitative research
+- **JavaScript/TypeScript** - Frontend and full-stack web applications
+- **C#** - Azure-centric enterprise platforms, APIs, identity-aware services, integrations
+- **Java** - Large-scale enterprise platforms, legacy systems, Spring/JVM ecosystems
+- **Rust** - Memory-safe systems, security-critical components, high-assurance services
+- **C++** - Performance-critical engines, real-time systems, low-level platform components
+- **C** - Embedded systems, OS-level components, firmware, minimal runtime environments
