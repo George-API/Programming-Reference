@@ -1,7 +1,13 @@
 
 # Overview
 
-IT project management reference organized into four directories: **Concepts** (cloud, data, software, project management), **Programming** (language syntax and utilities), **Resources** (terminology, standards, frameworks, tools), and **Trends** (industry analysis). Provides modern best practices, design patterns, and quick reference guides for initial understanding. Use as a secondary reference alongside official documentation and authoritative sources.
+Reference material for IT project management, providing modern best practices, design patterns, and quick reference guides for initial understanding. Use as a secondary reference alongside official documentation and authoritative sources.
+
+Reference material organized into four directories:
+- **Concepts** (cloud, data, software, project management)
+- **Programming** (language syntax and utilities)
+- **Resources** (terminology, standards, frameworks, tools)
+- **Trends** (industry analysis)
 
 ---
 
