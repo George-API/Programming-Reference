@@ -1,4 +1,4 @@
-# Enterprise Ontario Public Sector Reporting
+# Enterprise Reporting
 
 **Scope**: Reporting practices, Power BI dashboards, and best practices for enterprise Ontario public sector projects.
 
