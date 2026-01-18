@@ -33,8 +33,8 @@ pd.DataFrame(data = df) # required param
 ```
 
 -**Note:** Pandas requires value-reasignment for transforms
-`df = df.loc[df["col_name"] == some_value]` includes matches
-`df = df.loc[~df["col_name"] == some_value]`excludes matches
+- `df = df.loc[df["col_name"] == some_value]` includes matches
+- `df = df.loc[~df["col_name"] == some_value]`excludes matches
 ---
 
 ## Rapid Lookup
