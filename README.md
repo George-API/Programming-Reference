@@ -1,5 +1,5 @@
 # Overview
-A curated collection of IT reference material covering IT project management, software development, and data disciplines. 
+Curated collection of IT reference material covering IT project management, software development & data disciplines. 
 
 > ⚠️ **Disclaimer**  
 > This repository contains AI-generated content.  
