@@ -13,7 +13,7 @@ A curated collection of IT reference material covering IT project management, so
 
 ## Directory Structure
 
-### **Concepts**
+### **[Concepts](concepts/)**
 Core principles, patterns, and practices across cloud, data, software, and project management.
 
 - **[Cloud](concepts/cloud/):** Architecture, infrastructure, operations, Azure data platform, Fabric, Databricks  
