@@ -1,53 +1,48 @@
 
 # Overview
+A curated collection of IT reference material covering IT project management, software development, and data disciplines. 
 
-Reference material for IT project management, providing modern best practices, design patterns, and quick reference guides for initial understanding. Use as a secondary reference alongside official documentation and authoritative sources.
+**Disclaimer**: This repository contains AI-generated content is not an authoritative resource. 
 
-Reference material organized into four directories:
-- **Concepts** (cloud, data, software, project management)
-- **Programming** (language syntax and utilities)
-- **Resources** (terminology, standards, frameworks, tools)
-- **Trends** (industry analysis)
+Always refer to official documentation and internal resources when making decisions or implementing solutions, and ensure alignment with the following:
+
+- **Enterprise guidance** — Organizational policies, architecture standards, governance frameworks, and approved practices  
+- **Project conventions** — Established code patterns, coding standards, architectural guidelines, and team workflows  
+- **Authoritative external sources** — Vendor documentation, standards bodies (e.g., ISO, NIST, OWASP), and applicable regulatory requirements
 
 ---
 
 ## Directory Structure
 
-### [Concepts](concepts/)
-Core concepts, patterns, and practices for cloud architecture, data engineering, software development, and project management.
+### **Concepts**
+Core principles, patterns, and practices across cloud, data, software, and project management.
 
-- **[Cloud](concepts/cloud/)** - Architecture, infrastructure, operations, Azure data platform, Fabric, Databricks
-- **[Data](concepts/data/)** - Analytics engineering, data engineering, governance, operations, security, database management
-- **[Software](concepts/software/)** - Architecture patterns, design principles, DevOps, Azure DevOps, SDLC, DSA, OSI model
-- **[Project Management](concepts/project_management/)** - General PM, ITPM, methodologies, roadmaps, stakeholder engagement, reporting, tools
-
-### [Programming](programming/README.md)
-Syntax references and patterns for programming languages and utilities.
-
-- **Languages**: [C/C++](programming/c/), [C#](programming/csharp/), [Go](programming/go/), [Java](programming/java/), [JavaScript](programming/javascript/), [Python](programming/python/), [R](programming/r/), [Rust](programming/rust/), [SQL](programming/sql/), [TypeScript](programming/typescript/)
-- **Utilities**: [Bicep](programming/bicep/), [Excel](programming/excel/), [Git](programming/git/), [Terraform](programming/terraform/), [Terminal](programming/terminal/)
-
-### [Resources](resources/)
-Reference resources, standards, frameworks, tools, and terminology.
-
-- **[Terminology](resources/TERMINOLOGY.md)** - Key terminology across all domains
-- **[Research & Standards](resources/RESEARCH.md)** - Security standards, compliance frameworks, governance, research
-- **[Enterprise Tools](resources/TOOLS.md)** - Microsoft-centric enterprise tools and platforms
-
-### [Trends](trends/)
-Industry analysis and strategic technology trends.
-
-- **[IT 2026 Executive Analysis](trends/TRENDS_ANALYSIS.md)** - Strategic trends, cybersecurity, AI transformation
-- **[State of IT 2026 Report](trends/TRENDS.MD)** - Industry analysis and risk assessment
+- **[Cloud](concepts/cloud/)** — Architecture, infrastructure, operations, Azure data platform, Fabric, Databricks  
+- **[Data](concepts/data/)** — Analytics engineering, data engineering, governance, operations, security, database management  
+- **[Software](concepts/software/)** — Architecture patterns, design principles, DevOps, Azure DevOps, SDLC, DSA, OSI model  
+- **[Project Management](concepts/project_management/)** — General PM, ITPM, methodologies, roadmaps, stakeholder engagement, reporting, tools  
 
 ---
 
-## Usage
+### **[Programming](programming/README.md)**
+Language syntax, patterns, and utility references.
 
-**This repository is a quick reference guide**, not a replacement for authoritative sources. When making critical decisions or implementing solutions:
+- **Languages**: [C/C++](programming/c/), [C#](programming/csharp/), [Go](programming/go/), [Java](programming/java/), [JavaScript](programming/javascript/), [Python](programming/python/), [R](programming/r/), [Rust](programming/rust/), [SQL](programming/sql/), [TypeScript](programming/typescript/)  
+- **Utilities**: [Bicep](programming/bicep/), [Excel](programming/excel/), [Git](programming/git/), [Terraform](programming/terraform/), [Terminal](programming/terminal/)  
 
-1. **Consult official external resources**: Vendor documentation, standards bodies (ISO, NIST, OWASP), and regulatory requirements
-2. **Follow internal enterprise resources**: Your organization's policies, architecture standards, and governance frameworks
-3. **Adhere to project conventions**: Code patterns, coding standards, architectural guidelines, and team workflows specific to your context
+---
 
-> **Remember**: Always validate information against authoritative sources and align with your organization's established practices and protocols.
+### **[Resources](resources/)**
+Standards, frameworks, tools, and shared terminology.
+
+- **[Terminology](resources/TERMINOLOGY.md)** — Key terminology across domains  
+- **[Research & Standards](resources/RESEARCH.md)** — Security standards, compliance frameworks, governance, and research  
+- **[Enterprise Tools](resources/TOOLS.md)** — Microsoft-centric enterprise platforms and tooling  
+
+---
+
+### **[Trends](trends/)**
+Industry analysis and emerging developments.
+
+- **[IT 2026 Executive Analysis](trends/TRENDS_ANALYSIS.md)** — Strategic trends, cybersecurity, and AI transformation  
+- **[State of IT 2026 Report](trends/TRENDS.MD)** — Industry outlook and risk assessment  
