@@ -8,7 +8,7 @@ A curated collection of IT reference material covering IT project management, so
 > Always refer to authoritative sources when making decisions or implementing solutions, ensure alignment with:  
 > - **Enterprise guidance:** Organizational policies, architecture standards, governance frameworks, and approved practices  
 > - **Project conventions:** Established code patterns, coding standards, architectural guidelines, and team workflows  
-> - **Authoritative external sources:** Vendor documentation, standards bodies (e.g., ISO, NIST, OWASP), and applicable regulatory requirements
+> - **External sources:** Vendor documentation, standards bodies (e.g., ISO, NIST, OWASP), and applicable regulatory requirements
 
 ---
 
