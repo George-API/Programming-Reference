@@ -1,194 +1,186 @@
-# IT Project Management — Enterprise Tools
+# Enterprise Tools Reference
 
-**Purpose**: Enterprise tools, platforms, and utilities commonly used in Microsoft-centric IT project management environments.
+**Purpose**: Key tools for Microsoft-centric IT project management and development environments.
 
-**Related Documentation**: See [IT Project Management](../concepts/project_management/itpm.md) for implementation patterns and practices. For standards and research, see [RESEARCH.md](RESEARCH.md).
+**Related**: [References](References.md) | [Terminology](../TERMINOLOGY.md)
 
 ---
 
 ## Table of Contents
 
-- [Code Security & Vulnerability Scanning](#code-security--vulnerability-scanning)
-- [Security & Compliance](#security--compliance)
-- [Development & DevOps](#development--devops)
+- [IDE & Editors](#ide--editors)
+- [Database Tools](#database-tools)
+- [CLI Tools](#cli-tools)
+- [API & Testing Tools](#api--testing-tools)
+- [Data Quality & Observability](#data-quality--observability)
+- [Data Catalog & Governance](#data-catalog--governance)
+- [Container Tools](#container-tools)
+- [Code Security & Scanning](#code-security--scanning)
+- [Diagramming](#diagramming)
+- [Work Tracking](#work-tracking)
 - [Documentation & Collaboration](#documentation--collaboration)
-- [Diagramming & Architecture](#diagramming--architecture)
-- [Analytics & Reporting](#analytics--reporting)
-- [Infrastructure & IaC](#infrastructure--iac)
-- [Container & Orchestration](#container--orchestration)
 
 ---
 
-## Code Security & Vulnerability Scanning
+## IDE & Editors
 
-- **GitHub Advanced Security**
-  - [GitHub Advanced Security](https://github.com/features/security)
-  - [GitHub Dependabot](https://github.com/dependabot)
-  - [GitHub Code Scanning](https://github.com/features/security/code-scanning)
-  - [GitHub Secret Scanning](https://github.com/features/security/secret-scanning)
+| Tool | Focus | Link |
+|------|-------|------|
+| **Visual Studio** | Full IDE (.NET, C++, Python) | [visualstudio.microsoft.com](https://visualstudio.microsoft.com/) |
+| **Visual Studio Code** | Lightweight editor | [code.visualstudio.com](https://code.visualstudio.com/) |
+| **JetBrains Rider** | .NET IDE | [jetbrains.com/rider](https://www.jetbrains.com/rider/) |
+| **JetBrains DataGrip** | Database IDE | [jetbrains.com/datagrip](https://www.jetbrains.com/datagrip/) |
 
-- **Microsoft Defender for Cloud**
-  - [Azure Defender](https://azure.microsoft.com/services/azure-defender/)
-  - [Defender for DevOps](https://learn.microsoft.com/azure/defender-for-cloud/defender-for-devops-introduction)
-
-- **SonarQube / SonarCloud**
-  - [SonarCloud](https://sonarcloud.io/) - Azure DevOps integration
-  - [SonarQube](https://www.sonarqube.org/)
-
-- **Snyk** (Common in Microsoft environments)
-  - [Snyk Open Source Security](https://snyk.io/)
-  - [Snyk Code (SAST)](https://snyk.io/product/snyk-code/)
-  - [Snyk Container Security](https://snyk.io/product/container-security/)
+**Key VS Code Extensions**: Azure Repos, Bicep, Docker, GitLens, Pylance, Remote-SSH, Thunder Client
 
 ---
 
-## Security & Compliance
+## Database Tools
 
-- **Microsoft Sentinel (SIEM/SOAR)**
-  - [Azure Sentinel](https://azure.microsoft.com/services/azure-sentinel/)
-  - [Sentinel SOAR capabilities](https://learn.microsoft.com/azure/sentinel/)
-
-- **Microsoft Defender for Cloud**
-  - [Defender for Cloud](https://azure.microsoft.com/services/defender-for-cloud/)
-  - [Cloud Security Posture Management](https://learn.microsoft.com/azure/defender-for-cloud/concept-cloud-security-posture-management)
-
-- **Azure Key Vault**
-  - [Azure Key Vault](https://azure.microsoft.com/services/key-vault/)
-  - [Key Vault documentation](https://learn.microsoft.com/azure/key-vault/)
-
-- **Microsoft Purview**
-  - [Microsoft Purview](https://www.microsoft.com/security/business/risk-management/microsoft-purview)
-  - [Data governance and compliance](https://www.microsoft.com/microsoft-365/purview)
+| Tool | Focus | Link |
+|------|-------|------|
+| **SQL Server Management Studio** | SQL Server administration | [learn.microsoft.com/ssms](https://learn.microsoft.com/sql/ssms/) |
+| **Azure Data Studio** | Cross-platform SQL tool | [learn.microsoft.com/azure-data-studio](https://learn.microsoft.com/azure-data-studio/) |
+| **DBeaver** | Universal database tool | [dbeaver.io](https://dbeaver.io/) |
+| **pgAdmin** | PostgreSQL administration | [pgadmin.org](https://www.pgadmin.org/) |
 
 ---
 
-## Development & DevOps
+## CLI Tools
 
-- **Azure DevOps**
-  - [Azure DevOps](https://azure.microsoft.com/services/devops/)
-  - [Azure Pipelines](https://azure.microsoft.com/services/devops/pipelines/)
-  - [Azure Repos (Git)](https://azure.microsoft.com/services/devops/repos/)
-  - [Azure Artifacts](https://azure.microsoft.com/services/devops/artifacts/)
-  - [Azure Boards](https://azure.microsoft.com/services/devops/boards/)
-  - [Azure Test Plans](https://azure.microsoft.com/services/devops/test-plans/)
+| Tool | Focus | Link |
+|------|-------|------|
+| **Azure CLI** | Azure resource management | [learn.microsoft.com/cli/azure](https://learn.microsoft.com/cli/azure/) |
+| **Azure PowerShell** | Azure automation | [learn.microsoft.com/powershell/azure](https://learn.microsoft.com/powershell/azure/) |
+| **GitHub CLI (gh)** | GitHub from terminal | [cli.github.com](https://cli.github.com/) |
+| **dbt CLI** | Data transformations | [docs.getdbt.com](https://docs.getdbt.com/docs/core/installation-overview) |
+| **Databricks CLI** | Databricks automation | [docs.databricks.com/cli](https://docs.databricks.com/dev-tools/cli/) |
+| **kubectl** | Kubernetes management | [kubernetes.io/kubectl](https://kubernetes.io/docs/reference/kubectl/) |
+| **Helm** | Kubernetes package manager | [helm.sh](https://helm.sh/) |
+| **Terraform CLI** | Infrastructure as code | [terraform.io/cli](https://developer.hashicorp.com/terraform/cli) |
 
-- **Azure Repos (Git) Features**
-  - [Azure Repos documentation](https://learn.microsoft.com/azure/devops/repos/)
-  - [Branch policies](https://learn.microsoft.com/azure/devops/repos/git/branch-policies)
-  - [Pull requests](https://learn.microsoft.com/azure/devops/repos/git/pull-requests)
-  - [Code search](https://learn.microsoft.com/azure/devops/project/search)
-  - [File history and annotations](https://learn.microsoft.com/azure/devops/repos/git/history)
-  - [Webhooks](https://learn.microsoft.com/azure/devops/service-hooks/overview)
+---
 
-- **Azure DevOps Security & Scanning**
-  - [Defender for DevOps](https://learn.microsoft.com/azure/defender-for-cloud/defender-for-devops-introduction)
-  - [Azure DevOps security scanning](https://learn.microsoft.com/azure/devops/organizations/security/)
-  - [Service connections security](https://learn.microsoft.com/azure/devops/pipelines/library/service-endpoints)
-  - [Variable groups (secrets)](https://learn.microsoft.com/azure/devops/pipelines/library/variable-groups)
-  - [Secure files](https://learn.microsoft.com/azure/devops/pipelines/library/secure-files)
+## API & Testing Tools
 
-- **Azure DevOps Extensions & Marketplace**
-  - [Azure DevOps Marketplace](https://marketplace.visualstudio.com/azuredevops)
-  - [SonarCloud extension](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarcloud)
-  - [Snyk extension](https://marketplace.visualstudio.com/items?itemName=snyk-security.snyk-vulnerability-scanner)
-  - [WhiteSource extension](https://marketplace.visualstudio.com/items?itemName=whitesource.whiteSource-bolt-azure-devops)
-  - [OWASP ZAP extension](https://marketplace.visualstudio.com/items?itemName=CSE-DevOps.zap-scanner)
+| Tool | Focus | Link |
+|------|-------|------|
+| **Postman** | API development & testing | [postman.com](https://www.postman.com/) |
+| **Bruno** | Open-source API client | [usebruno.com](https://www.usebruno.com/) |
+| **Playwright** | E2E browser testing | [playwright.dev](https://playwright.dev/) |
+| **Selenium** | Browser automation | [selenium.dev](https://www.selenium.dev/) |
+| **k6** | Load testing | [k6.io](https://k6.io/) |
+| **JMeter** | Performance testing | [jmeter.apache.org](https://jmeter.apache.org/) |
 
-- **Visual Studio / Visual Studio Code**
-  - [Visual Studio](https://visualstudio.microsoft.com/)
-  - [Visual Studio Code](https://code.visualstudio.com/)
-  - [VS Code Extensions](https://marketplace.visualstudio.com/vscode)
-  - [Azure Repos extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azure-repos)
+---
 
-- **GitHub**
-  - [GitHub](https://github.com/)
-  - [GitHub Actions](https://github.com/features/actions)
-  - [GitHub Copilot](https://github.com/features/copilot)
+## Data Quality & Observability
+
+| Tool | Type | Link |
+|------|------|------|
+| **Great Expectations** | Data validation framework | [greatexpectations.io](https://greatexpectations.io/) |
+| **dbt Tests** | SQL-based testing | [docs.getdbt.com/tests](https://docs.getdbt.com/docs/build/data-tests) |
+| **Soda Core** | Quality monitoring (OSS) | [soda.io](https://www.soda.io/) |
+| **Pandera** | DataFrame validation | [pandera.readthedocs.io](https://pandera.readthedocs.io/) |
+| **Monte Carlo** | Data observability | [montecarlodata.com](https://www.montecarlodata.com/) |
+| **Bigeye** | Quality monitoring | [bigeye.com](https://www.bigeye.com/) |
+| **Datafold** | Data diff & quality | [datafold.com](https://www.datafold.com/) |
+| **ydata-profiling** | Automated profiling | [github.com/ydataai](https://github.com/ydataai/ydata-profiling) |
+| **OpenRefine** | Data cleansing | [openrefine.org](https://openrefine.org/) |
+
+---
+
+## Data Catalog & Governance
+
+| Tool | Scope | Link |
+|------|-------|------|
+| **Microsoft Purview** | Azure/Fabric governance | [docs.microsoft.com/purview](https://docs.microsoft.com/azure/purview/) |
+| **Unity Catalog** | Databricks governance | [docs.databricks.com/unity-catalog](https://docs.databricks.com/data-governance/unity-catalog/) |
+| **Atlan** | Modern data catalog | [atlan.com](https://atlan.com/) |
+| **Alation** | Enterprise data catalog | [alation.com](https://www.alation.com/) |
+| **Collibra** | Data intelligence | [collibra.com](https://www.collibra.com/) |
+| **OpenMetadata** | Discovery & lineage (OSS) | [open-metadata.org](https://open-metadata.org/) |
+| **DataHub** | Metadata platform (OSS) | [datahubproject.io](https://datahubproject.io/) |
+| **Apache Atlas** | Metadata governance (OSS) | [atlas.apache.org](https://atlas.apache.org/) |
+| **OpenLineage** | Lineage standard | [openlineage.io](https://openlineage.io/) |
+
+---
+
+## Container Tools
+
+| Tool | Focus | Link |
+|------|-------|------|
+| **Docker Desktop** | Container development | [docker.com/desktop](https://www.docker.com/products/docker-desktop/) |
+| **Podman** | Daemonless containers | [podman.io](https://podman.io/) |
+| **Rancher Desktop** | Kubernetes on desktop | [rancherdesktop.io](https://rancherdesktop.io/) |
+| **Lens** | Kubernetes IDE | [k8slens.dev](https://k8slens.dev/) |
+
+---
+
+## Code Security & Scanning
+
+| Tool | Focus | Link |
+|------|-------|------|
+| **SonarQube** | Code quality & security | [sonarqube.org](https://www.sonarqube.org/) |
+| **SonarCloud** | Cloud code analysis | [sonarcloud.io](https://sonarcloud.io/) |
+| **Snyk** | Dependency & container security | [snyk.io](https://snyk.io/) |
+| **Trivy** | Container vulnerability scanner | [trivy.dev](https://trivy.dev/) |
+| **Checkov** | IaC security scanning | [checkov.io](https://www.checkov.io/) |
+| **OWASP ZAP** | Web app security testing | [zaproxy.org](https://www.zaproxy.org/) |
+| **GitHub Dependabot** | Dependency updates | [github.com/dependabot](https://github.com/dependabot) |
+
+---
+
+## Diagramming
+
+| Tool | Focus | Link |
+|------|-------|------|
+| **diagrams.net** | Free diagramming | [diagrams.net](https://www.diagrams.net/) |
+| **Visio** | Microsoft diagramming | [microsoft.com/visio](https://www.microsoft.com/microsoft-365/visio/flowchart-software) |
+| **Lucidchart** | Collaborative diagrams | [lucidchart.com](https://www.lucidchart.com/) |
+| **Miro** | Whiteboarding | [miro.com](https://miro.com/) |
+| **PlantUML** | Diagrams as code | [plantuml.com](https://plantuml.com/) |
+| **Mermaid** | Markdown diagrams | [mermaid.js.org](https://mermaid.js.org/) |
+| **Excalidraw** | Hand-drawn diagrams | [excalidraw.com](https://excalidraw.com/) |
+
+---
+
+## Work Tracking
+
+| Tool | Focus | Link |
+|------|-------|------|
+| **Azure Boards** | Azure DevOps work tracking | [azure.microsoft.com/devops/boards](https://azure.microsoft.com/services/devops/boards/) |
+| **Jira** | Agile project management | [atlassian.com/jira](https://www.atlassian.com/software/jira) |
+| **Microsoft Project** | Traditional PM | [microsoft.com/project](https://www.microsoft.com/microsoft-365/project/project-management-software) |
+| **Linear** | Modern issue tracking | [linear.app](https://linear.app/) |
+| **Notion** | All-in-one workspace | [notion.so](https://www.notion.so/) |
 
 ---
 
 ## Documentation & Collaboration
 
-- **Microsoft 365**
-  - [Microsoft Teams](https://www.microsoft.com/microsoft-teams/group-chat-software)
-  - [SharePoint](https://www.microsoft.com/microsoft-365/sharepoint/collaboration)
-  - [OneDrive](https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage)
-  - [Microsoft Word](https://www.microsoft.com/microsoft-365/word)
-
-- **Confluence** (Common in enterprise)
-  - [Confluence](https://www.atlassian.com/software/confluence)
-
-- **Markdown Tools**
-  - [Markdown](https://daringfireball.net/projects/markdown/)
-  - [GitHub Flavored Markdown](https://github.github.com/gfm/)
+| Tool | Focus | Link |
+|------|-------|------|
+| **Microsoft Teams** | Team collaboration | [microsoft.com/teams](https://www.microsoft.com/microsoft-teams/) |
+| **SharePoint** | Document management | [microsoft.com/sharepoint](https://www.microsoft.com/microsoft-365/sharepoint/) |
+| **Confluence** | Team documentation | [atlassian.com/confluence](https://www.atlassian.com/software/confluence) |
+| **Obsidian** | Personal knowledge base | [obsidian.md](https://obsidian.md/) |
 
 ---
 
-## Diagramming & Architecture
+## Quick Reference
 
-- **Microsoft Visio**
-  - [Microsoft Visio](https://www.microsoft.com/microsoft-365/visio/flowchart-software)
-  - [Visio Online](https://www.microsoft.com/microsoft-365/visio/flowchart-software)
-
-- **Draw.io / diagrams.net**
-  - [diagrams.net](https://www.diagrams.net/)
-  - [Azure integration](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio)
-
-- **Lucidchart**
-  - [Lucidchart](https://www.lucidchart.com/)
-  - [Azure architecture diagrams](https://www.lucidchart.com/pages/templates/azure-architecture)
-
-- **PlantUML**
-  - [PlantUML](https://plantuml.com/)
-  - [VS Code extension](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml)
+| Category | Recommended |
+|----------|-------------|
+| **Editor** | VS Code + GitLens + Bicep |
+| **Database** | Azure Data Studio, SSMS |
+| **CLI** | Azure CLI, dbt CLI, kubectl |
+| **API Testing** | Postman or Bruno |
+| **Data Quality** | Great Expectations, dbt Tests, Soda |
+| **Catalog** | Purview (Azure) or Unity Catalog (Databricks) |
+| **Security** | Snyk, SonarCloud, Trivy |
+| **Diagrams** | diagrams.net, Mermaid |
 
 ---
 
-## Analytics & Reporting
-
-- **Power BI**
-  - [Power BI](https://powerbi.microsoft.com/)
-  - [Power BI Desktop](https://powerbi.microsoft.com/desktop/)
-  - [Power BI Service](https://powerbi.microsoft.com/service/)
-
-- **Azure Monitor**
-  - [Azure Monitor](https://azure.microsoft.com/services/monitor/)
-  - [Application Insights](https://azure.microsoft.com/services/monitor/#application-insights-section)
-
-- **Microsoft Excel**
-  - [Microsoft Excel](https://www.microsoft.com/microsoft-365/excel)
-  - [Power Query](https://learn.microsoft.com/power-query/)
-
----
-
-## Infrastructure & IaC
-
-- **Azure Resource Manager (ARM)**
-  - [ARM Templates](https://learn.microsoft.com/azure/azure-resource-manager/templates/)
-
-- **Bicep**
-  - [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
-
-- **Terraform**
-  - [Terraform Azure Provider](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs)
-
-- **Pulumi**
-  - [Pulumi Azure](https://www.pulumi.com/docs/clouds/azure/)
-
----
-
-## Container & Orchestration
-
-- **Azure Container Registry (ACR)**
-  - [Azure Container Registry](https://azure.microsoft.com/services/container-registry/)
-
-- **Azure Kubernetes Service (AKS)**
-  - [Azure Kubernetes Service](https://azure.microsoft.com/services/kubernetes-service/)
-
-- **Azure Container Instances**
-  - [Container Instances](https://azure.microsoft.com/services/container-instances/)
-
----
-
-> **Related Documentation**: See [IT Project Management](../concepts/project_management/itpm.md) for implementation patterns and best practices. For standards and research, see [RESEARCH.md](RESEARCH.md).
-
+> **Note**: For cloud services (ADF, Databricks, Fabric), see [concepts/cloud/](../concepts/cloud/).

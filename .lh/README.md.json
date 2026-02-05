@@ -1,0 +1,18 @@
+{
+    "sourceFile": "README.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1770331074024,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1770331074024,
+            "name": "Commit-0",
+            "content": "# Overview\n\nCurated IT reference material covering project management, software development, data engineering, and cloud architecture.\n\n> ⚠️ **Disclaimer**: AI-generated content. Always verify with authoritative sources, enterprise guidance, and vendor documentation.\n\n---\n\n## Quick Links\n\n**[Terminology](TERMINOLOGY.md)** — Key terms across all domains\n\n---\n\n## Concepts\n\nCore principles, patterns, and practices.\n\n### [Cloud](concepts/cloud/)\nArchitecture, infrastructure, optimization, Azure, Databricks, Fabric\n\n### [Data](concepts/data/)\nAnalytics, engineering, streaming, governance, operations, Power BI, security\n\n### [Software](concepts/software/)\nArchitecture, design patterns, DevOps, Azure DevOps, SDLC, DSA, OSI\n\n### [Project Management](concepts/project_management/)\nGeneral PM, ITPM, methodologies, product management, roadmaps, stakeholders, reporting\n\n---\n\n## Programming\n\nLanguage syntax, patterns, and utilities. See [programming/README.md](programming/README.md)\n\n| Languages | Utilities |\n|-----------|-----------|\n| [C](programming/c/) · [C++](programming/cpp/) · [C#](programming/csharp/) · [Go](programming/go/) · [Java](programming/java/) | [Bicep](programming/bicep/) · [Excel](programming/excel/) · [Git](programming/git/) |\n| [JavaScript](programming/javascript/) · [Python](programming/python/) · [R](programming/r/) · [Rust](programming/rust/) | [SQL](programming/sql/) · [Terraform](programming/terraform/) · [Terminal](programming/terminal/) |\n| [TypeScript](programming/typescript/) | |\n\n---\n\n## Resources\n\nStandards, tools, and industry analysis.\n\n| Resource | Description |\n|----------|-------------|\n| [References](resources/References.md) | Standards, certifications, legislation (Ontario/Canada focus) |\n| [Tools](resources/Tools.md) | Enterprise tools for development, data, and collaboration |\n| [Trends](resources/Trends.MD) | State of IT 2026 industry report |\n| [Trends Analysis](resources/Trends_Analysis.md) | Executive analysis: AI, cybersecurity, strategy |\n\n---\n\n## Structure\n\n```\nTPM/\n├── concepts/\n│   ├── cloud/          # 6 files\n│   ├── data/           # 9 files\n│   ├── project_management/  # 8 files\n│   └── software/       # 7 files\n├── programming/        # 14 languages/utilities\n├── resources/          # Standards, tools, trends\n└── TERMINOLOGY.md      # Cross-domain terminology\n```\n"
+        }
+    ]
+}

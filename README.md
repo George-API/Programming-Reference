@@ -1,47 +1,70 @@
 # Overview
-Curated collection of IT reference material covering IT project management, software development & data disciplines. 
 
-> ⚠️ **Disclaimer**  
-> This repository contains AI-generated content.  
->  
-> Always refer to authoritative sources when making decisions or implementing solutions, ensure alignment with:  
-> - **Enterprise guidance:** Organizational policies, architecture standards, governance frameworks, and approved practices  
-> - **Project conventions:** Established code patterns, coding standards, architectural guidelines, and team workflows  
-> - **External sources:** Vendor documentation, standards bodies (e.g., ISO, NIST, OWASP), and applicable regulatory requirements
+Curated IT reference material covering project management, software development, data engineering, and cloud architecture.
+
+> ⚠️ **Disclaimer**: AI-generated content. Always verify with authoritative sources, enterprise guidance, and vendor documentation.
 
 ---
 
-## Directory Structure
+## Quick Links
 
-### **[Concepts](concepts/)**
-Core principles, patterns, and practices across cloud, data, software, and project management.
-
-- **[Cloud](concepts/cloud/):** Architecture, infrastructure, operations, Azure data platform, Fabric, Databricks  
-- **[Data](concepts/data/):** Analytics engineering, data engineering, governance, operations, security, database management  
-- **[Software](concepts/software/):** Architecture patterns, design principles, DevOps, Azure DevOps, SDLC, DSA, OSI model  
-- **[Project Management](concepts/project_management/):** General PM, ITPM, methodologies, roadmaps, stakeholder engagement, reporting, tools  
+**[Terminology](TERMINOLOGY.md)** — Key terms across all domains
 
 ---
 
-### **[Programming](programming/README.md)**
-Language syntax, patterns, and utility references.
+## Concepts
 
-- **Languages:** [C/C++](programming/c/), [C#](programming/csharp/), [Go](programming/go/), [Java](programming/java/), [JavaScript](programming/javascript/), [Python](programming/python/), [R](programming/r/), [Rust](programming/rust/), [SQL](programming/sql/), [TypeScript](programming/typescript/)  
-- **Utilities:** [Bicep](programming/bicep/), [Excel](programming/excel/), [Git](programming/git/), [Terraform](programming/terraform/), [Terminal](programming/terminal/)  
+Core principles, patterns, and practices.
+
+### [Cloud](concepts/cloud/)
+Architecture, infrastructure, optimization, Azure, Databricks, Fabric
+
+### [Data](concepts/data/)
+Analytics, engineering, streaming, governance, operations, Power BI, security
+
+### [Software](concepts/software/)
+Architecture, design patterns, DevOps, Azure DevOps, SDLC, DSA, OSI
+
+### [Project Management](concepts/project_management/)
+General PM, ITPM, methodologies, product management, roadmaps, stakeholders, reporting
 
 ---
 
-### **[Resources](resources/)**
-Standards, frameworks, tools, and shared terminology.
+## Programming
 
-- **[Terminology](resources/TERMINOLOGY.md):** Key terminology across domains  
-- **[Research & Standards](resources/RESEARCH.md):** Security standards, compliance frameworks, governance, and research  
-- **[Enterprise Tools](resources/TOOLS.md):** Microsoft-centric enterprise platforms and tooling  
+Language syntax, patterns, and utilities. See [programming/README.md](programming/README.md)
+
+| Languages | Utilities |
+|-----------|-----------|
+| [C](programming/c/) · [C++](programming/cpp/) · [C#](programming/csharp/) · [Go](programming/go/) · [Java](programming/java/) | [Bicep](programming/bicep/) · [Excel](programming/excel/) · [Git](programming/git/) |
+| [JavaScript](programming/javascript/) · [Python](programming/python/) · [R](programming/r/) · [Rust](programming/rust/) | [SQL](programming/sql/) · [Terraform](programming/terraform/) · [Terminal](programming/terminal/) |
+| [TypeScript](programming/typescript/) | |
 
 ---
 
-### **[Trends](trends/)**
-Industry analysis and emerging developments.
+## Resources
 
-- **[IT 2026 Executive Analysis](trends/TRENDS_ANALYSIS.md):** Strategic trends, cybersecurity, and AI transformation  
-- **[State of IT 2026 Report](trends/TRENDS.MD):** Industry outlook and risk assessment  
+Standards, tools, and industry analysis.
+
+| Resource | Description |
+|----------|-------------|
+| [References](resources/References.md) | Standards, certifications, legislation (Ontario/Canada focus) |
+| [Tools](resources/Tools.md) | Enterprise tools for development, data, and collaboration |
+| [Trends](resources/Trends.MD) | State of IT 2026 industry report |
+| [Trends Analysis](resources/Trends_Analysis.md) | Executive analysis: AI, cybersecurity, strategy |
+
+---
+
+## Structure
+
+```
+TPM/
+├── concepts/
+│   ├── cloud/          # 6 files
+│   ├── data/           # 9 files
+│   ├── project_management/  # 8 files
+│   └── software/       # 7 files
+├── programming/        # 14 languages/utilities
+├── resources/          # Standards, tools, trends
+└── TERMINOLOGY.md      # Cross-domain terminology
+```
