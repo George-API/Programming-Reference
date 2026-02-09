@@ -1,0 +1,916 @@
+Syntax,Description,L1_Language,L2_Category,Priority,Example,Note
+x = 10,Variable assignment,PYTHON,Variables,Core,name = "Alice",Use descriptive names; avoid single letters except loops
+a; b; c = 1; 2; 3,Multiple assignment unpacking,PYTHON,Variables,Core,"x, y = 1, 2",Great for swapping values or unpacking function returns
+int(); float(); str(),Type conversion functions,PYTHON,Data Types,Core,int("42"),Always validate input before converting to avoid errors
+True / False / None,Boolean and null values,PYTHON,Data Types,Core,is_valid = True,Use None for optional values; check with 'is None'
+list,Mutable ordered collection,PYTHON,Collections,Core,lst = [1; 2; 3],Default choice for ordered data; use for iteration
+dict,Key-value pair mapping,PYTHON,Collections,Core,d = {"key": "value"},O(1) lookup; use for fast key-based access
+tuple,Immutable ordered collection,PYTHON,Collections,Core,tup = (1; 2; 3),Use for fixed data or dict keys; lighter than list
+set,Unordered unique elements,PYTHON,Collections,Advanced,s = {1; 2; 3},Use for deduplication and fast membership tests
+if / elif / else,Conditional branching,PYTHON,Control Flow,Core,if x > 0: pass,Keep conditions simple; extract complex logic to functions
+for item in iterable:,Iterate over collection,PYTHON,Control Flow,Core,for i in range(5):,Prefer for over while when iteration count is known
+while condition:,Loop while true,PYTHON,Control Flow,Core,while x > 0:,Use when loop count unknown; ensure exit condition
+break / continue,Loop control statements,PYTHON,Control Flow,Core,break,Use sparingly; often cleaner to restructure loop
+def func():,Function definition,PYTHON,Functions,Core,def greet(name):,Keep functions small and single-purpose
+return value,Return from function,PYTHON,Functions,Core,return x * 2,Return early to reduce nesting; avoid multiple returns
+lambda x: expr,Anonymous inline function,PYTHON,Functions,Core,lambda x: x * 2,Use for simple one-liners; prefer def for complex logic
+*args / **kwargs,Variable arguments,PYTHON,Functions,Advanced,"def f(*args, **kwargs):",Use for flexible APIs and decorator patterns
+try / except / finally,Exception handling block,PYTHON,Error Handling,Core,try: ... except Exception:,Catch specific exceptions; avoid bare except
+raise Exception(),Raise an exception,PYTHON,Error Handling,Core,raise ValueError("msg"),Include descriptive message; re-raise with 'raise' alone
+with open() as f:,Context manager for files,PYTHON,I/O,Core,with open("f.txt") as f:,Always use with for files to ensure proper cleanup
+f.read() / f.write(),File read and write,PYTHON,I/O,Core,content = f.read(),Use readlines() for large files to avoid memory issues
+class ClassName:,Class definition,PYTHON,OOP,Core,class Person:,Use classes for stateful objects; functions for stateless
+def __init__(self):,Constructor method,PYTHON,OOP,Core,def __init__(self; name):,Initialize all instance attributes here
+self.attribute,Instance attribute access,PYTHON,OOP,Core,self.name = name,Prefix private attributes with underscore
+@property,Property decorator,PYTHON,OOP,Advanced,@property def name(self):,Use for computed attributes or validation on access
+import module,Import entire module,PYTHON,Functions,Core,import os,Prefer explicit imports; place at file top
+from x import y,Import specific item,PYTHON,Functions,Core,from math import sqrt,Avoid 'from x import *' except in __init__.py
+[x for x in lst],List comprehension,PYTHON,Collections,Core,[x*2 for x in range(5)],More readable than map/filter for simple transforms
+{k: v for ...},Dict comprehension,PYTHON,Collections,Advanced,{x: x*2 for x in range(5)},Great for transforming or filtering dictionaries
+f"string {var}",Formatted string literal,PYTHON,Strings,Core,f"Name: {name}",Preferred over .format() and % formatting
+s.split() / s.join(),String split and join,PYTHON,Strings,Core,s.split(","),join() is on separator string not list
+s.strip() / s.replace(),String manipulation,PYTHON,Strings,Core,s.strip(),Always strip user input; strings are immutable
+len() / range() / enumerate(),Common built-in functions,PYTHON,Functions,Core,len(lst),Use enumerate() to get index and value together
+zip(a; b),Parallel iteration,PYTHON,Functions,Core,"for x, y in zip(a, b):",Stops at shortest; use zip_longest for all elements
+sorted() / reversed(),Sorting functions,PYTHON,Functions,Core,sorted(lst; key=lambda x: x),Returns new list; use list.sort() for in-place
+type() / isinstance(),Type checking,PYTHON,Data Types,Core,isinstance(x; int),Prefer isinstance() for inheritance support
++ - * / // % **,Arithmetic operators,PYTHON,Operators,Core,x + y,Use // for integer division; / always returns float
+== != < > <= >=,Comparison operators,PYTHON,Operators,Core,x == y,Use == for value; is for identity (None/singletons)
+and / or / not,Logical operators,PYTHON,Operators,Core,x and y,Short-circuit evaluation; returns actual value not bool
+in / not in,Membership operators,PYTHON,Operators,Core,"x in [1, 2, 3]",O(1) for sets/dicts; O(n) for lists
+is / is not,Identity operators,PYTHON,Operators,Advanced,x is None,Only use for None/True/False/singletons
+: -> (type hints),Type annotations,PYTHON,Data Types,Advanced,def f(x: int) -> str:,Improves IDE support and catches bugs early
+@dataclass,Dataclass decorator,PYTHON,OOP,Advanced,@dataclass class Point:,Auto-generates __init__ __repr__ __eq__; use for data containers
+spark.read.table(),Read table from catalog,PYSPARK,I/O,Core,spark.read.table("Sales"),Preferred for catalog tables; uses Unity Catalog metadata
+spark.read.parquet(),Read Parquet files,PYSPARK,I/O,Core,spark.read.parquet("path/"),Best format for analytics; columnar with compression
+spark.read.csv(),Read CSV files with options,PYSPARK,I/O,Core,spark.read.option("header";"true").csv(),Always set header and inferSchema options explicitly
+spark.read.json(),Read JSON files,PYSPARK,I/O,Core,spark.read.json("path/"),Each line must be valid JSON; use multiLine for arrays
+spark.read.format().load(),Read with explicit format,PYSPARK,I/O,Core,spark.read.format("delta").load("path"),Required for Delta; explicit format is clearer
+spark.sql(),Execute SQL query string,PYSPARK,I/O,Core,spark.sql("SELECT * FROM table"),Mix SQL with DataFrame API as needed
+spark.conf.set(),Set Spark configuration,PYSPARK,I/O,Core-N,spark.conf.set("spark.sql.shuffle.partitions";"200"),Tune shuffle partitions based on data size
+spark.catalog.listTables(),List tables in catalog,PYSPARK,I/O,Advanced,spark.catalog.listTables(),Useful for dynamic table discovery
+df.write.format().save(),Write with format to path,PYSPARK,I/O,Core,df.write.format("delta").save("path"),Use Delta format for ACID transactions
+df.write.saveAsTable(),Write as managed table,PYSPARK,I/O,Core,df.write.saveAsTable("tablename"),Creates managed table in metastore
+df.write.mode(),Specify write mode,PYSPARK,I/O,Core,df.write.mode("overwrite"),Use append for incremental; overwrite for full refresh
+df.write.partitionBy(),Partition output by columns,PYSPARK,I/O,Core-N,df.write.partitionBy("year";"month"),Partition on low-cardinality columns for query pruning
+df.write.option(),Set write options,PYSPARK,I/O,Core,df.write.option("mergeSchema";"true"),Enable schema evolution when structure changes
+df.select(),Select columns from DataFrame,PYSPARK,Columns,Core,df.select("col1"; "col2"),Only select needed columns for performance
+df.selectExpr(),Select with SQL expressions,PYSPARK,Columns,Core,df.selectExpr("col1 as c1"),Useful for quick SQL-style transformations
+df.withColumn(),Add or replace column,PYSPARK,Columns,Core,df.withColumn("new"; F.lit(1)),Chain multiple withColumn calls; creates new DataFrame
+df.withColumnRenamed(),Rename existing column,PYSPARK,Columns,Core,df.withColumnRenamed("old";"new"),Use for cleaning column names from source
+df.drop(),Drop columns from DataFrame,PYSPARK,Columns,Core,df.drop("col1"; "col2"),Remove sensitive or unnecessary columns early
+F.col(),Reference column by name,PYSPARK,Columns,Core,F.col("amount"),Required for complex expressions and conditions
+F.lit(),Create literal value column,PYSPARK,Columns,Core,F.lit(1),Use for adding constant values to DataFrame
+.cast(),Cast column to different type,PYSPARK,Columns,Core,F.col("x").cast("double"),Cast early to avoid type errors downstream
+.alias(),Rename column in expression,PYSPARK,Columns,Core,F.sum("amt").alias("total"),Always alias aggregated columns for clarity
+df.filter(),Filter rows by condition,PYSPARK,Control Flow,Core,df.filter(F.col("x") > 0),Filter early to reduce data volume
+df.where(),Filter with SQL expression,PYSPARK,Control Flow,Core,df.where("status = 'active'"),Interchangeable with filter; SQL-style syntax
+F.when().otherwise(),Conditional column logic,PYSPARK,Control Flow,Core,F.when(F.col("x")>0; 1).otherwise(0),Chain multiple when() for case-when logic
+F.coalesce(),Return first non-null value,PYSPARK,Control Flow,Core,F.coalesce("col1"; "col2"; "col3"),Essential for handling nulls in data
+df.distinct(),Remove fully duplicate rows,PYSPARK,Control Flow,Core,df.distinct(),Expensive shuffle operation; use dropDuplicates for keys
+df.dropDuplicates(),Remove duplicates by keys,PYSPARK,Control Flow,Core,df.dropDuplicates(["id"]),More efficient than distinct() for key-based dedup
+df.orderBy(),Sort by columns,PYSPARK,Control Flow,Core,df.orderBy(F.col("date").desc()),Avoid unless needed; causes full data shuffle
+df.limit(),Take first n rows,PYSPARK,Control Flow,Core,df.limit(100),Use for sampling; not guaranteed order without sort
+df.groupBy().agg(),Group and aggregate,PYSPARK,Functions,Core,df.groupBy("key").agg(F.sum("val")),Core pattern for summarization and metrics
+F.sum() / F.avg() / F.min() / F.max(),Aggregation functions,PYSPARK,Functions,Core,F.sum("amount"),Use within agg() for multiple aggregations
+F.count() / F.countDistinct(),Count and distinct count,PYSPARK,Functions,Core,F.countDistinct("user_id"),countDistinct is expensive; consider approx_count_distinct
+F.collect_list() / F.collect_set(),Collect values to array,PYSPARK,Functions,Advanced,F.collect_list("item"),Memory intensive; ensure group size is bounded
+df.join(),Join two DataFrames,PYSPARK,Functions,Core,df.join(df2; "id"; "left"),Always specify join type; broadcast small tables
+F.broadcast(),Hint to broadcast small table,PYSPARK,Functions,Core-N,df.join(F.broadcast(dim); "id"),Use for dimension tables < 10MB for performance
+df.union() / df.unionByName(),Combine DataFrames vertically,PYSPARK,Functions,Core,df1.unionByName(df2),unionByName handles different column orders
+Window.partitionBy(),Define window partition,PYSPARK,Functions,Core-N,Window.partitionBy("customer_id"),Partition on logical groupings for analytics
+Window.orderBy(),Define window ordering,PYSPARK,Functions,Core-N,Window.partitionBy("id").orderBy("ts"),Required for ranking and running totals
+F.row_number().over(),Sequential row number,PYSPARK,Functions,Core-N,F.row_number().over(window_spec),Use for deduplication; pick row where row_num = 1
+F.rank() / F.dense_rank(),Ranking with/without gaps,PYSPARK,Functions,Advanced-N,F.rank().over(window_spec),rank() skips; dense_rank() is consecutive
+F.lag() / F.lead(),Previous/next row values,PYSPARK,Functions,Advanced-N,F.lag("amount"; 1).over(w),Great for calculating deltas and changes
+F.first() / F.last(),First/last value in window,PYSPARK,Functions,Advanced-N,F.first("val").over(w),Use with ignorenulls=True to skip nulls
+F.to_date(),Parse string to date,PYSPARK,Data Types,Core,F.to_date("col"; "yyyy-MM-dd"),Specify format explicitly for reliability
+F.to_timestamp(),Parse string to timestamp,PYSPARK,Data Types,Core,F.to_timestamp("col"; "yyyy-MM-dd HH:mm:ss"),Handles timezone; use for datetime columns
+F.current_date() / F.current_timestamp(),Current date/timestamp,PYSPARK,Data Types,Core,F.current_timestamp(),Use for audit columns and incremental loads
+F.year() / F.month() / F.dayofmonth(),Extract date components,PYSPARK,Data Types,Core,F.year("date_col"),Useful for partitioning and time-based analysis
+F.date_add() / F.date_sub(),Add/subtract days from date,PYSPARK,Data Types,Core,F.date_add("date"; 7),Use for date arithmetic in business logic
+F.datediff() / F.months_between(),Date/month differences,PYSPARK,Data Types,Core,F.datediff("end"; "start"),Returns integer days or decimal months
+F.date_format(),Format date as string,PYSPARK,Data Types,Core,F.date_format("date"; "yyyy-MM"),Use for display or string-based partitions
+F.trim() / F.ltrim() / F.rtrim(),Trim whitespace from string,PYSPARK,Strings,Core,F.trim("name"),Always trim user input and source data
+F.upper() / F.lower(),Change string case,PYSPARK,Strings,Core,F.upper("name"),Use for case-insensitive comparisons
+F.concat() / F.concat_ws(),Concatenate strings,PYSPARK,Strings,Core,F.concat_ws("-"; "a"; "b"),concat_ws handles nulls better with separator
+F.substring(),Extract substring,PYSPARK,Strings,Core,F.substring("col"; 1; 3),1-indexed; use for fixed-position parsing
+F.split(),Split string to array,PYSPARK,Strings,Core,F.split("col"; ","),Combine with explode to normalize data
+F.regexp_replace(),Regex find and replace,PYSPARK,Strings,Core,F.regexp_replace("col"; "\\d+"; "X"),Use for data cleansing and standardization
+F.regexp_extract(),Regex extract group,PYSPARK,Strings,Advanced,F.regexp_extract("col"; "(\\d+)"; 1),Group index is 1-based; 0 returns full match
+F.length() / F.instr(),String length and find,PYSPARK,Strings,Core,F.length("name"),instr returns 0 if not found; 1-indexed position
+df.na.fill(),Fill null values by column,PYSPARK,Error Handling,Core,df.na.fill({"col": 0; "name": "UNK"}),Provide column-specific defaults for nulls
+df.na.drop(),Drop rows containing nulls,PYSPARK,Error Handling,Core,df.na.drop(subset=["id"]),Use subset to only check critical columns
+df.na.replace(),Replace specific values,PYSPARK,Error Handling,Core,df.na.replace([""; "NA"]; None),Standardize bad values before processing
+F.isnull() / F.isnotnull(),Check for null values,PYSPARK,Error Handling,Core,F.col("x").isNull(),Use in filter or when conditions for null handling
+F.explode() / F.explode_outer(),Expand array to rows,PYSPARK,Collections,Advanced,F.explode("array_col"),explode_outer keeps nulls; explode drops them
+F.array() / F.struct(),Create array/struct column,PYSPARK,Collections,Advanced,F.array("c1"; "c2"; "c3"),Use struct for nested JSON-like structures
+F.size() / F.array_contains(),Array size and membership,PYSPARK,Collections,Advanced,F.array_contains("arr"; "val"),Returns -1 for null arrays; check for null first
+F.from_json() / F.to_json(),Parse/create JSON,PYSPARK,Collections,Advanced-N,F.from_json("json_col"; schema),Schema required for parsing; infer or define explicitly
+F.get_json_object(),Extract JSON field by path,PYSPARK,Collections,Advanced,F.get_json_object("json"; "$.field"),Use JSONPath syntax; returns string type
+T.StructType() / T.StructField(),Define schema structure,PYSPARK,Data Types,Core-N,T.StructType([T.StructField("id"; T.StringType())]),Define explicit schemas for reliability over inference
+df.printSchema(),Display schema tree,PYSPARK,I/O,Core,df.printSchema(),Use to verify column types and nesting
+df.show(),Display rows as table,PYSPARK,I/O,Core,df.show(20; truncate=False),Set truncate=False to see full column values
+df.count(),Count rows (triggers action),PYSPARK,Functions,Core,row_count = df.count(),Triggers job; cache first if reusing DataFrame
+df.collect(),Collect all rows to driver,PYSPARK,Functions,Advanced,rows = df.collect(),Only for small results; causes OOM on large data
+df.take(),Take n rows to driver,PYSPARK,Functions,Core,first_10 = df.take(10),Safer than collect; limits data to driver
+df.explain(),Show query execution plan,PYSPARK,I/O,Advanced,df.explain(True),Use extended=True for detailed physical plan
+df.cache(),Cache DataFrame in memory,PYSPARK,Functions,Core-N,df.cache(),Cache when reusing same DataFrame multiple times
+df.persist(),Persist with storage level,PYSPARK,Functions,Advanced-N,df.persist(StorageLevel.MEMORY_AND_DISK),Use MEMORY_AND_DISK for large datasets
+df.unpersist(),Remove from cache,PYSPARK,Functions,Advanced-N,df.unpersist(),Free memory when cached DataFrame no longer needed
+df.checkpoint(),Truncate lineage,PYSPARK,Functions,Advanced-N,df.checkpoint(),Breaks long lineage chains; requires checkpoint dir
+df.repartition(),Increase/redistribute partitions,PYSPARK,Functions,Advanced-N,df.repartition(200; "key"),Full shuffle; use for skewed data distribution
+df.coalesce(),Decrease partitions without shuffle,PYSPARK,Functions,Advanced-N,df.coalesce(1),Use before writing to reduce small files
+DeltaTable.forPath(),Reference Delta table by path,PYSPARK,I/O,Core-N,DeltaTable.forPath(spark; "Tables/Fact"),Use for external or unregistered Delta tables
+DeltaTable.forName(),Reference Delta table by name,PYSPARK,I/O,Core-N,DeltaTable.forName(spark; "catalog.schema.table"),Preferred for Unity Catalog managed tables
+.merge().whenMatched().whenNotMatched(),Delta upsert pattern,PYSPARK,I/O,Core-N,delta.merge(src; cond).whenMatchedUpdateAll().execute(),Core SCD pattern for dimensional updates
+.delete(),Delete rows from Delta table,PYSPARK,I/O,Advanced-N,delta_table.delete("date < '2024-01-01'"),Use for data retention and cleanup
+.update(),Update rows in Delta table,PYSPARK,I/O,Advanced-N,delta_table.update(condition; {"col": "val"}),Update in place; creates new version
+.history(),Show Delta table versions,PYSPARK,I/O,Advanced-N,delta_table.history(),Review for auditing and time travel
+OPTIMIZE,Compact small files (SQL),PYSPARK,I/O,Core-N,spark.sql("OPTIMIZE schema.table"),Run regularly; consider ZORDER for query columns
+VACUUM,Remove old files (SQL),PYSPARK,I/O,Core-N,spark.sql("VACUUM schema.table RETAIN 168 HOURS"),Retain period must exceed longest running queries
+F.input_file_name(),Get source file path,PYSPARK,I/O,Core-N,df.withColumn("_file"; F.input_file_name()),Track data lineage back to source files
+deque(),Double-ended queue O(1) ends,PYTHON,Collections,Core,from collections import deque; dq = deque(),Use for queues; maxlen for sliding windows
+dq.append() / dq.appendleft(),Add to right/left end,PYTHON,Collections,Core,dq.appendleft(x),O(1) both ends unlike list.insert(0)
+dq.pop() / dq.popleft(),Remove from right/left end,PYTHON,Collections,Core,dq.popleft(),Use popleft for FIFO queue pattern
+Counter(),Frequency counting dict,PYTHON,Collections,Core,from collections import Counter; cnt = Counter(lst),Great for word counts and histogram data
+cnt.most_common(),Get top-k frequent items,PYTHON,Collections,Core,cnt.most_common(3),Returns list of (element count) tuples
+defaultdict(),Dict with default factory,PYTHON,Collections,Core,from collections import defaultdict; dd = defaultdict(list),Avoids KeyError; auto-creates missing keys
+heapq.heappush(),Push to min-heap O(log n),PYTHON,Collections,Core,import heapq; heapq.heappush(h; x),Use tuples for (priority item) patterns
+heapq.heappop(),Pop smallest from heap,PYTHON,Collections,Core,smallest = heapq.heappop(h),Negate values for max-heap behavior
+heapq.nlargest() / heapq.nsmallest(),Get n largest/smallest,PYTHON,Collections,Advanced,heapq.nlargest(3; lst),More efficient than sort for small n
+bisect.bisect_left(),Find insertion point left,PYTHON,Collections,Advanced,import bisect; i = bisect.bisect_left(arr; x),O(log n) binary search on sorted list
+bisect.insort(),Insert maintaining sorted order,PYTHON,Collections,Advanced,bisect.insort(arr; x),O(n) insert but finds position in O(log n)
+@lru_cache,Memoization decorator,PYTHON,Functions,Core,from functools import lru_cache; @lru_cache(None),Essential for recursive algorithms; cache_clear() to reset
+itertools.chain(),Flatten nested iterables,PYTHON,Functions,Advanced,from itertools import chain,chain.from_iterable for deeply nested
+itertools.groupby(),Group consecutive elements,PYTHON,Functions,Advanced,from itertools import groupby,Data must be sorted first on group key
+itertools.combinations() / permutations(),Generate combos/perms,PYTHON,Functions,Advanced,from itertools import combinations,Use r parameter to specify combination size
+plt.figure(),Create new figure,MATPLOTLIB,I/O,Core,plt.figure(figsize=(10; 6)),Set figsize for consistent output dimensions
+plt.subplots(),Create figure with subplots,MATPLOTLIB,I/O,Core,fig; ax = plt.subplots(2; 2),Preferred over plt.figure() for control
+plt.plot(),Line plot,MATPLOTLIB,Functions,Core,plt.plot(x; y; label="data"),Use for time series and continuous data
+plt.scatter(),Scatter plot,MATPLOTLIB,Functions,Core,plt.scatter(x; y; c=colors; s=sizes),Use c and s for third/fourth dimensions
+plt.bar() / plt.barh(),Bar chart vertical/horizontal,MATPLOTLIB,Functions,Core,plt.bar(categories; values),Use barh when labels are long
+plt.hist(),Histogram,MATPLOTLIB,Functions,Core,plt.hist(data; bins=20),Adjust bins based on data distribution
+plt.pie(),Pie chart,MATPLOTLIB,Functions,Advanced,plt.pie(sizes; labels=labels),Use sparingly; bar charts often clearer
+plt.xlabel() / plt.ylabel(),Set axis labels,MATPLOTLIB,Strings,Core,plt.xlabel("X Axis"),Always label axes for interpretability
+plt.title(),Set plot title,MATPLOTLIB,Strings,Core,plt.title("My Chart"),Keep titles concise and descriptive
+plt.legend(),Show legend,MATPLOTLIB,I/O,Core,plt.legend(loc="upper right"),Required when multiple series plotted
+plt.grid(),Toggle grid lines,MATPLOTLIB,I/O,Core,plt.grid(True),Improves readability for data analysis
+plt.xlim() / plt.ylim(),Set axis limits,MATPLOTLIB,Functions,Core,plt.xlim(0; 100),Use to focus on specific data ranges
+plt.xticks() / plt.yticks(),Set tick positions/labels,MATPLOTLIB,Functions,Advanced,plt.xticks(rotation=45),Rotate labels to prevent overlap
+plt.savefig(),Save figure to file,MATPLOTLIB,I/O,Core,plt.savefig("plot.png"; dpi=300),Use dpi=300+ for publication quality
+plt.show(),Display figure,MATPLOTLIB,I/O,Core,plt.show(),In notebooks use %matplotlib inline instead
+ax.set_xlabel() / ax.set_ylabel(),Set axis labels (OO style),MATPLOTLIB,Strings,Core,ax.set_xlabel("X"),OO style preferred for complex figures
+ax.set_title(),Set subplot title (OO style),MATPLOTLIB,Strings,Core,ax.set_title("Subplot 1"),Each subplot can have its own title
+plt.tight_layout(),Auto-adjust subplot spacing,MATPLOTLIB,I/O,Core,plt.tight_layout(),Call before savefig to prevent clipping
+plt.colorbar(),Add colorbar to plot,MATPLOTLIB,I/O,Advanced,plt.colorbar(),Essential for heatmaps and color-coded plots
+train_test_split(),Split data into train/test,SKLEARN,Functions,Core,from sklearn.model_selection import train_test_split,Always set random_state for reproducibility
+X_train; X_test; y_train; y_test = train_test_split(),Unpack train/test split,SKLEARN,Functions,Core,X_train; X_test; y_train; y_test = train_test_split(X; y; test_size=0.2),Use stratify=y for imbalanced classification
+model.fit(),Train model on data,SKLEARN,Functions,Core,model.fit(X_train; y_train),Only fit on training data never test
+model.predict(),Generate predictions,SKLEARN,Functions,Core,y_pred = model.predict(X_test),Use predict_proba for probability outputs
+model.score(),Evaluate model accuracy,SKLEARN,Functions,Core,accuracy = model.score(X_test; y_test),Default metric varies by model type
+StandardScaler(),Standardize features (z-score),SKLEARN,Data Types,Core,from sklearn.preprocessing import StandardScaler,Essential for distance-based algorithms
+scaler.fit_transform(),Fit and transform data,SKLEARN,Functions,Core,X_scaled = scaler.fit_transform(X_train),Only fit_transform on training data
+scaler.transform(),Transform new data,SKLEARN,Functions,Core,X_test_scaled = scaler.transform(X_test),Use same scaler fitted on train for test
+LabelEncoder(),Encode categorical labels,SKLEARN,Data Types,Core,from sklearn.preprocessing import LabelEncoder,For target variable; use OneHotEncoder for features
+OneHotEncoder(),One-hot encode categories,SKLEARN,Data Types,Core,from sklearn.preprocessing import OneHotEncoder,Use sparse=False for dense matrix output
+LinearRegression(),Linear regression model,SKLEARN,Functions,Core,from sklearn.linear_model import LinearRegression,Baseline for regression; check assumptions
+LogisticRegression(),Logistic regression classifier,SKLEARN,Functions,Core,from sklearn.linear_model import LogisticRegression,Good baseline classifier; increase max_iter if needed
+DecisionTreeClassifier(),Decision tree classifier,SKLEARN,Functions,Core,from sklearn.tree import DecisionTreeClassifier,Prone to overfitting; tune max_depth
+RandomForestClassifier(),Random forest classifier,SKLEARN,Functions,Core,from sklearn.ensemble import RandomForestClassifier,Robust default; check feature_importances_
+KMeans(),K-means clustering,SKLEARN,Functions,Core,from sklearn.cluster import KMeans,Use elbow method to find optimal n_clusters
+accuracy_score(),Classification accuracy metric,SKLEARN,Functions,Core,from sklearn.metrics import accuracy_score,Misleading for imbalanced classes
+confusion_matrix(),Confusion matrix for classification,SKLEARN,Functions,Core,from sklearn.metrics import confusion_matrix,Essential for understanding error types
+classification_report(),Precision/recall/F1 report,SKLEARN,Functions,Core,from sklearn.metrics import classification_report,More complete than accuracy alone
+mean_squared_error(),MSE for regression,SKLEARN,Functions,Core,from sklearn.metrics import mean_squared_error,Use squared=False for RMSE
+r2_score(),R-squared for regression,SKLEARN,Functions,Core,from sklearn.metrics import r2_score,1.0 is perfect; can be negative for bad fits
+cross_val_score(),K-fold cross-validation,SKLEARN,Functions,Core,from sklearn.model_selection import cross_val_score,Better estimate than single train/test split
+GridSearchCV(),Hyperparameter grid search,SKLEARN,Functions,Advanced,from sklearn.model_selection import GridSearchCV,Use n_jobs=-1 for parallelization
+Pipeline(),Chain preprocessing and model,SKLEARN,Functions,Advanced,from sklearn.pipeline import Pipeline,Prevents data leakage; cleaner code
+SELECT col1; col2 FROM table,Basic query structure,SQL,I/O,Core,SELECT id; name FROM users,Only select columns you need for performance
+SELECT * FROM table,Select all columns,SQL,I/O,Core,SELECT * FROM orders,Avoid in production; explicit columns preferred
+SELECT DISTINCT col,Select unique values only,SQL,I/O,Core,SELECT DISTINCT category FROM products,Can be expensive; consider GROUP BY instead
+WHERE condition,Filter rows pre-aggregation,SQL,Control Flow,Core,WHERE status = 'active',Filter early to reduce data processed
+AND / OR / NOT,Logical operators for conditions,SQL,Operators,Core,WHERE x > 0 AND y < 100,Use parentheses for complex conditions
+IN (v1; v2; ...),Membership filter,SQL,Operators,Core,WHERE status IN ('active'; 'pending'),More readable than multiple ORs
+BETWEEN a AND b,Inclusive range filter,SQL,Operators,Core,WHERE price BETWEEN 10 AND 50,Inclusive of both endpoints
+LIKE '%pattern%',String pattern matching,SQL,Operators,Core,WHERE name LIKE '%smith%',Leading % prevents index usage
+IS NULL / IS NOT NULL,Null value checking,SQL,Operators,Core,WHERE email IS NOT NULL,Cannot use = NULL; must use IS NULL
+AS,Alias for column or table,SQL,I/O,Core,SELECT name AS customer_name,Use short table aliases in joins
+CASE WHEN ... THEN ... ELSE ... END,Conditional expression,SQL,Control Flow,Core,CASE WHEN x > 0 THEN 'pos' ELSE 'neg' END,Essential for data transformations
+COALESCE(a; b; c),Return first non-null value,SQL,Functions,Core,COALESCE(nickname; name; 'Unknown'),Standard way to handle nulls
+NULLIF(a; b),Return null if values equal,SQL,Functions,Advanced,NULLIF(value; 0),Prevents divide by zero errors
+CAST(x AS TYPE),Convert to different data type,SQL,Data Types,Core,CAST(price AS DECIMAL(10;2)),Required for type-sensitive operations
+ORDER BY col ASC/DESC,Sort results,SQL,Control Flow,Core,ORDER BY created_at DESC,Last step; only sort when needed
+LIMIT n,Limit result rows,SQL,Control Flow,Core,LIMIT 100,Always use with ORDER BY for consistency
+GROUP BY col1; col2,Group rows for aggregation,SQL,Control Flow,Core,GROUP BY category; region,Include all non-aggregated SELECT columns
+HAVING condition,Filter after aggregation,SQL,Control Flow,Core,HAVING COUNT(*) > 10,Use for filtering on aggregate results
+COUNT(*),Count all rows,SQL,Functions,Core,SELECT COUNT(*) FROM orders,Includes nulls; faster than COUNT(col)
+COUNT(DISTINCT col),Count unique values,SQL,Functions,Core,COUNT(DISTINCT customer_id),Expensive; consider approx functions for big data
+SUM(col),Sum of values,SQL,Functions,Core,SUM(amount),Nulls ignored; use COALESCE if needed
+AVG(col),Average of values,SQL,Functions,Core,AVG(price),Nulls excluded from average calculation
+MIN(col) / MAX(col),Minimum/maximum value,SQL,Functions,Core,MIN(created_at),Efficient with indexes
+INNER JOIN ... ON,Join matching rows only,SQL,Functions,Core,INNER JOIN customers c ON o.customer_id = c.id,Default join type; rows must match both sides
+LEFT JOIN ... ON,Keep all left table rows,SQL,Functions,Core,LEFT JOIN orders o ON c.id = o.customer_id,Most common; preserves base table rows
+RIGHT JOIN ... ON,Keep all right table rows,SQL,Functions,Advanced,RIGHT JOIN products p ON oi.product_id = p.id,Rarely used; rewrite as LEFT JOIN for clarity
+FULL OUTER JOIN,Keep all rows from both tables,SQL,Functions,Advanced,FULL OUTER JOIN a ON b.id = a.id,Use for data comparison and reconciliation
+CROSS JOIN,Cartesian product of tables,SQL,Functions,Advanced,CROSS JOIN dates d,Use for date scaffolding and combinations
+UNION / UNION ALL,Combine result sets,SQL,Functions,Core,SELECT * FROM t1 UNION ALL SELECT * FROM t2,UNION removes dupes; ALL keeps all rows (faster)
+WITH cte AS (...),Common Table Expression,SQL,I/O,Core,WITH active_users AS (SELECT * FROM users WHERE active),Improves readability; can be referenced multiple times
+ROW_NUMBER() OVER (...),Sequential row number,SQL,Functions,Core,ROW_NUMBER() OVER (PARTITION BY id ORDER BY dt DESC),Use for dedup: WHERE rn = 1
+RANK() / DENSE_RANK() OVER (...),Ranking with/without gaps,SQL,Functions,Core,RANK() OVER (ORDER BY score DESC),RANK skips numbers for ties; DENSE_RANK doesn't
+LAG(col) / LEAD(col) OVER (...),Previous/next row value,SQL,Functions,Core-N,LAG(value) OVER (PARTITION BY id ORDER BY dt),Great for calculating changes between rows
+SUM(col) OVER (...),Running/window sum,SQL,Functions,Core-N,SUM(amount) OVER (PARTITION BY id ORDER BY dt),Add ROWS UNBOUNDED PRECEDING for running total
+PARTITION BY,Window function grouping,SQL,Functions,Core,OVER (PARTITION BY customer_id ORDER BY date),Like GROUP BY but preserves individual rows
+EXTRACT(part FROM date),Extract date component,SQL,Data Types,Core,EXTRACT(YEAR FROM created_at),Part can be YEAR MONTH DAY HOUR etc
+DATE_TRUNC('unit'; date),Truncate date to unit,SQL,Data Types,Core,DATE_TRUNC('month'; created_at),Useful for period-based grouping
+CURRENT_DATE / CURRENT_TIMESTAMP,Current date/timestamp,SQL,Data Types,Core,WHERE created_at >= CURRENT_DATE,Use for relative date filtering
+CREATE TABLE t (...),Create new table,SQL,I/O,Core,CREATE TABLE users (id INT; name VARCHAR(100)),Define constraints and data types upfront
+CREATE TABLE t AS SELECT ...,Create table from query (CTAS),SQL,I/O,Core,CREATE TABLE summary AS SELECT * FROM source,Fast way to materialize query results
+CREATE VIEW v AS SELECT ...,Create view from query,SQL,I/O,Core,CREATE VIEW active_users AS SELECT * FROM users,Reusable query; no data stored
+ALTER TABLE t ADD COLUMN,Add column to table,SQL,I/O,Advanced,ALTER TABLE users ADD COLUMN email VARCHAR(255),Consider nullable for existing data
+DROP TABLE t,Delete table,SQL,I/O,Core,DROP TABLE temp_data,Use IF EXISTS to avoid errors
+INSERT INTO t VALUES (...),Insert single row,SQL,I/O,Core,INSERT INTO users (id; name) VALUES (1; 'John'),Always specify column names explicitly
+INSERT INTO t SELECT ...,Insert from query,SQL,I/O,Core,INSERT INTO archive SELECT * FROM orders WHERE year < 2024,Efficient for bulk inserts
+UPDATE t SET col = val WHERE ...,Update existing rows,SQL,I/O,Core,UPDATE users SET status = 'inactive' WHERE last_login < '2024-01-01',Always include WHERE to avoid updating all rows
+DELETE FROM t WHERE ...,Delete rows matching condition,SQL,I/O,Core,DELETE FROM logs WHERE created_at < '2024-01-01',Always include WHERE; consider TRUNCATE for full delete
+MERGE INTO tgt USING src ON ...,Upsert pattern,SQL,I/O,Core-N,MERGE INTO dim USING stg ON dim.id = stg.id,Standard pattern for SCD and incremental loads
+BEGIN / COMMIT / ROLLBACK,Transaction control,SQL,Control Flow,Core-N,BEGIN; UPDATE ...; COMMIT;,Wrap related changes for atomicity
+EXPLAIN SELECT ...,Show query execution plan,SQL,I/O,Advanced,EXPLAIN SELECT * FROM orders,Use to optimize slow queries
+let x = 10,Block-scoped mutable variable,JAVASCRIPT,Variables,Core,let count = 0,Use for values that will be reassigned
+const y = 20,Block-scoped immutable reference,JAVASCRIPT,Variables,Core,const API_URL = "https://api.example.com",Default choice; prefer const over let
+var z = 30,Function-scoped variable (legacy),JAVASCRIPT,Variables,Advanced,var oldStyle = true,Avoid in modern code; use let/const
+const [a; b] = arr,Array destructuring,JAVASCRIPT,Variables,Core,const [first; second] = [1; 2],Clean way to extract array elements
+const { name; age } = obj,Object destructuring,JAVASCRIPT,Variables,Core,const { id; name } = user,Essential for working with API responses
+...arr / ...obj,Spread operator for arrays/objects,JAVASCRIPT,Operators,Core,const merged = [...arr1; ...arr2],Creates shallow copy; use for immutable updates
+() => {},Arrow function expression,JAVASCRIPT,Functions,Core,const add = (a; b) => a + b,Lexical this binding; concise syntax
+function name() {},Function declaration,JAVASCRIPT,Functions,Core,function greet(name) { return `Hello ${name}`; },Hoisted; use for named functions
+async function / await,Async function and await,JAVASCRIPT,Functions,Core,async function fetchData() { const data = await fetch(url); },Modern async pattern; cleaner than .then chains
+.map(),Transform array elements,JAVASCRIPT,Collections,Core,arr.map(x => x * 2),Returns new array; original unchanged
+.filter(),Filter array by condition,JAVASCRIPT,Collections,Core,arr.filter(x => x > 0),Returns new array with matching elements
+.reduce(),Reduce array to single value,JAVASCRIPT,Collections,Core,arr.reduce((acc; x) => acc + x; 0),Powerful but consider alternatives for readability
+.find() / .findIndex(),Find element/index by condition,JAVASCRIPT,Collections,Core,arr.find(x => x.id === 1),Returns first match or undefined/-1
+.some() / .every(),Test if some/all match condition,JAVASCRIPT,Collections,Core,arr.some(x => x > 10),Short-circuits; efficient for validation
+.forEach(),Iterate array (no return),JAVASCRIPT,Collections,Core,arr.forEach(x => console.log(x)),Cannot break; use for loop if needed
+.includes(),Check if array contains value,JAVASCRIPT,Collections,Core,arr.includes(5),O(n) lookup; use Set for frequent checks
+.push() / .pop(),Add/remove from end of array,JAVASCRIPT,Collections,Core,arr.push(item),Mutates array; returns new length/removed item
+.slice(),Extract portion of array (immutable),JAVASCRIPT,Collections,Core,arr.slice(1; 3),Non-mutating; use for copying arrays
+.splice(),Add/remove elements (mutates),JAVASCRIPT,Collections,Advanced,arr.splice(1; 2; newItem),Mutates in place; returns removed elements
+Object.keys() / Object.values(),Get array of keys/values,JAVASCRIPT,Collections,Core,Object.keys(obj),Iterate object properties as arrays
+Object.entries(),Get array of [key; value] pairs,JAVASCRIPT,Collections,Core,Object.entries(obj),Great for iterating objects
+Object.assign(),Copy properties to target,JAVASCRIPT,Collections,Core,Object.assign({}; obj1; obj2),Shallow copy; use spread for cleaner syntax
+?.  (optional chaining),Safe property access,JAVASCRIPT,Operators,Core,user?.address?.street,Prevents TypeError on null/undefined
+?? (nullish coalescing),Default for null/undefined only,JAVASCRIPT,Operators,Core,value ?? defaultValue,Unlike || handles 0 and empty string correctly
+|| (logical OR),Default for any falsy value,JAVASCRIPT,Operators,Core,value || defaultValue,Treats 0 '' false as falsy; use ?? instead
+`template ${var}`,Template literal string,JAVASCRIPT,Strings,Core,`Hello ${name}`,Supports multi-line and expressions
+typeof value,Check primitive type,JAVASCRIPT,Data Types,Core,typeof x === "string",Returns string; null returns 'object' (quirk)
+instanceof Constructor,Check if instance of class,JAVASCRIPT,Data Types,Core,obj instanceof Array,Works across inheritance chain
+Array.isArray(),Check if value is array,JAVASCRIPT,Data Types,Core,Array.isArray(value),More reliable than instanceof for arrays
+class ClassName {},Class declaration,JAVASCRIPT,OOP,Core,class Person { constructor(name) { this.name = name; } },Syntactic sugar over prototypes
+extends / super,Class inheritance,JAVASCRIPT,OOP,Core,class Employee extends Person { constructor(name) { super(name); } },super() must be called before this
+new Promise((resolve; reject) => {}),Create Promise,JAVASCRIPT,Functions,Core,new Promise((resolve; reject) => { resolve(data); }),Wrap callbacks in promises for async/await
+.then() / .catch() / .finally(),Promise chaining,JAVASCRIPT,Functions,Core,fetch(url).then(r => r.json()).catch(err => console.error(err)),Always include error handling
+Promise.all(),Wait for all promises,JAVASCRIPT,Functions,Core,Promise.all([p1; p2]),Fails fast on first rejection
+try {} catch (e) {} finally {},Error handling block,JAVASCRIPT,Error Handling,Core,try { risky(); } catch (e) { console.error(e); },finally runs regardless of outcome
+throw new Error(),Throw an error,JAVASCRIPT,Error Handling,Core,throw new Error("Something went wrong"),Include descriptive error message
+import { x } from "module",Named import (ES6),JAVASCRIPT,I/O,Core,import { Component } from "@angular/core",Tree-shakeable; import only what you need
+import x from "module",Default import (ES6),JAVASCRIPT,I/O,Core,import React from "react",One default export per module
+export { x } / export default,Module exports (ES6),JAVASCRIPT,I/O,Core,export default class App {},Prefer named exports for refactoring
+JSON.stringify() / JSON.parse(),JSON serialization,JAVASCRIPT,I/O,Core,JSON.parse(jsonString),Parse can throw on invalid JSON; wrap in try
+fetch(url; options),HTTP request API,JAVASCRIPT,I/O,Core,fetch(url; { method: "POST"; body: JSON.stringify(data) }),Check response.ok; doesn't reject on 404/500
+console.log(),Output to console,JAVASCRIPT,I/O,Core,console.log("Debug:"; value),Remove or use proper logging in production
+if / else if / else,Conditional branching,JAVASCRIPT,Control Flow,Core,if (x > 0) { } else { },Always use braces for clarity
+condition ? a : b,Ternary operator,JAVASCRIPT,Control Flow,Core,const result = x > 0 ? "positive" : "negative",Use for simple conditionals only
+for (let i = 0; i < n; i++),Classic for loop,JAVASCRIPT,Control Flow,Core,for (let i = 0; i < arr.length; i++) {},Use for index-based access or break/continue
+for (const item of arr),For-of loop (arrays),JAVASCRIPT,Control Flow,Core,for (const item of items) {},Cleaner than forEach; supports break
+for (const key in obj),For-in loop (object keys),JAVASCRIPT,Control Flow,Core,for (const key in obj) {},Includes inherited properties; use Object.keys instead
+switch (value) { case: },Switch statement,JAVASCRIPT,Control Flow,Core,switch (status) { case "active": break; },Include default case; don't forget break
+@Component({}),Component decorator,ANGULAR,OOP,Core,@Component({ selector: "app-user"; template: "" }),Use standalone: true for modern Angular
+@Input(),Input property binding,ANGULAR,OOP,Core,@Input() user!: User,Use required: true for mandatory inputs
+@Output(),Output event emitter,ANGULAR,OOP,Core,@Output() selected = new EventEmitter<number>(),Follow (eventName) convention
+@Injectable({ providedIn: "root" }),Service decorator,ANGULAR,OOP,Core,@Injectable({ providedIn: "root" }) export class UserService {},Singleton by default with providedIn: root
+constructor(private svc: Service),Dependency injection,ANGULAR,OOP,Core,constructor(private userService: UserService) {},Modern: use inject() function instead
+ngOnInit(),Lifecycle hook - init,ANGULAR,Functions,Core,ngOnInit(): void { this.loadData(); },Use for data fetching after inputs set
+ngOnDestroy(),Lifecycle hook - cleanup,ANGULAR,Functions,Core,ngOnDestroy(): void { this.subscription.unsubscribe(); },Always clean up subscriptions
+*ngIf,Structural directive - conditional,ANGULAR,Control Flow,Core,<div *ngIf="isVisible">Content</div>,Use @if in Angular 17+ control flow
+*ngFor,Structural directive - loop,ANGULAR,Control Flow,Core,<div *ngFor="let item of items">{{ item.name }}</div>,Use trackBy for performance
+[ngClass] / [ngStyle],Attribute directives - styling,ANGULAR,Control Flow,Core,[ngClass]="{ 'active': isActive }",Prefer class binding for single classes
+{{ expression }},Interpolation binding,ANGULAR,I/O,Core,{{ user.name }},One-way from component to template
+[property]="value",Property binding,ANGULAR,I/O,Core,[disabled]="isDisabled",Use for dynamic attribute values
+(event)="handler()",Event binding,ANGULAR,I/O,Core,(click)="onClick()",Access event with $event parameter
+[(ngModel)]="value",Two-way binding,ANGULAR,I/O,Core,<input [(ngModel)]="name">,"Requires FormsModule; ""banana in a box"" syntax"
+this.fb.group({}),Create FormGroup,ANGULAR,Functions,Core,this.fb.group({ name: [""]; email: [""] }),Use nonNullable: true for strict forms
+formControlName="x",Bind form control,ANGULAR,I/O,Core,<input formControlName="name">,Must be inside [formGroup] directive
+Validators.required,Form validation,ANGULAR,Functions,Core,Validators.required; Validators.email,Compose multiple validators in array
+this.http.get<T>(),HTTP GET request,ANGULAR,I/O,Core,this.http.get<User[]>("/api/users"),Returns Observable; must subscribe or use async pipe
+this.http.post<T>(),HTTP POST request,ANGULAR,I/O,Core,this.http.post<User>("/api/users"; userData),Include error handling with catchError
+.pipe(),RxJS pipe operator,ANGULAR,Functions,Core,obs$.pipe(map(x => x * 2); catchError(err => of(null))),Chain operators for transformations
+.subscribe(),Subscribe to Observable,ANGULAR,Functions,Core,this.data$.subscribe(data => this.items = data),Prefer async pipe in templates
+map() / filter() (RxJS),RxJS transformation operators,ANGULAR,Functions,Core,pipe(map(x => x.name); filter(x => x.active)),Import from 'rxjs/operators'
+switchMap() / mergeMap(),RxJS flattening operators,ANGULAR,Functions,Core-N,pipe(switchMap(id => this.getUser(id))),switchMap cancels previous; mergeMap runs concurrent
+catchError(),RxJS error handling,ANGULAR,Error Handling,Core,pipe(catchError(err => of([]))),Return fallback Observable; rethrow to propagate
+takeUntil(),RxJS auto-unsubscribe pattern,ANGULAR,Functions,Core-N,pipe(takeUntil(this.destroy$)),Emit in ngOnDestroy to clean up subscriptions
+BehaviorSubject<T>(),RxJS stateful subject,ANGULAR,Functions,Core-N,private data$ = new BehaviorSubject<User[]>([]),Has initial value; new subscribers get current value
+| async,Async pipe for Observables,ANGULAR,I/O,Core,<div>{{ data$ | async }}</div>,Auto-subscribes and unsubscribes; cleanest pattern
+| date / | currency / | uppercase,Built-in pipes,ANGULAR,I/O,Core,{{ price | currency:"USD" }},Pure pipes cached; impure recalculate on change
+router.navigate([]),Programmatic navigation,ANGULAR,Functions,Core,this.router.navigate(["/users"; id]),Use queryParams option for query parameters
+route.snapshot.paramMap.get(),Get route parameter,ANGULAR,Functions,Core,this.route.snapshot.paramMap.get("id"),Use paramMap Observable for reactive updates
+import pandas as pd,Import pandas library,PANDAS,I/O,Core,import pandas as pd,Standard import alias; use pd consistently
+pd.DataFrame(),Create DataFrame from dict/list,PANDAS,I/O,Core,pd.DataFrame({"col1": [1;2]; "col2": [3;4]}),Dict keys become column names
+pd.read_csv(),Read CSV file to DataFrame,PANDAS,I/O,Core,df = pd.read_csv("file.csv"),Use dtype param to specify column types upfront
+pd.read_parquet(),Read Parquet file to DataFrame,PANDAS,I/O,Core,df = pd.read_parquet("file.parquet"),Faster and smaller than CSV; preserves types
+pd.read_excel(),Read Excel file to DataFrame,PANDAS,I/O,Core,df = pd.read_excel("file.xlsx"; sheet_name="Sheet1"),Requires openpyxl for xlsx files
+pd.read_json(),Read JSON file to DataFrame,PANDAS,I/O,Core,df = pd.read_json("file.json"),Use orient param for different JSON structures
+df.to_csv(),Write DataFrame to CSV,PANDAS,I/O,Core,df.to_csv("output.csv"; index=False),Set index=False to avoid extra index column
+df.to_parquet(),Write DataFrame to Parquet,PANDAS,I/O,Core,df.to_parquet("output.parquet"),Preferred for data pipelines; use pyarrow engine
+df.to_excel(),Write DataFrame to Excel,PANDAS,I/O,Core,df.to_excel("output.xlsx"; index=False),Use ExcelWriter for multiple sheets
+df.head() / df.tail(),View first/last n rows,PANDAS,I/O,Core,df.head(10),First check after loading data
+df.info(),Show DataFrame info and dtypes,PANDAS,I/O,Core,df.info(),Shows memory usage and null counts
+df.describe(),Summary statistics,PANDAS,I/O,Core,df.describe(),Use include='all' for non-numeric columns
+df.shape,Get (rows; columns) tuple,PANDAS,I/O,Core,rows; cols = df.shape,Quick row/column count
+df.columns,Get column names,PANDAS,I/O,Core,df.columns.tolist(),Index object; convert to list for modification
+df.dtypes,Get column data types,PANDAS,Data Types,Core,df.dtypes,Check for unexpected types after loading
+df["col"],Select single column (Series),PANDAS,Columns,Core,df["name"],Returns Series not DataFrame
+df[["col1"; "col2"]],Select multiple columns,PANDAS,Columns,Core,df[["name"; "age"]],Double brackets return DataFrame
+df.loc[],Label-based selection,PANDAS,Columns,Core,df.loc[0:5; ["name"; "age"]],Inclusive of end label; use for named access
+df.iloc[],Integer-based selection,PANDAS,Columns,Core,df.iloc[0:5; 0:2],Exclusive of end index; use for position-based
+df[df["col"] > 0],Boolean filtering,PANDAS,Control Flow,Core,df[df["age"] > 18],Creates boolean mask then filters
+df.query(),Query string filtering,PANDAS,Control Flow,Core,df.query("age > 18 and status == 'active'"),Cleaner for complex conditions; use @ for variables
+df[(cond1) & (cond2)],Multiple conditions (AND),PANDAS,Control Flow,Core,df[(df["age"] > 18) & (df["status"] == "active")],Parentheses required around each condition
+df[(cond1) | (cond2)],Multiple conditions (OR),PANDAS,Control Flow,Core,df[(df["age"] < 18) | (df["age"] > 65)],Use | for OR; & for AND; ~ for NOT
+df.isin(),Filter by list of values,PANDAS,Control Flow,Core,df[df["status"].isin(["active"; "pending"])],Efficient for membership testing
+df["col"] = value,Assign column values,PANDAS,Columns,Core,df["new_col"] = df["a"] + df["b"],Creates or overwrites column in place
+df.assign(),Create new columns (returns copy),PANDAS,Columns,Core,df.assign(total=df["a"] + df["b"]),Returns new DataFrame; chainable
+df.drop(),Drop rows or columns,PANDAS,Columns,Core,df.drop(columns=["col1"; "col2"]),Use axis=1 or columns= for column drops
+df.rename(),Rename columns,PANDAS,Columns,Core,df.rename(columns={"old": "new"}),Preserves data; just changes column names
+df.astype(),Convert column data type,PANDAS,Data Types,Core,df["id"].astype(str),Can fail on invalid values; handle errors
+pd.to_datetime(),Convert to datetime,PANDAS,Data Types,Core,df["date"] = pd.to_datetime(df["date_str"]),Use format= for specific date formats
+pd.to_numeric(),Convert to numeric,PANDAS,Data Types,Core,df["num"] = pd.to_numeric(df["val"]; errors="coerce"),errors='coerce' converts bad values to NaN
+df.apply(),Apply function to rows/columns,PANDAS,Functions,Core,df["col"].apply(lambda x: x.upper()),Slow; prefer vectorized operations when possible
+df.map(),Element-wise mapping,PANDAS,Functions,Core,df["col"].map({"a": 1; "b": 2}),Great for value replacement; unmapped become NaN
+df.groupby().agg(),Group and aggregate,PANDAS,Functions,Core,df.groupby("key").agg({"val": "sum"; "cnt": "count"}),Pass dict for multiple aggregations
+df.groupby().transform(),Transform within groups,PANDAS,Functions,Advanced,df.groupby("key")["val"].transform("mean"),Returns same-sized result; use for window calcs
+df.value_counts(),Count unique values,PANDAS,Functions,Core,df["status"].value_counts(),Returns Series sorted by frequency
+df.nunique(),Count unique values per column,PANDAS,Functions,Core,df.nunique(),Quick cardinality check
+df.duplicated(),Find duplicate rows,PANDAS,Functions,Core,df[df.duplicated(subset=["id"])],Use keep='first'/'last'/False
+df.drop_duplicates(),Remove duplicate rows,PANDAS,Functions,Core,df.drop_duplicates(subset=["id"]; keep="first"),Specify key columns for dedup logic
+pd.merge(),Merge/join DataFrames,PANDAS,Functions,Core,pd.merge(df1; df2; on="id"; how="left"),SQL-like joins; check for unexpected row counts
+df.merge(),Merge as method,PANDAS,Functions,Core,df1.merge(df2; on="id"; how="inner"),Same as pd.merge but as method
+pd.concat(),Concatenate DataFrames,PANDAS,Functions,Core,pd.concat([df1; df2]; ignore_index=True),Use ignore_index=True to reset row numbers
+df.join(),Join on index,PANDAS,Functions,Advanced,df1.join(df2; how="left"),Use merge() for more explicit column joins
+df.fillna(),Fill missing values,PANDAS,Error Handling,Core,df["col"].fillna(0),Use method='ffill' for forward fill
+df.dropna(),Drop rows with missing values,PANDAS,Error Handling,Core,df.dropna(subset=["id"; "date"]),Use subset to only check critical columns
+df.isna() / df.notna(),Check for missing values,PANDAS,Error Handling,Core,df[df["col"].isna()],Returns boolean mask for filtering
+df.replace(),Replace values,PANDAS,Error Handling,Core,df.replace({"": None; "NA": None}),Standardize bad values before processing
+df.sort_values(),Sort by column values,PANDAS,Control Flow,Core,df.sort_values(by=["date"; "id"]; ascending=[False; True]),Multiple columns; multiple sort orders
+df.sort_index(),Sort by index,PANDAS,Control Flow,Core,df.sort_index(),Use after set_index for ordered data
+df.reset_index(),Reset index to default,PANDAS,Columns,Core,df.reset_index(drop=True),drop=True discards old index
+df.set_index(),Set column as index,PANDAS,Columns,Core,df.set_index("id"),Enables faster lookup and join on index
+df.str.lower() / .upper(),String case conversion,PANDAS,Strings,Core,df["name"].str.lower(),Access string methods via .str accessor
+df.str.strip(),Trim whitespace,PANDAS,Strings,Core,df["name"].str.strip(),Essential for data cleaning
+df.str.replace(),String replacement,PANDAS,Strings,Core,df["col"].str.replace("old"; "new"; regex=False),Set regex=False for literal replacement
+df.str.contains(),String pattern matching,PANDAS,Strings,Core,df[df["name"].str.contains("smith"; case=False)],Returns boolean Series for filtering
+df.str.split(),Split string to list,PANDAS,Strings,Core,df["name"].str.split(" "),Returns lists; use expand=True for columns
+df.str.extract(),Regex extraction,PANDAS,Strings,Advanced,df["col"].str.extract(r"(\d+)"),Use capture groups; returns DataFrame
+df.dt.year / .month / .day,Extract date components,PANDAS,Data Types,Core,df["date"].dt.year,Access datetime properties via .dt accessor
+df.dt.date,Extract date from datetime,PANDAS,Data Types,Core,df["datetime"].dt.date,Strips time component
+pd.Timedelta(),Create time delta,PANDAS,Data Types,Core,df["date"] + pd.Timedelta(days=7),Use for date arithmetic
+df.pivot_table(),Create pivot table,PANDAS,Functions,Core,df.pivot_table(values="amt"; index="date"; columns="cat"; aggfunc="sum"),Excel-like pivot; specify fill_value for nulls
+df.melt(),Unpivot wide to long format,PANDAS,Functions,Advanced,df.melt(id_vars=["id"]; value_vars=["a"; "b"]),Inverse of pivot; normalizes data
+df.copy(),Create deep copy of DataFrame,PANDAS,Functions,Core,df_copy = df.copy(),Avoid SettingWithCopyWarning; explicit copy
+Promise.race(),First promise to settle wins,JAVASCRIPT,Functions,Core,Promise.race([timeout; fetchData]),Use for timeout patterns
+Promise.allSettled(),Wait for all with status,JAVASCRIPT,Functions,Core,Promise.allSettled([p1; p2]).then(results => {}),Never rejects; check each result status
+Promise.any(),First fulfilled promise wins,JAVASCRIPT,Functions,Advanced,Promise.any([api1; api2; api3]),Ignores rejections until all fail
+async () => {},Async arrow function,JAVASCRIPT,Functions,Core,const getData = async () => { return await fetch(url); },Always returns Promise
+for await (const x of iterable),Async iteration,JAVASCRIPT,Control Flow,Advanced,for await (const chunk of stream) {},Use for streaming APIs
+setTimeout(),Delay execution once,JAVASCRIPT,Functions,Core,setTimeout(() => callback(); 1000),Returns ID for clearTimeout
+setInterval() / clearInterval(),Repeated execution,JAVASCRIPT,Functions,Core,const id = setInterval(poll; 5000); clearInterval(id),Always clear to prevent memory leaks
+requestAnimationFrame(),Animation frame timing,JAVASCRIPT,Functions,Advanced,requestAnimationFrame(animate),60fps; pauses when tab inactive
+AbortController,Cancellable fetch requests,JAVASCRIPT,Functions,Core,const ctrl = new AbortController(); fetch(url; { signal: ctrl.signal }),Essential for request cleanup and race conditions
+new Map(),Key-value with any key type,JAVASCRIPT,Collections,Core,const map = new Map([[key; value]]),Objects as keys; maintains insertion order
+map.get() / map.set() / map.has(),Map operations,JAVASCRIPT,Collections,Core,map.set(obj; data); map.get(obj),O(1) operations like object but better
+new Set(),Unique value collection,JAVASCRIPT,Collections,Core,const unique = new Set(arr),O(1) lookup; great for deduplication
+set.add() / set.has() / set.delete(),Set operations,JAVASCRIPT,Collections,Core,set.add(value); set.has(value),Returns boolean for has(); this for add()
+new WeakMap() / new WeakSet(),Weak references for GC,JAVASCRIPT,Collections,Advanced,const cache = new WeakMap(),Keys can be garbage collected; no iteration
+Array.from(),Create array from iterable,JAVASCRIPT,Collections,Core,Array.from(nodeList),Also accepts mapFn as second arg
+Array.flat() / Array.flatMap(),Flatten nested arrays,JAVASCRIPT,Collections,Core,arr.flat(2); arr.flatMap(x => [x; x*2]),Use Infinity to flatten all levels
+.at(),Negative index access,JAVASCRIPT,Collections,Core,arr.at(-1),Clean way to get last element
+.sort(),Sort array in place,JAVASCRIPT,Collections,Core,arr.sort((a; b) => a - b),Mutates original; compare function for numbers
+.reverse(),Reverse array in place,JAVASCRIPT,Collections,Core,arr.reverse(),Mutates original; use toReversed() for copy
+.join(),Join array to string,JAVASCRIPT,Collections,Core,arr.join("; "),Default separator is comma
+.concat(),Merge arrays (immutable),JAVASCRIPT,Collections,Core,arr1.concat(arr2),Returns new array; prefer spread operator
+.fill(),Fill array with value,JAVASCRIPT,Collections,Core,new Array(5).fill(0),All elements reference same object for objects
+Object.freeze(),Make object immutable,JAVASCRIPT,Collections,Core,Object.freeze(config),Shallow freeze only; nested objects still mutable
+Object.hasOwn(),Check own property,JAVASCRIPT,Collections,Core,Object.hasOwn(obj; "key"),Safer than hasOwnProperty; use for maps
+structuredClone(),Deep copy objects,JAVASCRIPT,Collections,Core,const copy = structuredClone(obj),Handles circular refs; native deep clone
+.startsWith() / .endsWith(),String prefix/suffix check,JAVASCRIPT,Strings,Core,str.startsWith("http"),Cleaner than regex for simple checks
+.padStart() / .padEnd(),Pad string to length,JAVASCRIPT,Strings,Core,id.padStart(6; "0"),Great for formatting numbers and IDs
+.trim() / .trimStart() / .trimEnd(),Remove whitespace,JAVASCRIPT,Strings,Core,input.trim(),Always trim user input
+.replaceAll(),Replace all occurrences,JAVASCRIPT,Strings,Core,str.replaceAll("old"; "new"),Cleaner than regex global flag
+.split(),Split string to array,JAVASCRIPT,Strings,Core,str.split(","),Empty string splits into characters
+.match() / .matchAll(),Regex matching,JAVASCRIPT,Strings,Core,str.match(/\d+/g),matchAll requires global flag; returns iterator
+new RegExp(),Dynamic regex creation,JAVASCRIPT,Strings,Advanced,new RegExp(pattern; "gi"),Use when pattern is a variable; escape special chars
+new URL() / URLSearchParams,URL parsing and params,JAVASCRIPT,I/O,Core,new URL(href).searchParams.get("id"),Safe URL manipulation; handles encoding
+localStorage / sessionStorage,Browser storage APIs,JAVASCRIPT,I/O,Core,localStorage.setItem("key"; JSON.stringify(data)),5MB limit; strings only; JSON.stringify objects
+addEventListener(),Attach event listener,JAVASCRIPT,I/O,Core,el.addEventListener("click"; handler),Use options { once: true } for single use
+removeEventListener(),Remove event listener,JAVASCRIPT,I/O,Core,el.removeEventListener("click"; handler),Handler must be same reference
+document.querySelector(),Select first matching element,JAVASCRIPT,I/O,Core,document.querySelector(".class"),CSS selector syntax; null if not found
+document.querySelectorAll(),Select all matching elements,JAVASCRIPT,I/O,Core,document.querySelectorAll("li"),Returns NodeList; use Array.from to convert
+document.createElement(),Create DOM element,JAVASCRIPT,I/O,Core,const div = document.createElement("div"),Set properties before appending to DOM
+element.classList.add/remove/toggle,Manage CSS classes,JAVASCRIPT,I/O,Core,el.classList.toggle("active"),toggle returns boolean; accepts multiple classes
+new Date(),Create date object,JAVASCRIPT,Data Types,Core,new Date(); new Date("2024-01-01"),Avoid string parsing; use explicit year/month/day
+Date.now(),Current timestamp ms,JAVASCRIPT,Data Types,Core,const timestamp = Date.now(),More efficient than new Date().getTime()
+.toISOString() / .toLocaleDateString(),Date formatting,JAVASCRIPT,Data Types,Core,date.toISOString(),ISO for APIs; locale for display
+Math.floor() / Math.ceil() / Math.round(),Rounding functions,JAVASCRIPT,Functions,Core,Math.round(3.5),floor down; ceil up; round nearest
+Math.max() / Math.min(),Find max/min values,JAVASCRIPT,Functions,Core,Math.max(...arr),Use spread for arrays; returns -Infinity if empty
+Math.random(),Random 0-1 value,JAVASCRIPT,Functions,Core,Math.floor(Math.random() * 100),Not cryptographically secure; use crypto API
+Number.isNaN() / Number.isFinite(),Number validation,JAVASCRIPT,Data Types,Core,Number.isNaN(value),Better than global isNaN which coerces
+parseInt() / parseFloat(),String to number,JAVASCRIPT,Data Types,Core,parseInt(str; 10),Always specify radix (10) for parseInt
+.toFixed(),Format decimal places,JAVASCRIPT,Data Types,Core,price.toFixed(2),Returns string; use for display only
+get / set,Class getters and setters,JAVASCRIPT,OOP,Core,get name() { return this._name; },Use for computed properties; prefix private with _
+static,Static class members,JAVASCRIPT,OOP,Core,static getInstance() { },Called on class not instance; use for utilities
+#privateField,Private class field,JAVASCRIPT,OOP,Advanced,class User { #password; },True privacy; not accessible outside class
+globalThis,Universal global object,JAVASCRIPT,Variables,Advanced,globalThis.fetch,Works in browser and Node.js environments
+Symbol(),Create unique identifier,JAVASCRIPT,Data Types,Advanced,const id = Symbol("id"),Guaranteed unique; use for object keys
+Proxy / Reflect,Object interception,JAVASCRIPT,OOP,Advanced,new Proxy(target; handler),Intercept operations; use for validation/logging
+generator function*,Generator function,JAVASCRIPT,Functions,Advanced,function* gen() { yield 1; yield 2; },Pausable functions; great for iterators
+ngOnChanges(),Lifecycle - input changes,ANGULAR,Functions,Core,ngOnChanges(changes: SimpleChanges): void {},Called when @Input properties change; check changes.prop
+ngAfterViewInit(),Lifecycle - view ready,ANGULAR,Functions,Core,ngAfterViewInit(): void { this.chart.render(); },DOM and child views initialized; use for DOM manipulation
+ngAfterContentInit(),Lifecycle - content projected,ANGULAR,Functions,Advanced,ngAfterContentInit(): void {},ng-content projected; access ContentChildren here
+@ViewChild(),Query single element/component,ANGULAR,OOP,Core,@ViewChild("myInput") inputEl!: ElementRef,Available after ngAfterViewInit
+@ViewChildren(),Query multiple elements,ANGULAR,OOP,Advanced,@ViewChildren(ItemComponent) items!: QueryList<ItemComponent>,QueryList is live; changes observable
+@HostListener(),Listen to host events,ANGULAR,OOP,Core,@HostListener("window:resize") onResize() {},Use for document/window events on directive
+@HostBinding(),Bind to host property,ANGULAR,OOP,Advanced,@HostBinding("class.active") isActive = false,Bind host element class/attribute to property
+ChangeDetectionStrategy.OnPush,Optimize change detection,ANGULAR,OOP,Core-N,changeDetection: ChangeDetectionStrategy.OnPush,Only check on input changes; major performance gain
+of(),Create Observable from value,ANGULAR,Functions,Core,of([]); of(null),Synchronous emit; use for fallback values
+forkJoin(),Wait for all Observables,ANGULAR,Functions,Core,forkJoin([obs1$; obs2$]).subscribe(([r1; r2]) => {}),All must complete; like Promise.all
+combineLatest(),Combine latest values,ANGULAR,Functions,Core-N,combineLatest([a$; b$]).pipe(map(([a; b]) => a + b)),Emits when any source emits; needs initial values
+debounceTime(),Delay emission by time,ANGULAR,Functions,Core,searchInput$.pipe(debounceTime(300)),Essential for search inputs; prevents API spam
+distinctUntilChanged(),Skip duplicate emissions,ANGULAR,Functions,Core,input$.pipe(distinctUntilChanged()),Combine with debounceTime for search patterns
+tap(),Side effects in pipe,ANGULAR,Functions,Core,pipe(tap(x => console.log(x))),Debugging; don't mutate data in tap
+finalize(),Cleanup on complete/error,ANGULAR,Functions,Core,pipe(finalize(() => this.loading = false)),Always runs; use for loading states
+startWith(),Emit initial value first,ANGULAR,Functions,Core,data$.pipe(startWith([])),Prevent empty template until async completes
+shareReplay(),Cache and share Observable,ANGULAR,Functions,Core-N,data$.pipe(shareReplay(1)),Avoid duplicate API calls; buffer size 1 typical
+Subject<T>(),Multicast Observable,ANGULAR,Functions,Core,private action$ = new Subject<string>(),Push values manually; use for events
+ReplaySubject<T>(),Subject with buffer,ANGULAR,Functions,Advanced,private cache$ = new ReplaySubject<Data>(1),Late subscribers get buffered values
+firstValueFrom(),Convert Observable to Promise,ANGULAR,Functions,Core,const data = await firstValueFrom(obs$),Use for one-time async operations
+toSignal() / toObservable(),Signal-Observable interop,ANGULAR,Functions,Advanced,const sig = toSignal(obs$),Bridge between signals and RxJS in Angular 16+
+HttpInterceptor,Intercept HTTP requests,ANGULAR,I/O,Core-N,implements HttpInterceptor { intercept(req; next) {} },Add auth headers; handle errors globally
+CanActivate,Route guard interface,ANGULAR,Control Flow,Core-N,implements CanActivate { canActivate() {} },Protect routes; return boolean or Observable
+loadChildren,Lazy load module/routes,ANGULAR,Control Flow,Core-N,loadChildren: () => import("./module"),Code splitting; smaller initial bundle
+resolve,Prefetch route data,ANGULAR,Control Flow,Advanced,resolve: { data: DataResolver },Load data before route activates
+RouterLink / routerLinkActive,Template navigation,ANGULAR,I/O,Core,[routerLink]="['/users'; id]" routerLinkActive="active",Preferred over manual navigation in templates
+ActivatedRoute.params,Observable route params,ANGULAR,I/O,Core,this.route.params.subscribe(p => {}),Reactive params; snapshot for one-time read
+environment.production,Environment config flag,ANGULAR,Variables,Core,if (environment.production) {},Switch behavior between dev and prod
+@Directive(),Custom directive decorator,ANGULAR,OOP,Advanced,@Directive({ selector: "[appHighlight]" }),Attribute directive for reusable behavior
+@Pipe(),Custom pipe decorator,ANGULAR,OOP,Advanced,@Pipe({ name: "customFormat" }),Transform data in templates; keep pure
+AsyncValidator,Async form validation,ANGULAR,Functions,Advanced,asyncValidators: [this.uniqueValidator],Return Observable; debounce API calls
+int / long / double / boolean,Primitive data types,JAVA,Data Types,Core,int count = 0; long id = 123L; double rate = 0.5;,Use primitives for performance; no null allowed
+Integer / Long / Double / String,Wrapper and reference types,JAVA,Data Types,Core,Integer count = null; String name = "value";,Use wrappers for nullability and collections
+var,Local variable type inference,JAVA,Variables,Core,var list = new ArrayList<String>();,Java 10+; use when type is clear from context
+final,Immutable variable/constant,JAVA,Variables,Core,final String API_KEY = "abc123";,Prefer final for thread safety and clarity
+(int) value,Explicit type casting,JAVA,Data Types,Core,int x = (int) 3.14;,May lose precision; check bounds first
+Integer.parseInt(),Parse string to int,JAVA,Data Types,Core,int num = Integer.parseInt("42");,Throws NumberFormatException on invalid input
+String.valueOf(),Convert to string,JAVA,Data Types,Core,String s = String.valueOf(123);,Null-safe unlike toString()
+instanceof,Type check operator,JAVA,Operators,Core,if (obj instanceof String s) { },Pattern matching in Java 16+ assigns variable
++ - * / % ++ --,Arithmetic operators,JAVA,Operators,Core,x + y; count++;,Watch for integer overflow with large values
+== != < > <= >=,Comparison operators,JAVA,Operators,Core,if (a == b) { },Use equals() for object value comparison
+&& || !,Logical operators,JAVA,Operators,Core,if (a && !b) { },Short-circuit evaluation; order matters
+? :,Ternary operator,JAVA,Operators,Core,int max = (a > b) ? a : b;,Use for simple conditionals only
+if / else if / else,Conditional branching,JAVA,Control Flow,Core,if (x > 0) { } else { },Always use braces for clarity
+switch (val) { case: },Switch statement,JAVA,Control Flow,Core,switch (status) { case "A": break; },Remember break; use switch expression instead
+switch expression ->,Switch expression (Java 14+),JAVA,Control Flow,Core,String result = switch (val) { case 1 -> "one"; default -> "other"; };,No break needed; returns value; exhaustive check
+for (int i = 0; i < n; i++),Classic for loop,JAVA,Control Flow,Core,for (int i = 0; i < 10; i++) { },Use for index-based access
+for (T item : collection),Enhanced for-each loop,JAVA,Control Flow,Core,for (String s : list) { },Preferred for iteration; cleaner syntax
+while (condition) { },While loop,JAVA,Control Flow,Core,while (hasNext()) { },Ensure exit condition to avoid infinite loop
+break / continue,Loop control statements,JAVA,Control Flow,Core,break; continue;,Use labeled break for nested loops
+public void method() { },Method definition,JAVA,Functions,Core,public int add(int a; int b) { return a + b; },Keep methods small and focused
+return value,Return from method,JAVA,Functions,Core,return result;,Return early for guard clauses
+x -> x * 2,Lambda expression,JAVA,Functions,Core,Function<Integer; Integer> sq = x -> x * x;,Use for functional interfaces; keep concise
+list.forEach(System.out::println),Method reference,JAVA,Functions,Core,items.sort(String::compareToIgnoreCase);,Cleaner than lambda when method matches signature
+public class ClassName { },Class definition,JAVA,OOP,Core,public class User { private String name; },One public class per file; use records for data
+public interface Name { },Interface definition,JAVA,OOP,Core,public interface Service { void execute(); },Define contracts; use default methods sparingly
+extends / implements,Inheritance and interface impl,JAVA,OOP,Core,class Admin extends User implements Auditable { },Prefer composition over deep inheritance
+abstract class,Abstract class definition,JAVA,OOP,Core,public abstract class BaseHandler { abstract void handle(); },Use for shared implementation with extension
+record ClassName(),Immutable data class (Java 14+),JAVA,OOP,Core,public record UserEvent(String userId; Instant ts) { },Auto-generates constructor/equals/hashCode/toString
+new ClassName(),Object instantiation,JAVA,OOP,Core,User user = new User("name");,Consider factory methods for complex construction
+this / super,Current/parent object reference,JAVA,OOP,Core,this.name = name; super.method();,super() must be first statement in constructor
+@Override,Override parent method,JAVA,OOP,Core,@Override public String toString() { },Always use; catches errors at compile time
+public / private / protected,Access modifiers,JAVA,OOP,Core,private String name; public void get() { },Prefer private; expose minimum necessary
+static,Class-level member,JAVA,OOP,Core,public static final Logger LOG = ...;,Use for constants and utility methods
+List<T>,Ordered mutable collection,JAVA,Collections,Core,List<String> list = new ArrayList<>();,ArrayList for general use; LinkedList for queues
+Set<T>,Unique element collection,JAVA,Collections,Core,Set<String> set = new HashSet<>();,HashSet fast; TreeSet for sorted
+Map<K; V>,Key-value collection,JAVA,Collections,Core,Map<String; Object> map = new HashMap<>();,HashMap fast; LinkedHashMap for order
+List.of() / Set.of() / Map.of(),Immutable collection factories,JAVA,Collections,Core,List<String> list = List.of("a"; "b");,Java 9+; throws on modification
+list.add() / list.get(),List add and access,JAVA,Collections,Core,list.add("item"); list.get(0);,get() throws IndexOutOfBoundsException
+map.put() / map.get(),Map put and get,JAVA,Collections,Core,map.put("key"; value); map.get("key");,Returns null if key not found
+map.getOrDefault(),Get with default value,JAVA,Collections,Core,map.getOrDefault("key"; defaultVal);,Avoid null checks with default value
+Optional.ofNullable(),Null-safe optional wrapper,JAVA,Collections,Core,Optional.ofNullable(value).orElse("default");,Don't use Optional for fields; use for returns
+opt.map() / opt.orElse(),Optional transformation,JAVA,Collections,Core,opt.map(String::toUpperCase).orElse("");,Chain operations; orElseGet for lazy eval
+list.stream().filter().map(),Stream pipeline operations,JAVA,Collections,Core,list.stream().filter(x -> x > 0).map(x -> x * 2);,Lazy evaluation; terminal operation triggers
+.collect(Collectors.toList()),Collect stream to list,JAVA,Collections,Core,stream.collect(Collectors.toList());,Use toList() in Java 16+ for immutable
+.collect(Collectors.groupingBy()),Group stream elements,JAVA,Collections,Advanced,stream.collect(Collectors.groupingBy(User::getDept));,Returns Map; use downstream collector for values
+try { } catch (Exception e) { },Exception handling block,JAVA,Error Handling,Core,try { risky(); } catch (IOException e) { log(e); },Catch specific exceptions; avoid catching Exception
+try-with-resources,Auto-closeable resource handling,JAVA,Error Handling,Core,try (var conn = getConnection()) { },Auto-closes resources; Java 7+
+throw new Exception(),Throw exception,JAVA,Error Handling,Core,throw new IllegalArgumentException("Invalid");,Use appropriate exception type; include message
+throws Exception,Declare thrown exceptions,JAVA,Error Handling,Core,public void read() throws IOException { },Checked exceptions in signature; caller must handle
+finally { },Cleanup block (always runs),JAVA,Error Handling,Core,finally { cleanup(); },Use try-with-resources instead when possible
+Files.readString(),Read file to string,JAVA,I/O,Core,String content = Files.readString(Path.of("file.txt"));,Java 11+; specify charset if non-UTF8
+Files.writeString(),Write string to file,JAVA,I/O,Core,Files.writeString(path; data);,Creates file if not exists; options for append
+Files.lines(),Stream file lines,JAVA,I/O,Core,Files.lines(path).forEach(System.out::println);,Lazy loading; use try-with-resources to close
+new ObjectMapper(),Jackson JSON mapper,JAVA,I/O,Core,ObjectMapper mapper = new ObjectMapper();,Reuse instance; thread-safe after config
+mapper.readValue(),Parse JSON to object,JAVA,I/O,Core,User u = mapper.readValue(json; User.class);,Configure for unknown properties handling
+mapper.writeValueAsString(),Serialize object to JSON,JAVA,I/O,Core,String json = mapper.writeValueAsString(obj);,Use @JsonProperty for field mapping
+HttpClient.newBuilder().build(),Create HTTP client,JAVA,I/O,Core,HttpClient client = HttpClient.newBuilder().build();,Java 11+; reuse for connection pooling
+HttpRequest.newBuilder(),Build HTTP request,JAVA,I/O,Core,HttpRequest req = HttpRequest.newBuilder().uri(uri).GET().build();,Fluent builder pattern; set headers as needed
+client.send(req; BodyHandlers),Execute HTTP request,JAVA,I/O,Core,HttpResponse<String> resp = client.send(req; BodyHandlers.ofString());,Use sendAsync() for non-blocking
+PreparedStatement,Parameterized SQL query,JAVA,I/O,Core,PreparedStatement ps = conn.prepareStatement(sql);,Prevents SQL injection; reuse for batch
+ps.setObject() / ps.executeQuery(),Set param and execute query,JAVA,I/O,Core,ps.setObject(1; id); ResultSet rs = ps.executeQuery();,Index is 1-based; use setNull for nulls
+ResultSet.next() / .getString(),Iterate result rows,JAVA,I/O,Core,while (rs.next()) { String val = rs.getString("col"); },Check for null with wasNull() if primitive
+connection.setAutoCommit(false),Start transaction,JAVA,I/O,Core,conn.setAutoCommit(false); conn.commit();,Rollback in catch block; use try-with-resources
+ExecutorService,Thread pool executor,JAVA,Functions,Core,ExecutorService exec = Executors.newFixedThreadPool(8);,Always shutdown in finally; size based on workload
+executor.submit(),Submit task to executor,JAVA,Functions,Core,Future<T> future = executor.submit(callable);,Returns Future; non-blocking submit
+CompletableFuture.supplyAsync(),Async computation,JAVA,Functions,Core,CompletableFuture.supplyAsync(() -> compute()).thenApply(x -> x * 2);,Chain with thenApply/thenCompose; handle errors
+future.get(),Block and get future result,JAVA,Functions,Core,T result = future.get(10; TimeUnit.SECONDS);,Always set timeout to avoid deadlock
+-Xms / -Xmx,Initial/max heap size,JVM,Config,Core,-Xms512m -Xmx2g,Set equal to avoid resize pauses in production
+-XX:+UseG1GC,Use G1 garbage collector,JVM,Config,Core,-XX:+UseG1GC,Default in Java 9+; balanced throughput/latency
+-XX:MaxGCPauseMillis,Target GC pause time,JVM,Config,Core-N,-XX:MaxGCPauseMillis=200,Hint not guarantee; tune based on workload
+-XX:+HeapDumpOnOutOfMemoryError,Dump heap on OOM,JVM,Config,Core-N,-XX:+HeapDumpOnOutOfMemoryError,Essential for production debugging; set path too
+jps,List JVM processes,JVM,I/O,Core,jps -l,Use -l for full class names; first step in diagnosis
+jstat -gc <pid>,GC statistics,JVM,I/O,Core,jstat -gc 12345 1000,Monitor GC frequency and duration over time
+jstack <pid>,Thread dump,JVM,I/O,Core-N,jstack 12345 > threaddump.txt,Capture multiple dumps to detect deadlocks
+jmap -heap <pid>,Heap summary,JVM,I/O,Advanced,jmap -heap 12345,Shows generation sizes; use for capacity planning
+@SpringBootApplication,Main application annotation,SPRINGBOOT,OOP,Core,@SpringBootApplication public class App { },Combines @Configuration @EnableAutoConfiguration @ComponentScan
+@RestController,REST controller class,SPRINGBOOT,OOP,Core,@RestController public class UserController { },Combines @Controller and @ResponseBody
+@RequestMapping,Base path mapping,SPRINGBOOT,OOP,Core,@RequestMapping("/api/users"),Set at class level for base path
+@GetMapping / @PostMapping,HTTP method mappings,SPRINGBOOT,I/O,Core,@GetMapping("/{id}") public User get(@PathVariable Long id),Use specific mapping over generic @RequestMapping
+@PutMapping / @DeleteMapping,HTTP method mappings,SPRINGBOOT,I/O,Core,@DeleteMapping("/{id}") public void delete(@PathVariable Long id),PUT for full update; PATCH for partial
+@PathVariable,Extract path variable,SPRINGBOOT,I/O,Core,@PathVariable Long id,Name must match path placeholder
+@RequestParam,Extract query parameter,SPRINGBOOT,I/O,Core,@RequestParam(defaultValue = "10") int limit,Use required=false for optional params
+@RequestBody,Deserialize request body,SPRINGBOOT,I/O,Core,@RequestBody CreateUserDto dto,Jackson deserializes JSON automatically
+ResponseEntity<T>,HTTP response wrapper,SPRINGBOOT,I/O,Core,return ResponseEntity.ok(user);,Control status code and headers
+ResponseEntity.created(),Return 201 Created response,SPRINGBOOT,I/O,Core,return ResponseEntity.created(uri).body(user);,Include Location header for REST compliance
+@Service,Service layer component,SPRINGBOOT,OOP,Core,@Service public class UserService { },Business logic layer; auto-scanned bean
+@Repository,Data access component,SPRINGBOOT,OOP,Core,@Repository public interface UserRepo extends JpaRepository { },Adds persistence exception translation
+@Component,Generic Spring component,SPRINGBOOT,OOP,Core,@Component public class Helper { },Use specific stereotype when applicable
+@Autowired,Dependency injection (field),SPRINGBOOT,OOP,Core,@Autowired private UserService userService;,Prefer constructor injection for testability
+Constructor injection,DI via constructor (preferred),SPRINGBOOT,OOP,Core,public UserService(UserRepository repo) { this.repo = repo; },Enables immutable fields and easier testing
+@Bean,Define bean in config class,SPRINGBOOT,OOP,Core,@Bean public RestTemplate restTemplate() { },Method name becomes bean name
+@Configuration,Configuration class,SPRINGBOOT,OOP,Core,@Configuration public class AppConfig { },Contains @Bean definitions
+@Value("${prop}"),Inject property value,SPRINGBOOT,Variables,Core,@Value("${app.timeout}") private int timeout;,Use default with colon: ${prop:default}
+@ConfigurationProperties,Bind properties to class,SPRINGBOOT,Variables,Core-N,@ConfigurationProperties(prefix = "app"),Type-safe configuration; validated
+@Entity,JPA entity class,SPRINGBOOT,OOP,Core,@Entity @Table(name = "users") public class User { },Maps class to database table
+@Id / @GeneratedValue,Primary key mapping,SPRINGBOOT,OOP,Core,@Id @GeneratedValue(strategy = GenerationType.IDENTITY),IDENTITY for auto-increment; SEQUENCE for Oracle
+@Column,Column mapping,SPRINGBOOT,OOP,Core,@Column(nullable = false) private String name;,Define constraints at entity level
+@OneToMany / @ManyToOne,JPA relationship mapping,SPRINGBOOT,OOP,Core,@OneToMany(mappedBy = "user") private List<Order> orders;,mappedBy on non-owning side; fetch = LAZY
+@Query,Custom JPQL query,SPRINGBOOT,I/O,Core,@Query("SELECT u FROM User u WHERE u.age >= :age"),Use nativeQuery=true for SQL; named params
+@Transactional,Transaction boundary,SPRINGBOOT,Functions,Core,@Transactional public void save(User user) { },Service layer; rollback on runtime exceptions
+@Transactional(readOnly = true),Read-only transaction,SPRINGBOOT,Functions,Core,@Transactional(readOnly = true) public List<User> findAll(),Performance hint; flush mode NEVER
+@Valid,Trigger validation,SPRINGBOOT,Functions,Core,public User create(@Valid @RequestBody UserDto dto),Validates @NotNull @Size etc on DTO
+@NotNull / @NotBlank,Validation constraints,SPRINGBOOT,Functions,Core,@NotBlank private String name;,NotBlank for strings; NotNull for objects
+@Size / @Min / @Max,Size/range validation,SPRINGBOOT,Functions,Core,@Size(min = 2; max = 100) private String name;,Size for strings/collections; Min/Max for numbers
+@RestControllerAdvice,Global exception handler,SPRINGBOOT,Error Handling,Core,@RestControllerAdvice public class GlobalHandler { },Centralized error handling for REST APIs
+@ExceptionHandler,Handle specific exception,SPRINGBOOT,Error Handling,Core,@ExceptionHandler(NotFoundException.class),Return ResponseEntity with error details
+@SpringBootTest,Integration test annotation,SPRINGBOOT,Functions,Core,@SpringBootTest class AppTests { },Full application context; slower than unit tests
+@Mock / @InjectMocks,Mockito test mocks,SPRINGBOOT,Functions,Core,@Mock private UserRepository repo; @InjectMocks private UserService svc;,Mock dependencies; inject into system under test
+@WebMvcTest,Controller layer test,SPRINGBOOT,Functions,Core-N,@WebMvcTest(UserController.class),Loads only web layer; faster than SpringBootTest
+MockMvc,Test REST endpoints,SPRINGBOOT,I/O,Core,mockMvc.perform(get("/api/users")).andExpect(status().isOk());,Simulate HTTP requests without server
+@DataJpaTest,JPA repository test,SPRINGBOOT,Functions,Advanced,@DataJpaTest class UserRepoTest { },Auto-configures in-memory DB; rollbacks
+@EnableWebSecurity,Enable Spring Security,SPRINGBOOT,OOP,Core-N,@EnableWebSecurity public class SecurityConfig { },Required for custom security config
+SecurityFilterChain,Security configuration bean,SPRINGBOOT,Functions,Core-N,@Bean SecurityFilterChain filterChain(HttpSecurity http),Modern config style; replaces WebSecurityAdapter
+.authorizeHttpRequests(),Configure authorization rules,SPRINGBOOT,Functions,Core-N,.authorizeHttpRequests(auth -> auth.anyRequest().authenticated()),Define public vs protected endpoints
+@PreAuthorize,Method-level security,SPRINGBOOT,Functions,Advanced,@PreAuthorize("hasRole('ADMIN')"),Use SpEL expressions; enable with annotation
+=SUM(range),Sum values in range,EXCEL,Functions,Core,=SUM(A1:A100),Most used function; ignores text and blanks
+=AVERAGE(range),Average of values in range,EXCEL,Functions,Core,=AVERAGE(B1:B50),Ignores blanks; use AVERAGEA to include
+=MIN(range) / =MAX(range),Minimum/maximum value in range,EXCEL,Functions,Core,=MIN(A1:A100); =MAX(A1:A100),Useful for data validation and ranges
+=COUNT(range),Count numeric cells,EXCEL,Functions,Core,=COUNT(A1:A100),Only counts numbers; use COUNTA for all values
+=COUNTA(range),Count non-empty cells,EXCEL,Functions,Core,=COUNTA(A1:A100),Counts text and numbers; excludes blanks
+=COUNTBLANK(range),Count empty cells,EXCEL,Functions,Core,=COUNTBLANK(A1:A100),Useful for data quality checks
+=SUMIF(range; criteria; sum_range),Conditional sum single criteria,EXCEL,Functions,Core,=SUMIF(A:A; "Active"; B:B),Use wildcards * and ? for patterns
+=SUMIFS(sum_range; range1; crit1; ...),Conditional sum multiple criteria,EXCEL,Functions,Core,=SUMIFS(C:C; A:A; "Active"; B:B; ">100"),Sum range first unlike SUMIF
+=COUNTIF(range; criteria),Conditional count single criteria,EXCEL,Functions,Core,=COUNTIF(A:A; "Complete"),Great for frequency analysis
+=COUNTIFS(range1; crit1; range2; crit2),Conditional count multiple criteria,EXCEL,Functions,Core,=COUNTIFS(A:A; "Active"; B:B; ">0"),All criteria must match
+=AVERAGEIF(range; criteria; avg_range),Conditional average single criteria,EXCEL,Functions,Core,=AVERAGEIF(A:A; "Q1"; B:B),Useful for segment analysis
+=AVERAGEIFS(avg_range; range1; crit1),Conditional average multi criteria,EXCEL,Functions,Core,=AVERAGEIFS(C:C; A:A; "Q1"; B:B; ">0"),Average range first unlike AVERAGEIF
+=SUMPRODUCT(array1; array2),Multiply arrays and sum results,EXCEL,Functions,Core,=SUMPRODUCT(A1:A10; B1:B10),Versatile; use for weighted averages
+=VLOOKUP(val; table; col; FALSE),Vertical lookup exact match,EXCEL,Functions,Core,=VLOOKUP(A1; $D$1:$F$100; 2; FALSE),FALSE for exact; always lock table reference
+=HLOOKUP(val; table; row; FALSE),Horizontal lookup exact match,EXCEL,Functions,Core,=HLOOKUP(A1; $A$1:$Z$3; 2; FALSE),Rarely used; prefer INDEX MATCH
+=XLOOKUP(val; lookup; return),Modern flexible lookup (365),EXCEL,Functions,Core,=XLOOKUP(A1; D:D; E:E; "Not Found"),Preferred over VLOOKUP; handles errors natively
+=INDEX(array; row; col),Return value at row/col position,EXCEL,Functions,Core,=INDEX(A1:C10; 5; 2),Combine with MATCH for flexible lookup
+=MATCH(val; range; 0),Find position of value (exact),EXCEL,Functions,Core,=MATCH(A1; B:B; 0),0 for exact; 1/-1 for approximate
+=INDEX()+MATCH(),Flexible lookup combination,EXCEL,Functions,Core,=INDEX(C:C; MATCH(A1; B:B; 0)),More flexible than VLOOKUP; column-agnostic
+=IFERROR(value; fallback),Return fallback if error,EXCEL,Error Handling,Core,=IFERROR(VLOOKUP(...); "Not Found"),Catches all errors; wrap lookups
+=IFNA(value; fallback),Return fallback if #N/A,EXCEL,Error Handling,Core,=IFNA(XLOOKUP(...); 0),Specific to #N/A; other errors pass through
+=IF(test; true_val; false_val),Conditional logic,EXCEL,Control Flow,Core,=IF(A1>100; "High"; "Low"),Avoid nesting deeply; use IFS instead
+=IFS(cond1; val1; cond2; val2),Multiple conditions (365),EXCEL,Control Flow,Core,=IFS(A1>100; "High"; A1>50; "Med"; TRUE; "Low"),Use TRUE as final catch-all
+=AND(cond1; cond2),All conditions true,EXCEL,Operators,Core,=AND(A1>0; B1<100),Use in IF for multi-condition logic
+=OR(cond1; cond2),Any condition true,EXCEL,Operators,Core,=OR(A1="Yes"; B1="Yes"),Combine with IF for flexible logic
+=NOT(condition),Negate condition,EXCEL,Operators,Core,=NOT(A1="Inactive"),Useful for inverse logic
+=CONCATENATE(text1; text2),Join text strings,EXCEL,Strings,Core,=CONCATENATE(A1; " "; B1),Legacy; use CONCAT or TEXTJOIN instead
+=CONCAT(text1; text2),Join text (modern),EXCEL,Strings,Core,=CONCAT(A1; "-"; B1),Simpler than CONCATENATE; handles ranges
+=TEXTJOIN(delim; ignore_empty; range),Join with delimiter,EXCEL,Strings,Core,=TEXTJOIN("; "; TRUE; A1:A10),Best for joining ranges; ignore_empty=TRUE typical
+=LEFT(text; n) / =RIGHT(text; n),Extract left/right characters,EXCEL,Strings,Core,=LEFT(A1; 3); =RIGHT(A1; 4),Combine with LEN for dynamic extraction
+=MID(text; start; length),Extract middle characters,EXCEL,Strings,Core,=MID(A1; 2; 5),1-indexed; use with FIND for dynamic start
+=LEN(text),Length of text string,EXCEL,Strings,Core,=LEN(A1),Useful for validation and extraction
+=TRIM(text),Remove leading/trailing spaces,EXCEL,Strings,Core,=TRIM(A1),Essential for data cleaning; reduces multiple spaces
+=CLEAN(text),Remove non-printable characters,EXCEL,Strings,Core,=CLEAN(A1),Use with TRIM for thorough cleaning
+=UPPER(text) / =LOWER(text),Convert case,EXCEL,Strings,Core,=UPPER(A1); =LOWER(A1),Standardize case for matching
+=PROPER(text),Title case (capitalize first),EXCEL,Strings,Core,=PROPER(A1),Capitalizes each word
+=SUBSTITUTE(text; old; new),Replace text occurrences,EXCEL,Strings,Core,=SUBSTITUTE(A1; " "; "_"),All occurrences; add 4th arg for specific instance
+=FIND(find; text) / =SEARCH(find; text),Find position (case sens/insens),EXCEL,Strings,Core,=FIND("-"; A1),FIND case-sensitive; SEARCH allows wildcards
+=VALUE(text),Convert text to number,EXCEL,Data Types,Core,=VALUE(A1),Fixes text-formatted numbers
+=TEXT(value; format),Format number as text,EXCEL,Data Types,Core,=TEXT(A1; "yyyy-mm-dd"),Essential for date formatting
+=TODAY(),Current date,EXCEL,Data Types,Core,=TODAY(),Updates daily; use for age calculations
+=NOW(),Current date and time,EXCEL,Data Types,Core,=NOW(),Updates on recalculation; volatile function
+=DATE(year; month; day),Create date from components,EXCEL,Data Types,Core,=DATE(2025; 1; 15),Reliable date construction
+=YEAR(date) / =MONTH(date) / =DAY(date),Extract date components,EXCEL,Data Types,Core,=YEAR(A1); =MONTH(A1); =DAY(A1),Use for grouping and filtering by period
+=DATEDIF(start; end; unit),Date difference (Y/M/D),EXCEL,Functions,Core,=DATEDIF(A1; B1; "D"),Hidden function; Y M D YM MD YD units
+=EDATE(date; months),Add months to date,EXCEL,Functions,Core,=EDATE(A1; 3),Negative months to subtract
+=EOMONTH(date; months),End of month offset,EXCEL,Functions,Core,=EOMONTH(A1; 0),0 for current month end; great for reporting
+=WEEKDAY(date; type),Day of week number,EXCEL,Functions,Core,=WEEKDAY(A1; 2),Type 2: Mon=1 to Sun=7
+=ROUND(value; decimals),Round to decimal places,EXCEL,Functions,Core,=ROUND(A1; 2),Banker's rounding; use 0 for whole numbers
+=ROUNDUP(value; decimals),Round up,EXCEL,Functions,Core,=ROUNDUP(A1; 0),Always rounds away from zero
+=INT(value),Integer part (floor),EXCEL,Functions,Core,=INT(A1),Rounds down toward zero; use for truncation
+=MEDIAN(range),Median value,EXCEL,Functions,Core,=MEDIAN(A1:A100),Middle value; resistant to outliers
+=STDEV(range) / =STDEV.S(range),Standard deviation (sample),EXCEL,Functions,Core-N,=STDEV(A1:A100),Use STDEV.P for population
+=VAR(range) / =VAR.S(range),Variance (sample),EXCEL,Functions,Advanced,=VAR(A1:A100),Square of standard deviation
+=PERCENTILE(range; k),Kth percentile value,EXCEL,Functions,Core-N,=PERCENTILE(A1:A100; 0.9),k between 0 and 1; 0.5 = median
+=UNIQUE(range),Unique values (365),EXCEL,Functions,Core,=UNIQUE(A1:A100),Dynamic array; spills results automatically
+=SORT(range; col; order),Sort array (365),EXCEL,Functions,Core,=SORT(A1:C10; 2; -1),-1 for descending; 1 for ascending
+=FILTER(range; criteria),Filter array (365),EXCEL,Functions,Core,=FILTER(A1:C10; B1:B10>100),Dynamic filtering; add "" for if-empty
+=SORTBY(range; by_range; order),Sort by another column (365),EXCEL,Functions,Core,=SORTBY(A1:C10; B1:B10; -1),More flexible than SORT; multiple sort keys
+$A$1 / $A1 / A$1,Absolute/mixed references,EXCEL,Variables,Core,=SUM($A$1:$A$10); =$A1*B$1,Lock row/column when copying formulas
+Named Ranges,Define names for ranges,EXCEL,Variables,Core,=SUM(SalesData); =VLOOKUP(x; ProductTable; 2; 0),Define via Formulas > Name Manager; makes formulas readable
+var x int = 10,Explicit variable declaration,GO,Variables,Core,var name string = "value",Use for package-level or when type needed
+x := 10,Short variable declaration,GO,Variables,Core,count := 0; name := "app",Preferred in functions; type inferred
+const Pi = 3.14,Constant declaration,GO,Variables,Core,const MaxRetries = 3,Compile-time constants; no runtime overhead
+const ( a = iota ),Iota for enum-like constants,GO,Variables,Core,const ( Pending = iota; Running; Done ),Auto-increments; resets in each const block
+int / int64 / float64,Numeric types,GO,Data Types,Core,var count int64 = 100,int is platform-sized; use int64 for precision
+string / bool,String and boolean types,GO,Data Types,Core,var active bool = true,Strings are immutable; zero value is ""
+[]byte(s) / string(b),Type conversion string/bytes,GO,Data Types,Core,data := []byte(str); str := string(data),Common for I/O and encoding
+nil,Zero value for pointers/slices/maps,GO,Data Types,Core,if err != nil { },Always check before using; zero value for interfaces too
++ - * / %,Arithmetic operators,GO,Operators,Core,x + y; count % 10,No implicit type conversion; must be same type
+== != < > <= >=,Comparison operators,GO,Operators,Core,if x == y { },Structs comparable if all fields are
+&& || !,Logical operators,GO,Operators,Core,if a && !b { },Short-circuit evaluation
+&x / *p,Address-of and dereference,GO,Operators,Core,ptr := &value; val := *ptr,Use pointers to avoid copying or for mutation
+if condition { },Conditional statement,GO,Control Flow,Core,if err != nil { return err },No parentheses; braces required
+if x := f(); x > 0 { },If with initialization,GO,Control Flow,Core,if resp; err := http.Get(url); err != nil { },Variable scoped to if-else block
+switch x { case: },Switch statement,GO,Control Flow,Core,switch status { case "ok": ... default: ... },No fall-through by default; use fallthrough if needed
+for i := 0; i < n; i++ { },Traditional for loop,GO,Control Flow,Core,for i := 0; i < 10; i++ { },Only loop construct in Go
+for condition { },While-style loop,GO,Control Flow,Core,for running { process() },Equivalent to while in other languages
+for { },Infinite loop,GO,Control Flow,Core,for { select { case <-done: return } },Break explicitly or return
+for i; v := range slice { },Range over slice/array,GO,Control Flow,Core,for i; item := range items { },Use _ to ignore index or value
+for k; v := range map { },Range over map,GO,Control Flow,Core,for key; val := range config { },Iteration order is randomized
+break / continue,Loop control,GO,Control Flow,Core,break; continue,Use labeled break for nested loops
+func name() { },Function definition,GO,Functions,Core,func process() error { return nil },Lowercase = package-private; uppercase = exported
+func f(a; b int) int { },Function with params and return,GO,Functions,Core,func add(a; b int) int { return a + b },Consecutive same-type params share type
+func f() (int; error) { },Multiple return values,GO,Functions,Core,func fetch() ([]byte; error) { },Standard pattern: value + error
+func f(args ...int) { },Variadic function,GO,Functions,Core,func sum(nums ...int) int { },Last param only; expand with ...
+return value,Return from function,GO,Functions,Core,return result; err,Named returns allow naked return
+defer f(),Defer execution until return,GO,Functions,Core,defer file.Close(),LIFO order; args evaluated immediately
+defer func() { }(),Defer anonymous function,GO,Functions,Core,defer func() { cleanup() }(),Capture values with closure
+type Name struct { },Struct definition,GO,OOP,Core,type Config struct { Host string; Port int },Composition over inheritance
+p := Person{Name: "x"},Struct initialization,GO,OOP,Core,cfg := Config{Host: "localhost"; Port: 8080},Field names optional but recommended
+p.Field,Access struct field,GO,OOP,Core,fmt.Println(cfg.Host),Use pointer receiver for mutation
+func (p *T) Method() { },Method with receiver,GO,OOP,Core,func (c *Config) Validate() error { },Pointer receiver to modify or avoid copy
+type Name interface { },Interface definition,GO,OOP,Core,type Handler interface { Handle() error },Implicit implementation; keep small
+v; ok := i.(Type),Type assertion,GO,OOP,Core,if str; ok := val.(string); ok { },Use comma-ok to avoid panic
+[]int / []string,Slice declaration,GO,Collections,Core,items := []string{"a"; "b"; "c"},Dynamic array; backed by array
+make([]T; len; cap),Create slice with make,GO,Collections,Core,buf := make([]byte; 1024),Preallocate for performance
+append(slice; elem),Append to slice,GO,Collections,Core,items = append(items; "new"),May allocate new backing array
+len(s) / cap(s),Length and capacity,GO,Collections,Core,n := len(items),Works on strings slices maps channels
+s[i:j],Slice sub-range,GO,Collections,Core,sub := items[1:3],Shares backing array; be careful with mutations
+map[K]V,Map declaration,GO,Collections,Core,config := map[string]string{},Keys must be comparable
+make(map[K]V),Create map with make,GO,Collections,Core,env := make(map[string]string),Nil map panics on write; use make
+m[key] = value,Set map value,GO,Collections,Core,env["HOME"] = "/root",Overwrites existing key
+value; ok := m[key],Get map value with check,GO,Collections,Core,if val; ok := env["PATH"]; ok { },Always use comma-ok for safety
+delete(m; key),Delete map key,GO,Collections,Core,delete(env; "TEMP"),Safe on missing key
+errors.New("msg"),Create error,GO,Error Handling,Core,return errors.New("invalid config"),Simple error creation
+fmt.Errorf("...: %w"; err),Wrap error with context,GO,Error Handling,Core,return fmt.Errorf("fetch failed: %w"; err),%w for unwrapping; add context
+if err != nil { return err },Error check pattern,GO,Error Handling,Core,if err != nil { return nil; err },Explicit error handling; no exceptions
+errors.Is(err; target),Check error type,GO,Error Handling,Core,if errors.Is(err; os.ErrNotExist) { },Works with wrapped errors
+panic("msg") / recover(),Panic and recover,GO,Error Handling,Advanced,defer func() { if r := recover(); r != nil { } }(),Use sparingly; for unrecoverable errors only
+go f(),Start goroutine,GO,Functions,Core,go processAsync(data),Lightweight; thousands are fine
+go func() { }(),Anonymous goroutine,GO,Functions,Core,go func() { result <- compute() }(),Capture variables carefully
+ch := make(chan T),Create unbuffered channel,GO,Functions,Core,done := make(chan struct{}),Synchronous; blocks until received
+ch := make(chan T; n),Create buffered channel,GO,Functions,Core,jobs := make(chan Job; 100),Async up to buffer size
+ch <- value,Send to channel,GO,Functions,Core,results <- data,Blocks on full buffer or unbuffered
+value := <-ch,Receive from channel,GO,Functions,Core,result := <-results,Blocks until value available
+close(ch),Close channel,GO,Functions,Core,close(done),Only sender should close; receivers detect with comma-ok
+for v := range ch { },Range over channel,GO,Control Flow,Core,for job := range jobs { process(job) },Exits when channel closed
+select { case: },Select from channels,GO,Control Flow,Core,select { case <-done: return case msg := <-ch: handle(msg) },Non-blocking with default case
+sync.Mutex,Mutual exclusion lock,GO,Functions,Core,var mu sync.Mutex; mu.Lock(); defer mu.Unlock(),Protect shared state; prefer channels when possible
+sync.WaitGroup,Wait for goroutines,GO,Functions,Core,var wg sync.WaitGroup; wg.Add(1); go f(); wg.Wait(),Add before goroutine; Done in goroutine
+sync.Once,Execute once,GO,Functions,Core-N,once.Do(func() { init() }),Thread-safe initialization
+context.Background(),Root context,GO,Functions,Core,ctx := context.Background(),Starting point for context tree
+context.WithCancel(parent),Cancelable context,GO,Functions,Core,ctx; cancel := context.WithCancel(ctx),Always defer cancel()
+context.WithTimeout(parent; d),Timeout context,GO,Functions,Core,ctx; cancel := context.WithTimeout(ctx; 30*time.Second),Auto-cancels after duration
+<-ctx.Done(),Check context cancellation,GO,Control Flow,Core,select { case <-ctx.Done(): return ctx.Err() },Check in long-running operations
+os.ReadFile("path"),Read entire file,GO,I/O,Core,data; err := os.ReadFile("config.yaml"),Simple for small files; Go 1.16+
+os.WriteFile("path"; data; 0644),Write entire file,GO,I/O,Core,os.WriteFile("out.json"; data; 0644),Creates or truncates; set permissions
+os.Open("path"),Open file for reading,GO,I/O,Core,file; err := os.Open("data.txt"),Read-only; use Create for write
+os.Create("path"),Create/truncate file,GO,I/O,Core,file; err := os.Create("output.log"),Creates or truncates existing
+defer file.Close(),Close file on return,GO,I/O,Core,defer file.Close(),Always defer close after open
+bufio.NewScanner(file),Line-by-line reader,GO,I/O,Core,scanner := bufio.NewScanner(file); for scanner.Scan() { },Check scanner.Err() after loop
+json.Marshal(v),Encode struct to JSON,GO,I/O,Core,data; err := json.Marshal(config),Use struct tags for field names
+json.Unmarshal(data; &v),Decode JSON to struct,GO,I/O,Core,err := json.Unmarshal(data; &config),Pass pointer to target
+json.NewEncoder(w).Encode(v),Stream JSON encode,GO,I/O,Core,json.NewEncoder(resp).Encode(result),Better for HTTP responses
+json.NewDecoder(r).Decode(&v),Stream JSON decode,GO,I/O,Core,json.NewDecoder(req.Body).Decode(&input),Better for HTTP requests
+yaml.Unmarshal(data; &v),Decode YAML to struct,GO,I/O,Core,err := yaml.Unmarshal(data; &config),gopkg.in/yaml.v3 common
+`json:"field"`,Struct tag for JSON field,GO,OOP,Core,Name string `json:"name;omitempty"`,omitempty skips zero values
+http.Get(url),HTTP GET request,GO,I/O,Core,resp; err := http.Get(url),Close resp.Body after use
+http.Post(url; ctype; body),HTTP POST request,GO,I/O,Core,resp; err := http.Post(url; "application/json"; bytes.NewReader(data)),Set content type explicitly
+http.NewRequest(method; url; body),Create HTTP request,GO,I/O,Core,req; err := http.NewRequest("PUT"; url; body),Add headers with req.Header.Set
+client.Do(req),Execute HTTP request,GO,I/O,Core,resp; err := client.Do(req),Use custom client for timeouts
+http.HandleFunc(path; handler),Register HTTP handler,GO,I/O,Core,http.HandleFunc("/health"; healthHandler),Quick setup; use mux for complex routing
+http.ListenAndServe(addr; nil),Start HTTP server,GO,I/O,Core,http.ListenAndServe(":8080"; nil),Blocks; use goroutine for non-blocking
+os.Getenv("VAR"),Get environment variable,GO,I/O,Core,apiKey := os.Getenv("API_KEY"),Returns empty string if not set
+os.Setenv("VAR"; "val"),Set environment variable,GO,I/O,Core,os.Setenv("LOG_LEVEL"; "debug"),Affects current process only
+os.Args,Command line arguments,GO,I/O,Core,if len(os.Args) > 1 { arg := os.Args[1] },os.Args[0] is program name
+flag.String("name"; "default"; "desc"),Define CLI flag,GO,I/O,Core,port := flag.Int("port"; 8080; "server port"),Returns pointer; call Parse first
+flag.Parse(),Parse CLI flags,GO,I/O,Core,flag.Parse(); fmt.Println(*port),Call after defining all flags
+log.Println("msg"),Log message,GO,I/O,Core,log.Println("Server started"),Includes timestamp by default
+log.Printf("format"; args),Log formatted message,GO,I/O,Core,log.Printf("Listening on port %d"; port),Printf format verbs
+log.Fatal(err),Log and exit,GO,Error Handling,Core,log.Fatal(err),Calls os.Exit(1) after logging
+time.Now(),Current time,GO,Data Types,Core,now := time.Now(),Local time; use UTC() for UTC
+time.Sleep(d),Sleep for duration,GO,Functions,Core,time.Sleep(5 * time.Second),Blocks goroutine; consider ticker for intervals
+time.Duration,Duration type,GO,Data Types,Core,timeout := 30 * time.Second,Type-safe; multiply with time constants
+time.Parse(layout; str),Parse time string,GO,Data Types,Core,t; err := time.Parse(time.RFC3339; str),Use reference time 2006-01-02 15:04:05
+t.Format(layout),Format time to string,GO,Data Types,Core,str := t.Format("2006-01-02"),Same reference time for layout
+exec.Command("cmd"; args...),Execute external command,GO,I/O,Core,cmd := exec.Command("az"; "login"),Each arg separate; no shell expansion
+cmd.Run() / cmd.Output(),Run command and get output,GO,I/O,Core,output; err := cmd.Output(),Output returns stdout; Run discards
+go test,Run tests,GO,Functions,Core,go test ./...,./... for all packages
+func TestXxx(t *testing.T),Test function,GO,Functions,Core,func TestAdd(t *testing.T) { },Must start with Test; takes *testing.T
+t.Error() / t.Fatal(),Report test failure,GO,Error Handling,Core,t.Errorf("expected %d; got %d"; want; got),Fatal stops test; Error continues
+go mod init,Initialize Go module,GO,I/O,Core,go mod init github.com/org/repo,Creates go.mod; use module path
+go get pkg@version,Add dependency,GO,I/O,Core,go get github.com/Azure/azure-sdk-for-go@latest,Use @latest or specific version
+go build / go run,Build or run Go code,GO,I/O,Core,go build -o app main.go,run for dev; build for production
+var x = 10,Local variable type inference,CSHARP,Variables,Core,var name = "value"; var list = new List<string>();,Use when type is clear from right side
+int / long / double / decimal,Numeric value types,CSHARP,Data Types,Core,int count = 0; decimal price = 19.99m;,Use decimal for financial; double for science
+string / bool,String and boolean types,CSHARP,Data Types,Core,string name = "value"; bool active = true;,string is reference type but immutable
+int? / string?,Nullable types,CSHARP,Data Types,Core,int? count = null; string? name = null;,Enable nullable for better null safety
+const / readonly,Constants and readonly fields,CSHARP,Variables,Core,const int Max = 100; readonly string _name;,const compile-time; readonly runtime
+(int)value / Convert.ToInt32(),Type conversion,CSHARP,Data Types,Core,int x = (int)3.14; int y = Convert.ToInt32("42");,Convert handles null; cast throws
+int.TryParse(s; out int result),Safe parse with out parameter,CSHARP,Data Types,Core,if (int.TryParse(str; out int num)) { },Preferred over Parse; no exception
+obj is Type / obj as Type,Type checking and safe cast,CSHARP,Data Types,Core,if (obj is string s) { }; var str = obj as string;,is pattern matching preferred in modern C#
++ - * / % ++ --,Arithmetic operators,CSHARP,Operators,Core,x + y; count++;,Watch for integer overflow
+== != < > <= >=,Comparison operators,CSHARP,Operators,Core,if (x == y) { },Override Equals for custom types
+&& || !,Logical operators,CSHARP,Operators,Core,if (a && !b) { },Short-circuit evaluation
+? :,Ternary operator,CSHARP,Operators,Core,var result = x > 0 ? "positive" : "negative";,Keep simple; use switch for complex
+??,Null-coalescing operator,CSHARP,Operators,Core,var value = input ?? "default";,Returns left if non-null
+??=,Null-coalescing assignment,CSHARP,Operators,Core,list ??= new List<string>();,Assigns only if null
+?.,Null-conditional operator,CSHARP,Operators,Core,var len = str?.Length; obj?.Method();,Returns null if left is null
+if / else if / else,Conditional branching,CSHARP,Control Flow,Core,if (x > 0) { } else if (x < 0) { } else { },Always use braces
+switch (val) { case: },Switch statement,CSHARP,Control Flow,Core,switch (status) { case "A": break; default: break; },Use switch expression for simple mapping
+switch expression =>,Switch expression (C# 8+),CSHARP,Control Flow,Core,var result = status switch { "A" => 1; _ => 0 };,_ is discard pattern (default)
+for (int i = 0; i < n; i++),Traditional for loop,CSHARP,Control Flow,Core,for (int i = 0; i < 10; i++) { },Use for index-based access
+foreach (var item in items),Iterate over collection,CSHARP,Control Flow,Core,foreach (var user in users) { },Preferred for collections
+while (condition) { },While loop,CSHARP,Control Flow,Core,while (hasMore) { process(); },Ensure exit condition
+break / continue,Loop control,CSHARP,Control Flow,Core,break; continue,break exits; continue skips to next iteration
+public ReturnType Method(),Method definition,CSHARP,Functions,Core,public int Add(int a; int b) { return a + b; },PascalCase for public methods
+=> expression,Expression-bodied member,CSHARP,Functions,Core,public int Double(int x) => x * 2;,Concise for single expressions
+params Type[],Variable arguments,CSHARP,Functions,Core,public int Sum(params int[] nums) { },Must be last parameter
+x => x * 2,Lambda expression,CSHARP,Functions,Core,Func<int; int> square = x => x * x;,Use for LINQ and delegates
+Action<T> / Func<T; TResult>,Delegate types,CSHARP,Functions,Core,Action<string> log = s => Console.WriteLine(s);,Action for void; Func for return value
+public class ClassName { },Class definition,CSHARP,OOP,Core,public class User { public string Name { get; set; } },One class per file; PascalCase
+public interface IName { },Interface definition,CSHARP,OOP,Core,public interface IService { Task<T> GetAsync<T>(int id); },Prefix with I; define contracts
+public record Name(),Record type (C# 9+),CSHARP,OOP,Core,public record UserDto(string Name; string Email);,Immutable by default; value equality
+: base / : this,Constructor chaining,CSHARP,OOP,Core,public Admin(string name) : base(name) { },base for parent; this for other constructor
+public T Prop { get; set; },Auto-property,CSHARP,OOP,Core,public string Name { get; set; },Compiler generates backing field
+public T Prop { get; init; },Init-only property (C# 9+),CSHARP,OOP,Core,public string Id { get; init; },Set only during initialization
+virtual / override / abstract,Method overriding,CSHARP,OOP,Core,public virtual void Process() { }; public override void Process() { },abstract requires implementation
+public / private / protected,Access modifiers,CSHARP,OOP,Core,private readonly IService _service;,Default is private; prefer explicit
+static,Static member,CSHARP,OOP,Core,public static readonly Logger Instance = new();,Shared across instances
+sealed,Prevent inheritance,CSHARP,OOP,Core,public sealed class FinalClass { },Improves performance; explicit design
+List<T>,Dynamic list collection,CSHARP,Collections,Core,var list = new List<string>(); list.Add("item");,Default choice for collections
+Dictionary<TKey; TValue>,Key-value collection,CSHARP,Collections,Core,var dict = new Dictionary<string; int>();,O(1) lookup; use TryGetValue
+list.Add() / list.Remove(),List modification,CSHARP,Collections,Core,list.Add(item); list.Remove(item);,Remove returns bool if found
+dict[key] = value,Dictionary set value,CSHARP,Collections,Core,dict["key"] = 123;,Throws if key missing on get
+dict.TryGetValue(key; out var val),Dictionary safe get,CSHARP,Collections,Core,if (dict.TryGetValue("key"; out var val)) { },Preferred over indexer for safety
+.Where(x => condition),LINQ filter,CSHARP,Collections,Core,users.Where(u => u.Active),Deferred execution; chain with other operators
+.Select(x => transform),LINQ projection,CSHARP,Collections,Core,users.Select(u => u.Name),Transform each element
+.First() / .FirstOrDefault(),LINQ get first element,CSHARP,Collections,Core,var first = users.FirstOrDefault();,First throws if empty; FirstOrDefault returns null
+.Any() / .All(),LINQ existence check,CSHARP,Collections,Core,if (users.Any(u => u.Admin)) { },Any for existence; All for condition
+.OrderBy() / .OrderByDescending(),LINQ sorting,CSHARP,Collections,Core,users.OrderBy(u => u.Name),Chain ThenBy for secondary sort
+.GroupBy(x => key),LINQ grouping,CSHARP,Collections,Core,users.GroupBy(u => u.Department),Returns IGrouping with Key property
+.ToList() / .ToArray(),LINQ materialization,CSHARP,Collections,Core,var result = query.ToList();,Forces execution; use when needed
+.Skip(n).Take(m),LINQ pagination,CSHARP,Collections,Core,users.Skip(10).Take(10),Combine for paging
+try { } catch (Exception ex) { },Exception handling,CSHARP,Error Handling,Core,try { } catch (InvalidOperationException ex) { } catch { },Catch specific exceptions first
+throw new Exception(),Throw exception,CSHARP,Error Handling,Core,throw new ArgumentException("Invalid input");,Include meaningful message
+using (var r = new Resource()),Using statement (dispose),CSHARP,Error Handling,Core,using var stream = new FileStream(path; FileMode.Open);,Ensures Dispose called; use declaration form
+finally { },Cleanup block,CSHARP,Error Handling,Core,finally { cleanup(); },Always runs; use using instead when possible
+async Task<T> MethodAsync(),Async method signature,CSHARP,Functions,Core,public async Task<User> GetUserAsync(int id),Suffix with Async; return Task
+await task,Await async operation,CSHARP,Functions,Core,var result = await service.GetAsync(id);,Non-blocking wait; captures context
+Task.WhenAll(tasks),Await multiple tasks,CSHARP,Functions,Core,await Task.WhenAll(task1; task2; task3);,Run concurrently; wait for all
+CancellationToken,Cancellation support,CSHARP,Functions,Core,async Task<T> GetAsync(int id; CancellationToken ct),Pass to async methods for cancellation
+ConfigureAwait(false),Avoid context capture,CSHARP,Functions,Core-N,await task.ConfigureAwait(false);,Use in libraries; not in UI code
+File.ReadAllTextAsync(),Read file async,CSHARP,I/O,Core,var content = await File.ReadAllTextAsync("file.txt");,Simple for small files
+File.WriteAllTextAsync(),Write file async,CSHARP,I/O,Core,await File.WriteAllTextAsync("file.txt"; content);,Creates or overwrites file
+JsonSerializer.Serialize(),Serialize to JSON,CSHARP,I/O,Core,var json = JsonSerializer.Serialize(obj);,Use options for formatting
+JsonSerializer.Deserialize<T>(),Deserialize from JSON,CSHARP,I/O,Core,var obj = JsonSerializer.Deserialize<User>(json);,Returns null if json is null
+[JsonPropertyName("name")],JSON property attribute,CSHARP,OOP,Core,[JsonPropertyName("user_id")] public string UserId { get; set; },Map C# name to JSON name
+HttpClient,HTTP client class,CSHARP,I/O,Core,var response = await httpClient.GetAsync(url);,Reuse instance; use IHttpClientFactory
+response.EnsureSuccessStatusCode(),Check HTTP success,CSHARP,I/O,Core,response.EnsureSuccessStatusCode();,Throws on non-2xx; check IsSuccessStatusCode instead
+await response.Content.ReadAsStringAsync(),Read HTTP response,CSHARP,I/O,Core,var json = await response.Content.ReadAsStringAsync();,Use ReadFromJsonAsync for direct deserialize
+$"Hello {name}",String interpolation,CSHARP,Strings,Core,$"User {user.Name} created at {DateTime.Now}",Preferred over concatenation
+string.IsNullOrWhiteSpace(),Check empty string,CSHARP,Strings,Core,if (string.IsNullOrWhiteSpace(input)) { },Checks null empty and whitespace
+str.Contains() / .StartsWith(),String search,CSHARP,Strings,Core,if (name.Contains("admin")) { },Case-sensitive by default
+string.Join("; "; items),Join strings,CSHARP,Strings,Core,var csv = string.Join("; "; names);,Efficient; handles null items
+StringBuilder,Mutable string builder,CSHARP,Strings,Core,var sb = new StringBuilder(); sb.Append("text");,Use for many concatenations
+WebApplication.CreateBuilder(args),Create app builder,ASPNET,I/O,Core,var builder = WebApplication.CreateBuilder(args);,Entry point for ASP.NET apps; configures services
+builder.Build(),Build application,ASPNET,I/O,Core,var app = builder.Build();,Creates immutable app from builder
+app.Run(),Run application,ASPNET,I/O,Core,app.Run();,Blocks; starts listening for requests
+app.MapGet("/path"; handler),Map GET endpoint,ASPNET,I/O,Core,app.MapGet("/users/{id}"; (int id) => Results.Ok(id));,Minimal API pattern; clean and fast
+app.MapPost("/path"; handler),Map POST endpoint,ASPNET,I/O,Core,app.MapPost("/users"; (UserDto dto) => Results.Created());,Auto model binding from body
+app.MapPut() / app.MapDelete(),Map PUT/DELETE endpoints,ASPNET,I/O,Core,app.MapPut("/users/{id}"; handler);,RESTful resource updates and deletes
+app.MapGroup("/api"),Group endpoints,ASPNET,I/O,Core,var api = app.MapGroup("/api/v1");,Organize endpoints; share filters
+Results.Ok() / Results.Created(),Return success results,ASPNET,I/O,Core,return Results.Ok(user);,Type-safe result helpers
+Results.NotFound() / Results.BadRequest(),Return error results,ASPNET,I/O,Core,return Results.NotFound();,Return appropriate HTTP status
+Results.Problem(),Return problem details,ASPNET,Error Handling,Core,return Results.Problem("Error occurred");,RFC 7807 format; include details
+[ApiController],API controller attribute,ASPNET,OOP,Core,[ApiController] public class UsersController : ControllerBase,Auto validation; binding from body
+[Route("api/[controller]")],Route template,ASPNET,OOP,Core,[Route("api/[controller]")],[controller] token replaced by class name
+[HttpGet] / [HttpPost],HTTP method attributes,ASPNET,I/O,Core,[HttpGet("{id}")] public async Task<ActionResult<User>> Get(int id),Combine method and route
+[HttpPut] / [HttpDelete],HTTP method attributes,ASPNET,I/O,Core,[HttpPut("{id}")] public async Task<IActionResult> Update(int id),Return IActionResult for flexibility
+[FromBody] / [FromQuery],Model binding source,ASPNET,I/O,Core,public IActionResult Create([FromBody] UserDto dto),Explicit binding source
+[FromRoute] / [FromHeader],Model binding source,ASPNET,I/O,Core,public IActionResult Get([FromRoute] int id),FromRoute for path params
+ActionResult<T>,Controller return type,ASPNET,I/O,Core,public async Task<ActionResult<User>> GetUser(int id),Enables OpenAPI schema generation
+Ok() / NotFound() / BadRequest(),Controller result methods,ASPNET,I/O,Core,return Ok(user); return NotFound();,Inherited from ControllerBase
+builder.Services.AddScoped<I; T>(),Register scoped service,ASPNET,Functions,Core,builder.Services.AddScoped<IUserService; UserService>();,One per request; most common
+builder.Services.AddSingleton<I; T>(),Register singleton service,ASPNET,Functions,Core,builder.Services.AddSingleton<ICacheService; CacheService>();,One for app lifetime; thread-safe only
+builder.Services.AddTransient<I; T>(),Register transient service,ASPNET,Functions,Core,builder.Services.AddTransient<IValidator; Validator>();,New instance each injection
+builder.Services.AddHttpClient<T>(),Register typed HTTP client,ASPNET,Functions,Core,builder.Services.AddHttpClient<IApiService; ApiService>();,Manages HttpClient lifecycle
+IOptions<T> / IOptionsSnapshot<T>,Options pattern injection,ASPNET,Variables,Core,public Service(IOptions<AppOptions> options),Snapshot for reloading; Monitor for changes
+builder.Configuration["Key"],Access configuration,ASPNET,Variables,Core,var connStr = builder.Configuration["ConnectionStrings:Default"];,Colon for nested sections
+builder.Services.Configure<T>(),Bind configuration section,ASPNET,Variables,Core,builder.Services.Configure<AppOptions>(config.GetSection("App"));,Type-safe configuration
+[Authorize],Require authentication,ASPNET,Control Flow,Core,[Authorize] public class SecureController { },Apply to class or method
+[Authorize(Roles = "Admin")],Role-based authorization,ASPNET,Control Flow,Core,[Authorize(Roles = "Admin")],Comma-separate multiple roles
+[Authorize(Policy = "...")],Policy-based authorization,ASPNET,Control Flow,Core,[Authorize(Policy = "RequireScope")],More flexible than roles
+User.Claims,Access user claims,ASPNET,Variables,Core,var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;,Check claim types for standard claims
+app.UseAuthentication(),Add auth middleware,ASPNET,Functions,Core,app.UseAuthentication();,Must come before UseAuthorization
+app.UseAuthorization(),Add authz middleware,ASPNET,Functions,Core,app.UseAuthorization();,Enables [Authorize] attribute
+app.UseMiddleware<T>(),Register custom middleware,ASPNET,Functions,Core,app.UseMiddleware<CorrelationIdMiddleware>();,Order matters; request pipeline
+app.UseCors(),Enable CORS middleware,ASPNET,Functions,Core,app.UseCors("AllowSpecificOrigin");,Configure policy in services
+app.UseExceptionHandler(),Global exception handling,ASPNET,Error Handling,Core,app.UseExceptionHandler();,Returns Problem Details for API
+[Required] / [StringLength],Validation attributes,ASPNET,OOP,Core,[Required] [StringLength(100)] public string Name { get; set; },Auto-validated with ApiController
+[EmailAddress] / [Range],Validation attributes,ASPNET,OOP,Core,[EmailAddress] public string Email { get; set; },Range for numeric bounds
+ModelState.IsValid,Check validation state,ASPNET,Control Flow,Core,if (!ModelState.IsValid) return BadRequest(ModelState);,Auto-checked with ApiController
+builder.Services.AddDbContext<T>(),Register EF DbContext,ASPNET,Functions,Core,builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlServer(cs));,Scoped by default
+DbSet<T>,EF entity collection,ASPNET,Collections,Core,public DbSet<User> Users { get; set; },Maps to database table
+await db.SaveChangesAsync(),Persist EF changes,ASPNET,I/O,Core,await _context.SaveChangesAsync();,Saves all tracked changes; returns count
+.Include(x => x.Nav),EF eager loading,ASPNET,Collections,Core,await db.Users.Include(u => u.Orders).ToListAsync();,Loads related data in one query
+.AsNoTracking(),EF read-only query,ASPNET,Collections,Core-N,await db.Users.AsNoTracking().ToListAsync();,Performance boost for read-only
+_logger.LogInformation(),Log info message,ASPNET,I/O,Core,_logger.LogInformation("User {UserId} created"; userId);,Use structured logging with placeholders
+_logger.LogError(ex; "msg"),Log error with exception,ASPNET,Error Handling,Core,_logger.LogError(ex; "Failed to create user {UserId}"; userId);,Exception first; enables stack trace
+builder.Services.AddHealthChecks(),Register health checks,ASPNET,Functions,Core-N,builder.Services.AddHealthChecks().AddCheck<DbHealthCheck>("db");,Add custom health checks
+app.MapHealthChecks("/health"),Map health endpoint,ASPNET,I/O,Core-N,app.MapHealthChecks("/health");,Use for k8s/container liveness probes
+builder.Services.AddSwaggerGen(),Add Swagger/OpenAPI,ASPNET,Functions,Core,builder.Services.AddEndpointsApiExplorer(); builder.Services.AddSwaggerGen();,API documentation generation
+app.UseSwagger() / app.UseSwaggerUI(),Enable Swagger UI,ASPNET,I/O,Core,app.UseSwagger(); app.UseSwaggerUI();,Interactive API testing interface
+map(func; iterable),Apply function to each element,PYTHON,Functions,Core,list(map(str.upper; names)),Lazy; wrap in list() to materialize
+filter(func; iterable),Filter elements by predicate,PYTHON,Functions,Core,list(filter(lambda x: x > 0; nums)),Returns iterator; often prefer list comprehension
+any(iterable) / all(iterable),Check if any/all elements true,PYTHON,Functions,Core,any(x > 0 for x in lst),Short-circuits; use with generator expression
+sum(iterable),Sum of elements,PYTHON,Functions,Core,total = sum(prices),Use start param for non-zero initial
+min(iterable) / max(iterable),Min/max of iterable,PYTHON,Functions,Core,min(scores); max(scores; key=lambda x: x.val),Use key for custom comparison
+abs() / round() / pow(),Math built-ins,PYTHON,Functions,Core,abs(-5); round(3.14; 2); pow(2; 10),round uses banker's rounding
+dict.get(key; default),Get with default value,PYTHON,Collections,Core,val = d.get("key"; "default"),Returns None if no default specified
+dict.keys() / .values() / .items(),Dict iterators,PYTHON,Collections,Core,for k; v in d.items():,Returns views; iterate or convert to list
+dict.update(),Merge dictionaries,PYTHON,Collections,Core,d1.update(d2); d1 |= d2,Modifies in place; | creates new dict in 3.9+
+dict.pop() / dict.setdefault(),Remove or set default,PYTHON,Collections,Core,d.pop("key"; None); d.setdefault("key"; []),setdefault great for grouping patterns
+list.append() / list.extend(),Add single/multiple elements,PYTHON,Collections,Core,lst.append(x); lst.extend([1;2;3]),append adds one; extend adds all from iterable
+list.pop() / list.remove(),Remove by index/value,PYTHON,Collections,Core,lst.pop(); lst.remove(x),pop returns item; remove raises if not found
+list.index() / list.count(),Find index or count occurrences,PYTHON,Collections,Core,idx = lst.index(x); cnt = lst.count(x),index raises if not found
+list.sort() / list.reverse(),In-place sort/reverse,PYTHON,Collections,Core,lst.sort(key=lambda x: x.name),Modifies list; use sorted() for new list
+str.find() / str.index(),Find substring position,PYTHON,Strings,Core,pos = s.find("sub"); s.index("sub"),find returns -1 if not found; index raises
+str.count(),Count substring occurrences,PYTHON,Strings,Core,cnt = s.count("a"),Non-overlapping matches
+str.startswith() / str.endswith(),Check prefix/suffix,PYTHON,Strings,Core,if s.startswith("http"):,Accepts tuple for multiple options
+str.upper() / str.lower() / str.title(),Case conversion,PYTHON,Strings,Core,s.upper(); s.lower(); s.title(),Returns new string; original unchanged
+str.isdigit() / str.isalpha(),Character type check,PYTHON,Strings,Core,if s.isdigit():,Returns False on empty string
+json.loads() / json.dumps(),Parse/serialize JSON,PYTHON,I/O,Core,import json; obj = json.loads(s); s = json.dumps(obj),Use indent for pretty printing
+json.load() / json.dump(),Read/write JSON files,PYTHON,I/O,Core,with open("f.json") as f: data = json.load(f),File-based counterparts to loads/dumps
+os.path.join() / os.path.exists(),Path manipulation,PYTHON,I/O,Core,import os; path = os.path.join("dir"; "file.txt"),OS-independent path handling
+pathlib.Path(),Modern path handling,PYTHON,I/O,Core,from pathlib import Path; p = Path("dir") / "file.txt",Preferred over os.path in Python 3
+os.listdir() / os.makedirs(),Directory operations,PYTHON,I/O,Core,os.listdir("."); os.makedirs("dir"; exist_ok=True),exist_ok prevents error if exists
+os.getenv(),Get environment variable,PYTHON,I/O,Core,val = os.getenv("API_KEY"; "default"),Returns None if not set without default
+datetime.now() / datetime.today(),Current date/time,PYTHON,Data Types,Core,from datetime import datetime; now = datetime.now(),now() can take timezone; today() is naive
+datetime.strptime() / .strftime(),Parse/format datetime,PYTHON,Data Types,Core,dt = datetime.strptime(s; "%Y-%m-%d"); s = dt.strftime("%Y-%m-%d"),strptime parses; strftime formats
+timedelta,Date arithmetic,PYTHON,Data Types,Core,from datetime import timedelta; dt + timedelta(days=7),Add/subtract time from datetime
+re.match() / re.search(),Regex match at start/anywhere,PYTHON,Strings,Core,import re; m = re.search(r"\d+"; s),match at start only; search anywhere
+re.findall() / re.sub(),Find all matches / substitute,PYTHON,Strings,Core,re.findall(r"\d+"; s); re.sub(r"\s+"; " "; s),Use raw strings r"" for regex
+print(),Output to console,PYTHON,I/O,Core,print(f"Value: {x}"; end=""),Use end/sep params for formatting
+input(),Read user input,PYTHON,I/O,Core,name = input("Enter name: "),Always returns string; convert as needed
+if __name__ == "__main__":,Script entry point guard,PYTHON,Control Flow,Core,if __name__ == "__main__": main(),Allows import without execution
+global / nonlocal,Variable scope modifiers,PYTHON,Variables,Advanced,global counter; nonlocal x,global for module; nonlocal for enclosing scope
+assert condition,Debug assertion,PYTHON,Error Handling,Core,assert x > 0; "x must be positive",Removed with -O flag; use for debugging only
+-XX:+UseZGC,Use ZGC collector (Java 11+),JVM,Config,Core-N,-XX:+UseZGC,Sub-millisecond pauses; good for large heaps
+-XX:+UseShenandoahGC,Use Shenandoah GC (Java 12+),JVM,Config,Advanced,-XX:+UseShenandoahGC,Low-pause alternative to ZGC
+-XX:NewRatio,Old:Young generation ratio,JVM,Config,Core-N,-XX:NewRatio=2,Lower ratio = larger young gen; tune for allocation rate
+-XX:MetaspaceSize,Initial metaspace size,JVM,Config,Core-N,-XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=512m,Set Max to avoid unbounded growth
+-Xlog:gc*,Unified GC logging (Java 9+),JVM,Config,Core,-Xlog:gc*:file=gc.log:time,Modern GC logging; replaces PrintGC
+-XX:+PrintGCDetails,Print detailed GC info (pre-Java 9),JVM,Config,Advanced,-XX:+PrintGCDetails -XX:+PrintGCDateStamps,Legacy; use -Xlog in Java 9+
+-XX:HeapDumpPath,Heap dump file location,JVM,Config,Core-N,-XX:HeapDumpPath=/tmp/heapdump.hprof,Specify path for OOM heap dumps
+jcmd <pid> <command>,Multi-purpose diagnostic tool,JVM,I/O,Core,jcmd 12345 GC.heap_info; jcmd 12345 Thread.print,Preferred over jmap/jstack in modern JDK
+jcmd <pid> VM.flags,Show all JVM flags,JVM,I/O,Core,jcmd 12345 VM.flags,See actual runtime flag values
+jinfo <pid>,JVM configuration info,JVM,I/O,Core-N,jinfo -flags 12345,View or modify some flags at runtime
+-XX:+UnlockDiagnosticVMOptions,Enable diagnostic options,JVM,Config,Advanced,-XX:+UnlockDiagnosticVMOptions,Required for some advanced diagnostic flags
+-XX:+FlightRecorder,Enable JDK Flight Recorder,JVM,Config,Core-N,-XX:+FlightRecorder -XX:StartFlightRecording=duration=60s,Low-overhead profiling; built into JDK
+JAVA_OPTS / JAVA_TOOL_OPTIONS,Environment JVM options,JVM,Config,Core,export JAVA_OPTS="-Xms512m -Xmx2g",TOOL_OPTIONS picked up automatically; OPTS for scripts
+-Djava.property=value,Set system property,JVM,Config,Core,-Dspring.profiles.active=prod,Access with System.getProperty()

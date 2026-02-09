@@ -1,0 +1,35 @@
+Section,Item,Value,Notes
+COLUMN,Syntax,Text (40),Code element name; format varies by type
+COLUMN,Description,Text (80),What it does; no ending period
+COLUMN,L1_Language,Text (12),UPPERCASE; see L1 values below
+COLUMN,L2_Category,Text (15),Title Case; syntax category
+COLUMN,Priority,Text (10),Knowledge tier; see Priority values below
+COLUMN,Example,Text (60),Short code snippet demonstrating usage
+COLUMN,Note,Text (80),Concise use case or best practice tip
+L1,PYTHON,,General-purpose scripting and data science
+L1,SQL,,Database query language
+L1,JAVASCRIPT,,Web and Node.js scripting
+L1,DAX,,Power BI formula language
+L1,POWERSHELL,,Windows automation scripting
+L1,BASH,,Unix/Linux shell scripting
+L1,M/POWERQUERY,,Data transformation in Power BI/Excel
+L1,KQL,,Kusto Query Language for Azure
+L2,Variables,,Declaration assignment scope
+L2,Data Types,,Primitives collections objects
+L2,Control Flow,,Conditionals loops branching
+L2,Functions,,Definition parameters returns
+L2,Operators,,Arithmetic comparison logical
+L2,Strings,,Manipulation formatting parsing
+L2,Collections,,Lists arrays dicts sets
+L2,Error Handling,,Try catch exceptions
+L2,I/O,,Input output files streams
+L2,OOP,,Classes objects inheritance
+PRIORITY,Core,,Must memorize - used constantly
+PRIORITY,Advanced,,Reference when needed
+PRIORITY,Core-N,,Essential for specific language
+PRIORITY,Advanced-N,,Specialist syntax
+RULE,Required,All columns,No blank cells allowed
+RULE,Unique,Syntax + L1_Language,Unique per language
+RULE,Consistency,L1-L2,L2 must be valid for selected L1
+RULE,Sort,L1 → L2 → Syntax,Alphabetical within each level
+RULE,Example,Code only,No prose in example column
