@@ -50,8 +50,8 @@ Standards, tools, and industry analysis.
 |----------|-------------|
 | [References](resources/References.md) | Standards, certifications, legislation (Ontario/Canada focus) |
 | [Tools](resources/Tools.md) | Enterprise tools for development, data, and collaboration |
-| [Trends](resources/Trends.MD) | State of IT 2026 industry report |
-| [Trends Analysis](resources/Trends_Analysis.md) | Executive analysis: AI, cybersecurity, strategy |
+| [Trends](resources/2026_Research.MD) | State of IT 2026 industry report |
+| [Trends Analysis](resources/2026_Research_Analysis.md) | Executive analysis: AI, cybersecurity, strategy |
 
 ---
 

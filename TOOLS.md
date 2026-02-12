@@ -8,16 +8,20 @@
 
 ## Table of Contents
 
-- [IDE & Editors](#ide--editors)
-- [Database Tools](#database-tools)
-- [CLI Tools](#cli-tools)
-- [API & Testing Tools](#api--testing-tools)
-- [Data Tools](#data-tools)
-- [Container Tools](#container-tools)
-- [Code Security & Scanning](#code-security--scanning)
-- [Diagramming](#diagramming)
-- [Work Tracking](#work-tracking)
-- [Documentation & Collaboration](#documentation--collaboration)
+- [Enterprise Tools Reference](#enterprise-tools-reference)
+  - [Table of Contents](#table-of-contents)
+  - [IDE \& Editors](#ide--editors)
+    - [Key VS Code Extensions](#key-vs-code-extensions)
+  - [Database Tools](#database-tools)
+  - [CLI Tools](#cli-tools)
+  - [API \& Testing Tools](#api--testing-tools)
+  - [Data Tools](#data-tools)
+  - [Container Tools](#container-tools)
+  - [Code Security \& Scanning](#code-security--scanning)
+  - [Diagramming](#diagramming)
+  - [Work Tracking](#work-tracking)
+  - [Documentation \& Collaboration](#documentation--collaboration)
+  - [Quick Reference — Essential Stack](#quick-reference--essential-stack)
 
 ---
 
